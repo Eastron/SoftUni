@@ -1,0 +1,27 @@
+using System;
+using System.Numerics;
+using System.Collections.Generic;
+using System.Linq;
+
+public class StrongNumber
+{
+	public static decimal GetPower(decimal number, decimal power)
+	{
+		decimal result = number;
+		
+		for(int i = 1; i < power; i++)
+		{
+			result *= number;
+		}
+		
+		return result;
+	}
+	
+  	public  static void Main()
+  	{		
+		decimal number = decimal.Parse(Console.ReadLine());
+		decimal power = decimal.Parse(Console.ReadLine());
+		
+		Console.WriteLine(GetPower(number, power));
+	}
+}

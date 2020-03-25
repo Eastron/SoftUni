@@ -1,0 +1,26 @@
+using System;
+using System.Numerics;
+using System.Collections.Generic;
+using System.Linq;
+
+public class StrongNumber
+{
+	public static void GetPrice(string input, int quantity)
+	{
+		switch(input)
+		{
+			case "coffee": Console.WriteLine("{0:F2}", quantity * 1.50); break;
+			case "water": Console.WriteLine("{0:F2}", quantity * 1.00); break;
+			case "coke": Console.WriteLine("{0:F2}", quantity * 1.40); break;
+			case "snacks": Console.WriteLine("{0:F2}", quantity * 2.00); break;
+		}
+	}
+	
+  	public  static void Main()
+  	{		
+		string input = Console.ReadLine();
+		int quantity = int.Parse(Console.ReadLine());
+		
+		GetPrice(input, quantity);
+	}
+}

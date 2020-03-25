@@ -1,0 +1,30 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace Task_01
+{
+    class Program
+    {
+        public static int Sum(int first, int second)
+        {
+            return first + second;
+        }
+
+        public static int Subtract(int sum, int third)
+        {
+            return sum - third;
+        }
+        public static void Main()
+        {
+            int first = int.Parse(Console.ReadLine());
+            int second = int.Parse(Console.ReadLine());
+            int third = int.Parse(Console.ReadLine());
+
+            int sum = Sum(first, second);
+            int subtract = Subtract(sum, third);
+
+            Console.WriteLine(subtract);
+        }
+    }
+}

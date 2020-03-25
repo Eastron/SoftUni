@@ -1,0 +1,31 @@
+using System;
+using System.Numerics;
+using System.Collections.Generic;
+using System.Linq;
+
+public class StrongNumber
+{
+	public static int GetSmallest(int first, int second, int third)
+	{
+		if(first < second && first < third)
+		{
+			return first;
+		}
+		else if(second < first && second < third)
+		{
+			return second;
+		}
+		else
+		{
+			return third;
+		}
+	}
+  	public  static void Main()
+  	{		
+		int first = int.Parse(Console.ReadLine());
+		int second = int.Parse(Console.ReadLine());		
+		int third = int.Parse(Console.ReadLine());
+
+		Console.WriteLine(GetSmallest(first, second, third));
+	}
+}

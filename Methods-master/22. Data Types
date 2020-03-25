@@ -1,0 +1,35 @@
+using System;
+using System.Numerics;
+using System.Collections.Generic;
+using System.Linq;
+
+public class StrongNumber
+{
+	
+	
+	public static void PrintValues(string type, string values)
+	{
+		if(type == "int")
+		{
+			int num = int.Parse(values);
+			Console.WriteLine(num * 2);
+		}
+		else if(type == "real")
+		{
+			double num = double.Parse(values);
+			Console.WriteLine("{0:F2}", num * 1.50);
+		}
+		else
+		{
+			Console.WriteLine("$" + values + "$");
+		}
+	}
+	
+  	public  static void Main()
+  	{		
+		string type = Console.ReadLine();
+		string values = Console.ReadLine();
+		
+		PrintValues(type, values);
+	}
+}

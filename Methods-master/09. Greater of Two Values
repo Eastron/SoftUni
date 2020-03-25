@@ -1,0 +1,60 @@
+using System;
+using System.Numerics;
+using System.Collections.Generic;
+using System.Linq;
+
+public class StrongNumber
+{
+	public static string GetGreaterValues(string input, string first, string second)
+	{
+		if(input == "int")
+		{
+			int number1 = int.Parse(first);
+			int number2 = int.Parse(second);
+			
+			if(number1 > number2)
+			{
+				return first;
+			}
+			else
+			{
+				return second;
+			}
+		}
+		else if(input == "char")
+		{
+			char char1 = Convert.ToChar(first);
+			char char2 = Convert.ToChar(second);
+			
+			if(char1 > char2)
+			{
+				return first;
+			}
+			else
+			{
+				return second;
+			}
+		}
+		else
+		{
+			if(first.CompareTo(second) > 0)
+			{
+				return first;
+			}
+			else
+			{
+				return second;
+			}
+		}
+	}
+	
+  	public  static void Main()
+  	{		
+		string input = Console.ReadLine();
+		string first = Console.ReadLine();
+		string second = Console.ReadLine();
+		
+		Console.WriteLine(GetGreaterValues(input, first, second));
+    
+	}
+}

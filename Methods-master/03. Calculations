@@ -1,0 +1,47 @@
+using System;
+using System.Numerics;
+using System.Collections.Generic;
+using System.Linq;
+
+public class StrongNumber
+{
+	public static void Add(int first, int second)
+	{
+				Console.WriteLine(first + second);	
+	}
+	public static void Multiply(int first, int second)
+	{
+					Console.WriteLine(first * second);
+	}
+	public static void Subtract(int first, int second)
+	{
+					Console.WriteLine(first - second);
+	}
+	public static void Divide(int first, int second)
+	{
+					Console.WriteLine(first / second);
+	}
+  	public  static void Main()
+  	{		
+		string input = Console.ReadLine();
+		int first = int.Parse(Console.ReadLine());
+		int second = int.Parse(Console.ReadLine());
+		
+		if(input == "add")
+		{
+			Add(first, second);
+		}
+		else if(input == "multiply")
+		{
+			Multiply(first, second);
+		}
+		else if(input == "subtract")
+		{
+			Subtract(first, second);
+		}
+		else
+		{
+			Divide(first, second);
+		}
+	}
+}

@@ -1,0 +1,31 @@
+using System;
+using System.Numerics;
+using System.Collections.Generic;
+using System.Linq;
+
+public class StrongNumber
+{
+	public static int GetVowel(string input)
+	{
+		int count = 0;
+		for(int i = 0; i < input.Length; i++)
+		{
+			char currentChar = input[i];
+			
+			if(currentChar == 'a' || currentChar == 'A' || currentChar == 'e' || currentChar == 'E' || currentChar == 'u' || currentChar == 'U' || currentChar == 'i'
+			  || currentChar == 'I' || currentChar == 'o' || currentChar == 'O')
+			{
+				count++;
+			}
+		}
+		
+		return count;
+		
+	}
+  	public  static void Main()
+  	{		
+		string input = Console.ReadLine();
+		
+		Console.WriteLine(GetVowel(input));
+	}
+}

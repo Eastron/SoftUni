@@ -1,0 +1,37 @@
+using System;
+using System.Numerics;
+using System.Collections.Generic;
+using System.Linq;
+
+public class StrongNumber
+{
+	public static void GetSymbols(string char1, string char2)
+	{
+		char start = char1[0];
+		char end = char2[0];
+		
+		if(start < end)
+		{
+			start = char1[0];
+			end = char2[0];			
+		}
+		else
+		{
+			start = char2[0];
+			end = char1[0];
+		}
+
+		
+		for(int i = start + 1; i < end; i++)
+		{
+			Console.Write("{0} ", (char)i);
+		}
+	}
+  	public  static void Main()
+  	{		
+		string char1 = Console.ReadLine();
+		string char2 = Console.ReadLine();
+		
+		GetSymbols(char1, char2);
+	}
+}

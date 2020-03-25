@@ -1,0 +1,39 @@
+using System;
+using System.Numerics;
+using System.Collections.Generic;
+using System.Linq;
+
+public class StrongNumber
+{
+	public static string GetReverse(string number)
+	{
+		char[] charArray = number.ToCharArray();
+		Array.Reverse(charArray);
+		return new String(charArray);
+	}
+	public static string GetPalindrome(string number)
+	{
+		string reverseNum = GetReverse(number);
+		
+		if(number == reverseNum)
+		{
+			return "true";
+		}
+		else
+		{
+			return "false";
+		}
+	}
+	
+  	public  static void Main()
+  	{		
+		string number = Console.ReadLine();
+		
+		while(number != "END")
+		{	
+			Console.WriteLine(GetPalindrome(number));
+			
+			number = Console.ReadLine();
+		}
+	}
+}

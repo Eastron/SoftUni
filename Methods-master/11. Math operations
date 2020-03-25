@@ -1,0 +1,28 @@
+using System;
+using System.Numerics;
+using System.Collections.Generic;
+using System.Linq;
+
+public class StrongNumber
+{
+	public static double Calculate(int first, string @operator, int second)
+	{
+		switch(@operator)
+		{
+			case "+": return first + second; break;
+			case "-": return first - second; break;
+			case "*": return first * second; break;
+			case "/": return first / second; break;
+		}
+		
+	}
+  	public  static void Main()
+  	{		
+		int first = int.Parse(Console.ReadLine());
+		string @operator = Console.ReadLine();		
+		int second = int.Parse(Console.ReadLine());
+
+		double result = Calculate(first, @operator, second);
+		Console.WriteLine(result);
+	}
+}

@@ -1,0 +1,28 @@
+using System;
+using System.Numerics;
+using System.Collections.Generic;
+using System.Linq;
+
+public class StrongNumber
+{
+	public static double CalculateFactorial(BigInteger number)
+	{
+		double factorial  = 1;
+		for(int i = 1; i <= number; i++)
+		{
+			factorial *= i;
+		}
+		return factorial;
+	}
+	
+  	public  static void Main()
+  	{		
+		BigInteger first = BigInteger.Parse(Console.ReadLine());
+		BigInteger second = BigInteger.Parse(Console.ReadLine());
+		
+		double firstNum = CalculateFactorial(first);
+		double secondNum = CalculateFactorial(second);
+		
+		Console.WriteLine("{0:F2}", firstNum / secondNum);
+	}
+}

@@ -1,0 +1,272 @@
+using System;
+using System.Numerics;
+using System.Collections.Generic;
+using System.Linq;
+
+public class StrongNumber
+{
+	public static int[] GetExchangeArray(int[] arr, string[] token)
+	{
+		int index = int.Parse(token[1]);
+		List<int> start = new List<int>();
+		List<int> end = new List<int>();
+		
+		for(int i = 0; i <= index; i++)
+		{
+			end.Add(arr[i]);
+		}
+		
+		int count = 0;
+		
+		for(int i = index + 1; i < arr.Length; i++)
+		{
+			start.Add(arr[i]);	
+			count++;
+		}
+		
+		int n = 0;
+		
+		for(int i = 0; i < arr.Length; i++)
+		{
+			if(i <= start.Count - 1)
+			{
+				arr[i] = start[i];
+			}
+			else
+			{
+				arr[i] = end[n];
+				n++;
+			}
+		}
+		
+		return arr;
+	}
+	
+	public static void PrintMaxEvenOrOdd(int[] arr, string[] token)
+	{
+		int max = int.MinValue;
+		int index = 0;
+		int count = 0;
+		
+		if(token[1] == "even")
+		{
+			for(int i = 0; i < arr.Length; i++)
+			{
+				if(arr[i] % 2 == 0)
+				{
+					count++;
+					if(arr[i] >= max)
+					{
+						max = arr[i];
+						index = i;
+					}
+				}
+			}
+			
+			if(count > 0)
+			{
+			Console.WriteLine(index);
+			}
+			else
+			{
+				Console.WriteLine("No matches");
+			}
+		}
+		else
+		{
+			for(int i = 0; i < arr.Length; i++)
+			{
+				if(arr[i] % 2 != 0)
+				{
+					count++;
+					if(arr[i] >= max)
+					{
+						max = arr[i];
+						index = i;
+					}
+				}
+			}
+			
+			if(count > 0)
+			{
+			Console.WriteLine(index);
+			}
+			else
+			{
+				Console.WriteLine("No matches");
+			}
+		}
+	}
+	
+	public static void PrintMinEvenOrOdd(int[] arr, string[] token)
+	{
+		int min = int.MaxValue;
+		int index = 0;
+		int count = 0;
+		
+		if(token[1] == "even")
+		{
+			for(int i = 0; i < arr.Length; i++)
+			{
+				if(arr[i] % 2 == 0)
+				{
+					count++;
+					if(arr[i] <= min)
+					{
+						min = arr[i];
+						index = i;
+					}
+				}
+			}
+			
+			if(count > 0)
+			{
+			Console.WriteLine(index);
+			}
+			else
+			{
+				Console.WriteLine("No matches");
+			}
+		}
+		else
+		{
+			for(int i = 0; i < arr.Length; i++)
+			{
+				if(arr[i] % 2 != 0)
+				{
+					count++;
+					if(arr[i] <= min)
+					{
+						min = arr[i];
+						index = i;
+					}
+				}
+			}
+			
+			if(count > 0)
+			{
+			Console.WriteLine(index);
+			}
+			else
+			{
+				Console.WriteLine("No matches");
+			}
+		}
+	}
+	
+	public static void PrintFirstEvenOrOdd(int[] arr, string[] token)
+	{
+		int count = int.Parse(token[1]);
+		List<int> even = new List<int>();
+		List<int> odd = new List<int>();;
+		
+		if(count > arr.Length)
+		{
+			Console.WriteLine("Invalid count");
+		}
+		else
+		{
+			if(token[2] == "even")
+			{
+				for(int i = 0; i < arr.Length; i++)
+				{
+					if(arr[i] % 2 == 0 && even.Count < count)
+					{
+						even.Add(arr[i]);
+					}
+				}
+				
+				Console.WriteLine("[{0}]",string.Join(", ", even));
+			}
+			else
+			{
+				for(int i = 0; i < arr.Length; i++)
+				{
+					if(arr[i] % 2 != 0 && odd.Count < count)
+					{
+						odd.Add(arr[i]);
+					}
+				}
+				
+				Console.WriteLine("[{0}]",string.Join(", ", odd));
+			}
+		}
+	}
+	
+	public static void PrintLastEvenOrOdd(int[] arr, string[] token)
+	{
+		int count = int.Parse(token[1]);
+		List<int> even = new List<int>();
+		List<int> odd = new List<int>();
+		
+		if(count > arr.Length)
+		{
+			Console.WriteLine("Invalid count");
+		}
+		else
+		{
+			if(token[2] == "even")
+			{
+				for(int i = arr.Length - 1; i >= 0; i--)
+				{
+					if(arr[i] % 2 == 0 && even.Count < count)
+					{
+						even.Add(arr[i]);
+					}
+				}
+				even.Reverse();
+				Console.WriteLine("[{0}]",string.Join(", ", even));
+			}
+			else
+			{
+				for(int i = arr.Length - 1; i >= 0 ; i--)
+				{
+					if(arr[i] % 2 != 0 && odd.Count < count)
+					{
+						odd.Add(arr[i]);
+					}
+				}
+				
+				odd.Reverse();
+				Console.WriteLine("[{0}]",string.Join(", ", odd));
+			}
+		}
+	}
+	
+  	public  static void Main()
+  	{	
+		int[] arr = Console.ReadLine().Split().Select(int.Parse).ToArray();
+		string input = Console.ReadLine();
+		
+		while(input != "end")
+		{
+			string[] token = input.Split();
+			
+			switch(token[0])
+			{
+				case "exchange":
+					{
+						int index = int.Parse(token[1]);
+						
+						if(index >= 0 && index < arr.Length)
+						{
+							GetExchangeArray(arr, token);
+						}
+						else
+						{
+							Console.WriteLine("Invalid index");
+						}
+					}
+					break;
+				case "max": PrintMaxEvenOrOdd(arr, token); break;
+				case "min": PrintMinEvenOrOdd(arr, token); break;
+				case "first": PrintFirstEvenOrOdd(arr, token); break;
+				case "last": PrintLastEvenOrOdd(arr, token); break;
+			}
+			
+			input = Console.ReadLine();
+		}
+		
+		Console.WriteLine("[{0}]",string.Join(", ", arr));
+	}
+}

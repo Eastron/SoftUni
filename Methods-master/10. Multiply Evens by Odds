@@ -1,0 +1,59 @@
+using System;
+using System.Numerics;
+using System.Collections.Generic;
+using System.Linq;
+
+public class StrongNumber
+{
+	public static int GetSumOfOddDigits(string number)
+	{
+		int sum = 0;
+		for(int i = 0; i < number.Length; i++)
+		{
+			char currentNum = number[i];
+			
+			if(currentNum >= 48 && currentNum <= 57)
+			{
+				int num = currentNum - '0';
+				if(num % 2 != 0)
+				{
+					sum += num;
+				}
+			}
+		}
+		return sum;
+	}
+	
+	public static int GetSumOfEvenDigits(string number)
+	{
+		int sum = 0;
+		for(int i = 0; i < number.Length; i++)
+		{
+			char currentNum = number[i];
+			
+			if(currentNum >= 48 && currentNum <= 57)
+			{
+				int num = currentNum - '0';
+				if(num % 2 == 0)
+				{
+					sum += num;
+				}
+			}
+		}
+		
+		return sum;
+	}
+	public static int GetMultipleOfEvenAndOdds(int sumEven, int sumOdd)
+	{
+		return sumEven * sumOdd;
+	}
+  	public  static void Main()
+  	{		
+		string number = Console.ReadLine();		
+		
+		int sumEven = GetSumOfEvenDigits(number);
+		int sumOdd =  GetSumOfOddDigits(number);
+		int result = GetMultipleOfEvenAndOdds(sumEven, sumOdd);
+		Console.WriteLine(result);
+	}
+}
