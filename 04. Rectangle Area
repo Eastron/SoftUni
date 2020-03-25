@@ -1,0 +1,17 @@
+using System;
+
+namespace RectangleArea
+{
+    class RectangleArea
+    {
+        static void Main()
+        {
+            Console.WriteLine("Please insert number A:");
+            double a = double.Parse(Console.ReadLine());
+            Console.WriteLine("Please insert number B:");
+            double b = double.Parse(Console.ReadLine());
+            Console.WriteLine("Rectangle area is:");
+            Console.WriteLine(a * b);
+        }
+    }
+}
