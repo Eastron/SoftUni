@@ -1,0 +1,85 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text.RegularExpressions;
+using System.Text;
+
+namespace Task_01
+{
+    class Program
+    {
+        public static void Main()
+        {
+            Dictionary<string, int> users = new Dictionary<string, int>();
+            Dictionary<string, int> users1 = new Dictionary<string, int>();
+
+            string input = Console.ReadLine();
+
+            while (input != "Log out")
+            {
+                string[] token = input.Split(": ");
+                string username = token[1];
+                if (token[0].Equals("New follower"))
+                {
+
+                    if (!users.ContainsKey(username))
+                    {
+                        users.Add(username, 0);
+                        users1.Add(username, 0);
+                    }
+                }
+                else if (token[0].Equals("Like"))
+                {
+                    int likes = int.Parse(token[2]);
+
+                    if (!users.ContainsKey(username))
+                    {
+                        users.Add(username, likes);
+                        users1.Add(username, 0);
+                    }
+                    else
+                    {
+                        users[username] += likes;
+                    }
+                }
+                else if (token[0].Equals("Comment"))
+                {
+                    if (!users.ContainsKey(username))
+                    {
+                        users1.Add(username, 1);
+                        users.Add(username, 0);
+                    }
+                    else
+                    {
+                        users1[username]++;
+                    }
+                }
+                else if (token[0].Equals("Blocked"))
+                {
+                    if (users.ContainsKey(username))
+                    {
+                        users.Remove(username);
+                        users1.Remove(username);
+                    }
+                    else
+                    {
+                        Console.WriteLine($"{username} doesn't exist.");
+                    }
+                }
+
+                input = Console.ReadLine();
+            }
+
+            Console.WriteLine("{0} followers", users.Count);
+            foreach (var item in users.OrderByDescending(x => x.Value).ThenBy(x => x.Key))
+            {
+                int comment = 0;
+                if (users1.ContainsKey(item.Key))
+                {
+                    comment = users1[item.Key];
+                }
+                Console.WriteLine("{0}: {1}", item.Key, item.Value + comment);
+            }
+        }
+    }
+}

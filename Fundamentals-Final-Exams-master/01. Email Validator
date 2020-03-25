@@ -1,0 +1,90 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text.RegularExpressions;
+using System.Text;
+
+namespace Task_01
+{
+    class Program
+    {
+        public static void Main()
+        {
+            string email = Console.ReadLine();
+            StringBuilder sb = new StringBuilder();
+            sb.Append(email);
+
+            string command = Console.ReadLine();
+
+            while (command != "Complete")
+            {
+                string[] token = command.Split();
+
+                if (token[0].Equals("Make"))
+                {
+                    if (token[1].Equals("Upper"))
+                    {
+                        string temp = sb.ToString().ToUpper();
+                        sb.Clear();
+                        sb.Append(temp);
+                        Console.WriteLine(sb);
+                    }
+                    else
+                    {
+                        string temp = sb.ToString().ToLower();
+                        sb.Clear();
+                        sb.Append(temp);
+                        Console.WriteLine(sb);
+                    }
+                }
+                else if (token[0].Equals("GetDomain"))
+                {
+                    int count = int.Parse(token[1]);
+                    int startIndex = sb.Length - count;
+
+                    for (int i = startIndex; i < sb.Length; i++)
+                    {
+                        Console.Write(sb[i]);
+                    }
+                    Console.WriteLine();
+                }
+                else if (token[0].Equals("GetUsername"))
+                {
+                    string temp = sb.ToString();
+                    if (temp.Contains('@'))
+                    {
+                        int index = temp.IndexOf('@');
+
+                        for (int i = 0; i < index; i++)
+                        {
+                            Console.Write(sb[i]);
+                        }
+                        Console.WriteLine();
+                    }
+                    else
+                    {
+                        Console.WriteLine("The email {0} doesn't contain the @ symbol.", temp);
+                    }
+                }
+                else if (token[0].Equals("Replace"))
+                {
+                    char currentChar = token[1][0];
+                    sb.Replace(currentChar, '-');
+                    Console.WriteLine(sb);
+                }
+                else
+                {
+                    List<int> nums = new List<int>();
+
+                    for (int i = 0; i < sb.Length; i++)
+                    {
+                        nums.Add(sb[i]);
+                    }
+                    Console.WriteLine(String.Join(" ", nums));
+                }
+
+                command = Console.ReadLine();
+            }
+        }
+    }
+}

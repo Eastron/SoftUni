@@ -1,0 +1,98 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text.RegularExpressions;
+using System.Text;
+
+namespace Task_01
+{
+    class Program
+    {
+        public static void Main()
+        {
+            string username = Console.ReadLine();
+            StringBuilder sb = new StringBuilder();
+            sb.Append(username);
+
+            string input = Console.ReadLine();
+
+            while (input != "Sign up")
+            {
+                string[] token = input.Split();
+
+                if (token[0].Equals("Case"))
+                {
+
+                    if (token[1].Equals("lower"))
+                    {
+                        string temp = sb.ToString().ToLower();
+                        sb.Clear();
+                        sb.Append(temp);
+                        Console.WriteLine(sb);
+                    }
+                    else
+                    {
+                        string temp = sb.ToString().ToUpper();
+                        sb.Clear();
+                        sb.Append(temp);
+                        Console.WriteLine(sb);
+                    }
+                }
+                else if (token[0].Equals("Reverse"))
+                {
+                    int startIndex = int.Parse(token[1]);
+                    int endIndex = int.Parse(token[2]);
+
+                    if (startIndex >= 0 && startIndex < sb.Length && endIndex >= 0 && endIndex < sb.Length)
+                    {
+                        string substring = string.Empty;
+                        for (int i = startIndex; i <= endIndex; i++)
+                        {
+                            substring += sb[i];
+                        }
+                        for (int i = substring.Length - 1; i >= 0; i--)
+                        {
+                            Console.Write(substring[i]);
+                        }
+                        Console.WriteLine();
+                    }
+                }
+                else if (token[0].Equals("Cut"))
+                {
+                    string substring = token[1];
+                    string temp = sb.ToString();
+                    if (temp.Contains(substring))
+                    {
+                        sb.Replace(substring, string.Empty);
+                        Console.WriteLine(sb);
+                    }
+                    else
+                    {
+                        Console.WriteLine("The word {0} doesn't contain {1}.",sb, substring);
+                    }
+                }
+                else if (token[0].Equals("Replace"))
+                {
+                    char oldChar = token[1][0];
+                    sb.Replace(oldChar, '*');
+                    Console.WriteLine(sb);
+                }
+                else if (token[0].Equals("Check"))
+                {
+                    char newChar = token[1][0];
+                    string temp = sb.ToString();
+                    if (temp.Contains(newChar))
+                    {
+                        Console.WriteLine("Valid");
+                    }
+                    else
+                    {
+                        Console.WriteLine("Your username must contain {0}.", newChar);
+                    }
+                }
+
+                input = Console.ReadLine();
+            }
+        }
+    }
+}

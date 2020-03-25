@@ -1,0 +1,41 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text.RegularExpressions;
+using System.Text;
+
+namespace Task_01
+{
+    class Program
+    {
+        public static void Main()
+        {
+            int lines = int.Parse(Console.ReadLine());
+
+            var regex = @"!(?<command>[A-Z][a-z]{3,})!:\[(?<numbers>[A-za-z]{8,})\]";
+
+            for (int i = 0; i < lines; i++)
+            {
+                string input = Console.ReadLine();
+                var match = Regex.Match(input, regex);
+                if (match.Success)
+                {
+                    List<int> numbers = new List<int>();
+                    string command = match.Groups["command"].Value;
+                    string nums = match.Groups["numbers"].Value;
+
+                    for (int j = 0; j < nums.Length; j++)
+                    {
+                        numbers.Add(nums[j]);
+                    }
+
+                    Console.WriteLine("{0}: {1}", command, String.Join(" ", numbers));
+                }
+                else
+                {
+                    Console.WriteLine("The message is invalid");
+                }
+            }
+        }
+    }
+}

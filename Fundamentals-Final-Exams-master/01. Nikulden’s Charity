@@ -1,0 +1,105 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text.RegularExpressions;
+using System.Text;
+
+namespace Task_01
+{
+    class Program
+    {
+        public static void Main()
+        {
+            string input = Console.ReadLine();
+
+            StringBuilder sb = new StringBuilder();
+            sb.Append(input);
+            int sum = 0;
+
+            string command = Console.ReadLine();
+            while (command != "Finish")
+            {
+                string[] token = command.Split();
+
+                if (token[0].Equals("Replace"))
+                {
+                    char currentChar = token[1][0];
+                    char newChar = token[2][0];
+
+                    sb.Replace(currentChar, newChar);
+                    Console.WriteLine(sb);
+                }
+                else if (token[0].Equals("Cut"))
+                {
+                    int startIndex = int.Parse(token[1]);
+                    int endIndex = int.Parse(token[2]);
+
+                    if (startIndex >= 0 && startIndex < sb.Length && endIndex >= 0 && endIndex < sb.Length)
+                    {
+                        int length = endIndex - startIndex;
+
+                        sb.Remove(startIndex, length + 1);
+                        Console.WriteLine(sb);
+                    }
+                    else
+                    {
+                        Console.WriteLine("Invalid indexes!");
+                    }
+                }
+                else if (token[0].Equals("Make"))
+                {
+                    if (token[1].Equals("Upper"))
+                    {
+                        string temp = sb.ToString().ToUpper();
+                        sb.Clear();
+                        sb.Append(temp);
+                        Console.WriteLine(sb);
+                    }
+                    else
+                    {
+                        string temp = sb.ToString().ToLower();
+                        sb.Clear();
+                        sb.Append(temp);
+                        Console.WriteLine(sb);
+                    }
+                }
+                else if (token[0].Equals("Check"))
+                {
+                    string temp = sb.ToString();
+                    string substring = token[1];
+                    if (temp.Contains(substring))
+                    {
+                        Console.WriteLine("Message contains {0}", substring);
+                    }
+                    else
+                    {
+                        Console.WriteLine("Message doesn't contain {0}", substring);
+                    }
+                }
+                else if (token[0].Equals("Sum"))
+                {
+                    int startIndex = int.Parse(token[1]);
+                    int endIndex = int.Parse(token[2]);
+
+                    if (startIndex >= 0 && startIndex < sb.Length && endIndex >= 0 && endIndex < sb.Length)
+                    {
+
+                        for (int i = startIndex; i <= endIndex; i++)
+                        {
+                            sum += sb[i];    
+                        }
+
+                        Console.WriteLine(sum);
+                        
+                    }
+                    else
+                    {
+                        Console.WriteLine("Invalid indexes!");
+                    }
+                }
+
+                command = Console.ReadLine();
+            }
+        }
+    }
+}

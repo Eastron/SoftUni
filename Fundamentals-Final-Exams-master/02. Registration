@@ -1,0 +1,41 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text.RegularExpressions;
+using System.Text;
+
+namespace Task_01
+{
+    class Program
+    {
+        public static void Main()
+        {
+            int lines = int.Parse(Console.ReadLine());
+            int count = 0;
+            var regex = @"([U]\$)(?<username>[A-Z]{1,}[a-z]{2,})(\1)([P]\@\$)(?<password>[A-Za-z]{5,}[\d]{1,})([P]\@\$)";
+
+            for (int i = 0; i < lines; i++)
+            {
+                string input = Console.ReadLine();
+
+                var match = Regex.Match(input, regex);
+
+                if (match.Success)
+                {
+                    count++;
+                    string username = match.Groups["username"].Value;
+                    string password = match.Groups["password"].Value;
+
+                    Console.WriteLine("Registration was successful");
+                    Console.WriteLine("Username: {0}, Password: {1}", username, password);
+                }
+                else
+                {
+                    Console.WriteLine("Invalid username or password");
+                }
+            }
+
+            Console.WriteLine("Successful registrations: {0}", count);
+        }
+    }
+}

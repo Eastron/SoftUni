@@ -1,0 +1,71 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text.RegularExpressions;
+using System.Text;
+
+namespace Task_01
+{
+    class Program
+    {
+        public static void Main()
+        {
+            Dictionary<string, List<string>> guests = new Dictionary<string, List<string>>();
+            int count = 0;
+
+            string input = Console.ReadLine();
+
+            while (input != "Stop")
+            {
+                string[] token = input.Split('-');
+                string guest = token[1];
+                string meal = token[2];
+
+                if (token[0].Equals("Like"))
+                {
+                    if (!guests.ContainsKey(guest))
+                    {
+                        guests.Add(guest, new List<string>());
+                        guests[guest].Add(meal);
+                    }
+                    else
+                    {
+                        if (!guests[guest].Contains(meal))
+                        {
+                            guests[guest].Add(meal);
+                        }
+                    }
+                }
+                else
+                {
+                    if (guests.ContainsKey(guest))
+                    {
+                        if (guests[guest].Contains(meal))
+                        {
+                            guests[guest].Remove(meal);
+                            count++;
+                            Console.WriteLine("{0} doesn't like the {1}.", guest, meal);
+                        }
+                        else
+                        {
+                            Console.WriteLine("{0} doesn't have the {1} in his/her collection.", guest, meal);
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine("{0} is not at the party.", guest);
+                    }
+                }
+
+                input = Console.ReadLine();
+            }
+
+            foreach (var guest in guests.OrderByDescending(x => x.Value.Count).ThenBy(x => x.Key))
+            {
+                Console.WriteLine("{0}: {1}", guest.Key, String.Join(", ", guest.Value));
+            }
+
+            Console.WriteLine("Unliked meals: {0}", count);
+        }
+    }
+}

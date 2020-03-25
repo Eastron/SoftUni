@@ -1,0 +1,68 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text.RegularExpressions;
+using System.Text;
+
+namespace Task_01
+{
+    class Program
+    {
+        public static void Main()
+        {
+            Dictionary<string, List<string>> users = new Dictionary<string, List<string>>();
+            int count = 0;
+            string input = Console.ReadLine();
+            while (input != "Statistics")
+            {
+                string[] token = input.Split("->");
+                string username = token[1];
+
+                if (token[0].Equals("Add"))
+                {
+                    if (!users.ContainsKey(username))
+                    {
+                        users.Add(username, new List<string>());
+                        count++;
+                    }
+                    else
+                    {
+                        Console.WriteLine($"{username} is already registered");
+                    }
+                }
+                else if (token[0].Equals("Send"))
+                {
+                    string email = token[2];
+                    
+                        users[username].Add(email);
+                    
+                }
+                else
+                {
+                    if (users.ContainsKey(username))
+                    {
+                        users.Remove(username);
+                        count--;
+                    }
+                    else
+                    {
+                        Console.WriteLine($"{username} not found!");
+                    }
+                }
+
+                input = Console.ReadLine();
+            }
+
+            Console.WriteLine("Users count: {0}", count);
+     
+            foreach (var user in users.OrderByDescending(x => x.Value.Count).ThenBy(x => x.Key))
+            {
+                Console.WriteLine(user.Key);
+                foreach (var email in user.Value)
+                {
+                    Console.WriteLine($"- {email}");
+                }
+            }
+        }
+    }
+}

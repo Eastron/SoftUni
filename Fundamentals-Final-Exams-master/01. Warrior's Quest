@@ -1,0 +1,98 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text.RegularExpressions;
+using System.Text;
+
+
+
+namespace Task_01
+{
+    class Program
+    {
+        public static void Main()
+        {
+            string skill = Console.ReadLine();
+            StringBuilder sb = new StringBuilder();
+
+            sb.Append(skill);
+
+            string input = Console.ReadLine();
+
+            while (input != "For Azeroth")
+            {
+                string[] token = input.Split();
+
+                if (token[0].Equals("GladiatorStance"))
+                {
+                    for (int i = 0; i < sb.Length; i++)
+                    {
+                        sb[i] = char.ToUpper(sb[i]);
+                    }
+                    Console.WriteLine(sb);
+                }
+                else if (token[0].Equals("DefensiveStance"))
+                {
+                    for (int i = 0; i < sb.Length; i++)
+                    {
+                        sb[i] = char.ToLower(sb[i]);
+                    }
+                    Console.WriteLine(sb);
+                }
+                else if (token[0].Equals("Dispel"))
+                {
+                    int index = int.Parse(token[1]);
+                    char letter = token[2][0];
+
+                    if (index >= 0 && index < sb.Length)
+                    {
+                        char temp = sb[index];
+                        sb.Replace(temp, letter, index, 1);
+                        Console.WriteLine("Success!");
+                    }
+                    else
+                    {
+                        Console.WriteLine("Dispel too weak.");
+                    }
+                }
+                else if (token[0].Equals("Target"))
+                {
+                    if (token[1].Equals("Change"))
+                    {
+                        string substring = token[2];
+                        string secondSubstring = token[3];
+                        string temp = sb.ToString();
+                        if (temp.Contains(substring))
+                        {
+                            sb.Replace(substring, secondSubstring);
+                            Console.WriteLine(sb);
+                        }
+                    }
+                    else if(token[1].Equals("Remove"))
+                    {
+                        string substring = token[2];
+
+                        string temp = sb.ToString();
+                        int index = temp.IndexOf(substring);
+
+                        if (temp.Contains(substring))
+                        {
+                            sb.Remove(index, substring.Length);
+                            Console.WriteLine(sb);
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine("Command doesn't exist!");
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Command doesn't exist!");
+                }
+
+                input = Console.ReadLine();
+            }
+        }
+    }
+}

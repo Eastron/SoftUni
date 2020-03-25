@@ -1,0 +1,100 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text.RegularExpressions;
+using System.Text;
+
+namespace Task_01
+{
+    class Program
+    {
+        public static void Main()
+        {
+            string input = Console.ReadLine();
+            StringBuilder sb = new StringBuilder();
+            sb.Append(input);
+
+            string command = Console.ReadLine();
+
+            while (command != "Done")
+            {
+                string[] token = command.Split();
+
+                if (token[0].Equals("Change"))
+                {
+                    char oldChar = token[1][0];
+                    char newChar = token[2][0];
+                    string temp = sb.ToString();
+
+                    if (temp.Contains(oldChar))
+                    {
+                        sb.Replace(oldChar, newChar);
+                        Console.WriteLine(sb);
+                    }
+                }
+                else if (token[0].Equals("Includes"))
+                {
+                    string substring = token[1];
+                    string temp = sb.ToString();
+
+                    if (temp.Contains(substring))
+                    {
+                        Console.WriteLine("True");
+                    }
+                    else
+                    {
+                        Console.WriteLine("False");
+                    }
+                }
+                else if (token[0].Equals("End"))
+                {
+                    string substring = token[1];
+                    string temp = sb.ToString();
+                    
+                    if (temp.EndsWith(substring))
+                    {
+                        Console.WriteLine("True");
+                    }
+                    else
+                    {
+                        Console.WriteLine("False");
+                    }
+                }
+                else if (token[0].Equals("Uppercase"))
+                {
+                    string temp = sb.ToString().ToUpper();
+                    sb.Clear();
+                    sb.Append(temp);
+                    Console.WriteLine(sb);
+                }
+                else if (token[0].Equals("FindIndex"))
+                {
+                    string temp = sb.ToString();
+                    char theChar = token[1][0];
+
+                    if (temp.Contains(theChar))
+                    {
+                        int index = temp.IndexOf(theChar);
+                        Console.WriteLine(index);
+                    }
+                }
+                else if (token[0].Equals("Cut"))
+                {
+                    int startIndex = int.Parse(token[1]);
+                    int length = int.Parse(token[2]);
+                    if (startIndex >= 0 && startIndex < sb.Length)
+                    {
+                        for (int i = startIndex; i < startIndex + length; i++)
+                        {
+                            Console.Write(sb[i]);
+                        }
+                        Console.WriteLine();
+                        sb.Remove(startIndex, length);
+                    }
+                }
+
+                command = Console.ReadLine();
+            }
+        }
+    }
+}
