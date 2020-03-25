@@ -1,0 +1,49 @@
+using System;
+
+namespace Task_21
+{
+    class Program
+    {
+        static void Main()
+        {
+            double neededMoney = double.Parse(Console.ReadLine());
+            double ownedMoney = double.Parse(Console.ReadLine());
+            int spendCounter = 0;
+            int daysCounter = 0;
+
+            while (ownedMoney < neededMoney && spendCounter < 5)
+            {
+                string command = Console.ReadLine();
+                double money = double.Parse(Console.ReadLine());
+
+                if (command == "save")
+                {
+                    ownedMoney += money;
+                    spendCounter = 0;
+                }
+                else
+                {
+                    ownedMoney -= money;
+                    spendCounter++;
+                }
+                if (ownedMoney < 0)
+                {
+                    ownedMoney = 0;
+                }
+
+                daysCounter++;
+            }
+
+            if (spendCounter == 5)
+            {
+                Console.WriteLine("You can't save the money.");
+                Console.WriteLine(daysCounter);
+            }
+            if (ownedMoney >= neededMoney)
+            {
+                Console.WriteLine("You saved the money for {0} days.", daysCounter);
+            }
+
+        }
+    }
+}

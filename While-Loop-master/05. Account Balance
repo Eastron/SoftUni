@@ -1,0 +1,32 @@
+using System;
+
+namespace Task_04
+{
+    class AccountBalance
+    {
+        static void Main(string[] args)
+        {
+            int n = int.Parse(Console.ReadLine());
+            double sum = 0;
+            int counter = 0;
+            
+            while (counter < n)
+            {
+                double number = double.Parse(Console.ReadLine());
+                
+                if (number >= 0)
+                {
+                    Console.WriteLine("Increase: {0:F2}", number);
+                    sum += number;
+                }
+                else
+                {
+                    Console.WriteLine("Invalid operation!");
+                    break;
+                }
+                counter++;
+            }
+            Console.WriteLine("Total: {0}", sum);
+        }
+    }
+}

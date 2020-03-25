@@ -1,0 +1,48 @@
+using System;
+
+namespace Task_22
+{
+    class Program
+    {
+        static void Main()
+        {
+            int goal = 10000;
+            
+            int sumSteps = 0;
+            
+
+            while (sumSteps < goal)
+            {
+                string input = Console.ReadLine();
+
+                if (input == "Going home")
+                {
+                    
+                    int moreSteps = int.Parse(Console.ReadLine());
+                    sumSteps += moreSteps; 
+                    int stepsLeft = goal - sumSteps;
+
+                    if (sumSteps >= goal)
+                    {
+                        Console.WriteLine("Goal reached! Good job!");
+                        break;
+                    }
+                    else
+                    {
+                        Console.WriteLine("{0} more steps to reach goal.", stepsLeft);
+                        break;
+                    }
+                    
+                }
+
+                int steps = Int32.Parse(input);
+                sumSteps += steps;
+
+                if (sumSteps >= goal)
+                {
+                    Console.WriteLine("Goal reached! Good job!");
+                }
+            }
+        }
+    }
+}

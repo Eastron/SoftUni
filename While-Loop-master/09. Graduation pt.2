@@ -1,0 +1,46 @@
+using System;
+
+namespace Task_08
+{
+    class GraduationPartTwo
+    {
+        static void Main(string[] args)
+        {
+            string student = Console.ReadLine();
+            
+            int counter = 0;
+            double sum = 0;
+            int negativeCounter = 1;
+
+            while (counter < 12)
+            {
+                double grade = double.Parse(Console.ReadLine());
+
+                if (grade < 4)
+                {
+                    counter--;
+                     
+                    if (negativeCounter > 1)
+                    {
+                        int n = counter + negativeCounter + 1;
+                        Console.WriteLine("{0} has been excluded at {1} grade", student, n);
+                        break;
+                    }
+                    negativeCounter++;
+                }
+                else
+                {
+                    sum += grade;
+                    counter++;
+                }
+            }
+
+            if (counter == 12)
+            {
+                double average = sum / counter;
+
+                Console.WriteLine("{0} graduated. Average grade: {1:F2}", student, average);
+            }  
+        }
+    }
+}

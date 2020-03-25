@@ -1,0 +1,89 @@
+using System;
+
+namespace Task_23
+{
+    class Program
+    {
+        static void Main()
+        {
+            decimal input = decimal.Parse(Console.ReadLine());
+            decimal coins = 0;
+            int coinCounter = 0;
+
+            if (input >= 2)
+            {
+                while (input >= 2)
+                {
+                    coins = input % 2;
+                    input -= 2;
+                    coinCounter++;
+                }
+            }
+            if (input >= 1)
+            {
+                while (input >= 1)
+                {
+                    coins = input % 1;
+                    input--;
+                    coinCounter++;
+                }
+            }
+            if (input >= 0.50m)
+            {
+                while (input >= 0.50m)
+                {
+                    coins = input % 0.50m;
+                    input -= 0.50m;
+                    coinCounter++;
+                }
+            }
+            if (input >= 0.20m)
+            {
+                while (input >= 0.20m)
+                {
+                    coins = input % 0.20m;
+                    input -= 0.20m;
+                    coinCounter++;
+                }
+            }
+            if (input >= 0.10m)
+            {
+                while (input >= 0.10m)
+                {
+                    coins = input % 0.10m;
+                    input -= 0.10m;
+                    coinCounter++;
+                }
+            }
+            if (input >= 0.05m)
+            {
+                while (input >= 0.05m)
+                {
+                    coins = input % 0.05m;
+                    input -= 0.05m;
+                    coinCounter++;
+                }
+            }
+            if (input >= 0.02m)
+            {
+                while (input >= 0.02m)
+                {
+                    coins = input % 0.02m;
+                    input -= 0.02m;
+                    coinCounter++;
+                }
+            }
+            if (input >= 0.01m)
+            {
+                while (input >= 0.01m)
+                {
+                    coins = input % 0.01m;
+                    input -= 0.01m;
+                    coinCounter++;
+                }
+            }
+            
+            Console.WriteLine(coinCounter);  
+        }
+    }
+}

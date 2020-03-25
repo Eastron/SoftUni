@@ -1,0 +1,49 @@
+using System;
+
+namespace Task_20
+{
+    class Program
+    {
+        static void Main()
+        {
+            int inputOfBadGrades = int.Parse(Console.ReadLine());
+            int countForBadGrades = 0;
+            double sumGrades = 0;
+            int counterForGrades = 0;
+            string lastProblem = string.Empty;
+
+            while (countForBadGrades < inputOfBadGrades)
+            {
+                string nameOfExercise = Console.ReadLine();
+
+                if (nameOfExercise == "Enough")
+                {
+                    double averageGrade = sumGrades / counterForGrades;
+
+                    Console.WriteLine("Average score: {0:F2}", averageGrade);
+                    Console.WriteLine("Number of problems: {0}", counterForGrades);
+                    Console.WriteLine("Last problem: {0}", lastProblem);
+                    break;
+                }
+
+                int grade = int.Parse(Console.ReadLine());
+                
+                counterForGrades++;
+                sumGrades += grade;
+
+                if (grade <= 4)
+                {
+                    countForBadGrades++;
+                }
+
+                lastProblem = nameOfExercise;
+
+            }
+            if (countForBadGrades == inputOfBadGrades)
+                {
+                    Console.WriteLine("You need a break, {0} poor grades.", countForBadGrades);
+                }
+
+        }
+    }
+}

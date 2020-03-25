@@ -1,0 +1,38 @@
+using System;
+
+namespace Task_19
+{
+    class Program
+    {
+        static void Main()
+        {
+            string favoriteBook = Console.ReadLine();
+            int numberOfBooks = int.Parse(Console.ReadLine());
+            int counter = 0;
+            bool bookIsFound = false;
+            string nextBook = string.Empty;
+
+            while (counter < numberOfBooks)
+            {
+                nextBook = Console.ReadLine();
+                if (nextBook == favoriteBook)
+                {
+                    bookIsFound = true;
+                    break;
+                }
+
+                counter++;
+                
+            }
+            if (bookIsFound == false)
+            {
+                Console.WriteLine("The book you search is not here!");
+                Console.WriteLine("You checked {0} books.", numberOfBooks);
+            }
+            else
+            {
+                Console.WriteLine("You checked {0} books and found it.", counter);
+            }
+        }
+    }
+}

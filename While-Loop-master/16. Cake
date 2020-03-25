@@ -1,0 +1,37 @@
+using System;
+
+namespace Task_24
+{
+    class Program
+    {
+        static void Main()
+        {
+            int width = int.Parse(Console.ReadLine());
+            int height = int.Parse(Console.ReadLine());
+            
+            int sizeOfCake = width * height;
+            int sumPieces = 0;
+            int result = 0;
+
+            while (sumPieces <= sizeOfCake)
+            {
+                string command = Console.ReadLine();
+                if (command == "STOP")
+                {
+                    int pieceLeft = sizeOfCake - sumPieces;
+                    Console.WriteLine("{0} pieces are left.", pieceLeft);
+                    break;
+                }
+
+                int piece = Int32.Parse(command);
+                sumPieces += piece;
+                result = sumPieces - sizeOfCake;
+                
+            }
+            if (sumPieces > sizeOfCake)
+            {
+                Console.WriteLine("No more cake left! You need {0} pieces more.", result);
+            }
+        }
+    }
+}

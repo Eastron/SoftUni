@@ -1,0 +1,30 @@
+using System;
+
+namespace Task_07
+{
+    class Graduation
+    {
+        static void Main(string[] args)
+        {
+            string student = Console.ReadLine();
+
+            double sum = 0;
+            int count = 0;
+            
+            while (count < 12)
+            {
+                double grade = double.Parse(Console.ReadLine());
+                if (grade >= 4)
+                {
+                    sum += grade;
+                    count++;
+                }
+                
+            }
+
+            double average = sum / count;
+ 
+            Console.WriteLine("{0} graduated. Average grade: {1:F2}", student, average);
+        }
+    }
+}

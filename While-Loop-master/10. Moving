@@ -1,0 +1,40 @@
+using System;
+
+namespace Task_09
+{
+    class Moving
+    {
+        static void Main(string[] args)
+        {
+            int width = int.Parse(Console.ReadLine());
+            int length = int.Parse(Console.ReadLine());
+            int higth = int.Parse(Console.ReadLine());
+
+            int sum = 0;
+            int result = 0;
+            int space = width * length * higth;
+
+            while (true)
+            {
+                string box = Console.ReadLine();
+
+                if (box == "Done")
+                {
+                    Console.WriteLine("{0} Cubic meters left.", result);
+                    break;
+                }
+
+                int boxes = int.Parse(box);
+                sum += boxes;
+                result = space - sum;
+
+                if (space < sum)
+                {
+                    Console.WriteLine("No more free space! You need {0} Cubic meters more.", Math.Abs(result));
+                    break;
+                }
+
+            }
+         }
+    }
+}
