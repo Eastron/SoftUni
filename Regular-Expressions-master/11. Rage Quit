@@ -1,0 +1,42 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text.RegularExpressions;
+using System.Text;
+
+
+
+namespace Task_01
+{
+    class Program
+    {
+        public static void Main()
+        {
+            StringBuilder sb = new StringBuilder();
+
+            string input = Console.ReadLine();
+
+            input = input.ToUpper();
+            
+            int count = 0;
+
+            var reg = @"(?<symbols>[^\d]+)(?<digits>[\d]+)";
+            var matches = Regex.Matches(input, reg);
+
+
+            foreach (Match symbols in matches)
+            {
+                string symbol = symbols.Groups["symbols"].Value;
+                string counts = symbols.Groups["digits"].Value;
+                int counter = int.Parse(counts);
+
+                sb.Insert(sb.Length,symbol,counter);
+            }
+
+            count = sb.ToString().Distinct().Count();
+
+            Console.WriteLine("Unique symbols used: {0}", count);
+            Console.WriteLine(sb);
+        }
+    }
+}

@@ -1,0 +1,30 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text.RegularExpressions;
+
+
+
+namespace Task_01
+{
+    class Program
+    {
+        public static void Main()
+        {
+            var regex = @"\b(?<day>\d{2})([-.\/])(?<month>[A-Z][a-z]{2})\1(?<year>\d{4})\b";
+
+            var datex = Console.ReadLine();
+
+            var matches = Regex.Matches(datex, regex);
+
+            foreach (Match dates in matches)
+            {
+                var date = dates.Groups["day"].Value;
+                var month = dates.Groups["month"].Value;
+                var year = dates.Groups["year"].Value;
+
+                Console.WriteLine("Day: {0}, Month: {1}, Year: {2}", date, month, year);
+            }
+        }
+    }
+}

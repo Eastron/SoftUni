@@ -1,0 +1,43 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text.RegularExpressions;
+
+
+
+namespace Task_01
+{
+    class Program
+    {
+        public static void Main()
+        {
+            decimal sum = 0;
+
+            string input = Console.ReadLine();
+
+            while (input != "end of shift")
+            {
+                var regex = @"^%(?<name>[A-Z][a-z]+)%[^|$%]*<(?<product>\w+)>[^|$%]*\|(?<quantity>\d+)\|[^|$%]*?(?<price>[0-9]*[.]?[0-9]+)\$";
+                var matches = Regex.Matches(input, regex);
+
+                foreach (Match characters in matches)
+                {
+                    var name = characters.Groups["name"].Value;
+                    var product = characters.Groups["product"].Value;
+                    var quantity = characters.Groups["quantity"].Value;
+                    var price = characters.Groups["price"].Value;
+
+                    decimal result = decimal.Parse(quantity) * decimal.Parse(price);
+                    sum += result;
+
+                    Console.WriteLine("{0}: {1} - {2:F2}", name, product, result);
+                }
+
+                input = Console.ReadLine();
+            }
+
+            Console.WriteLine("Total income: {0:F2}", sum);
+
+        }
+    }
+}

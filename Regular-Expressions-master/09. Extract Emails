@@ -1,0 +1,26 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text.RegularExpressions;
+
+
+
+namespace Task_01
+{
+    class Program
+    {
+        public static void Main()
+        {
+            string input = Console.ReadLine();
+
+            var regex = @"\b(?<!\S)(([a-z0-9\-\.]+@[a-z0-9\-]+\.[a-z0-9]+([\.a-z0-9]+)?))\b";
+            var matches = Regex.Matches(input, regex);
+
+            foreach (Match email in matches)
+            {
+                string mail = email.ToString();
+                Console.WriteLine(mail);
+            }
+        }
+    }
+}

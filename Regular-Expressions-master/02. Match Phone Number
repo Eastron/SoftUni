@@ -1,0 +1,22 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text.RegularExpressions;
+
+namespace Task_01
+{
+    class Program
+    {
+        public static void Main()
+        {
+            var regex = @"(\+359([ -])2(\2)(\d{3})(\2)(\d{4}))\b";
+            var phones = Console.ReadLine();
+
+            var matches = Regex.Matches(phones, regex);
+
+           
+
+            Console.WriteLine(String.Join(", ", matches));
+        }
+    }
+}

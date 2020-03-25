@@ -1,0 +1,83 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text.RegularExpressions;
+
+
+
+namespace Task_01
+{
+    class Program
+    {
+        public static void Main()
+        {
+            Dictionary<string, int> participants = new Dictionary<string, int>();
+      
+            string[] names = Console.ReadLine().Split(", ");
+
+            foreach (var name in names)
+            {
+                participants.Add(name, 0);
+            }
+
+            var input = Console.ReadLine();
+
+            while (input != "end of race")
+            {
+                var regex = @"[A-Za-z]";
+                var matches = Regex.Matches(input, regex);
+                string name = string.Empty;
+                int kilometers = 0;
+
+                foreach (Match characters in matches)
+                {
+                    name += characters;
+                }
+
+                regex = @"[0-9]";
+                matches = Regex.Matches(input, regex);
+                string currentChar = string.Empty;
+
+                foreach (Match digit in matches)
+                {
+                    currentChar += digit;
+                    kilometers += int.Parse(currentChar);
+                    currentChar = string.Empty;
+                }
+
+                if (participants.ContainsKey(name))
+                {
+                    participants[name] += kilometers;
+                }
+
+                kilometers = 0;
+
+                input = Console.ReadLine();
+            }
+
+            int count = 1;
+            foreach (var participant in participants.OrderByDescending(x => x.Value))
+            {
+                
+                if (count == 1)
+                {
+                    Console.WriteLine("{0}st place: {1}", count, participant.Key);
+                }
+                else if (count == 2)
+                {
+                    Console.WriteLine("{0}nd place: {1}", count, participant.Key);
+                }
+                else if (count == 3)
+                {
+                    Console.WriteLine("{0}rd place: {1}", count, participant.Key);
+                }
+                else
+                {
+                    break;
+                }
+                count++;
+            }
+            
+        }
+    }
+}

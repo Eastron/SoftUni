@@ -1,0 +1,87 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text.RegularExpressions;
+
+
+
+namespace Task_01
+{
+    class Program
+    {
+        public static void Main()
+        {
+            Dictionary<string, List<string>> planets = new Dictionary<string, List<string>>();
+            int lines = int.Parse(Console.ReadLine());
+            string command = string.Empty;
+
+            for (int i = 0; i < lines; i++)
+            {
+                string input = Console.ReadLine();
+                var regex = @"[s, S, t, T, a, A, r, R]";
+                var matches = Regex.Matches(input, regex);
+                int count = matches.Count;
+
+                for (int j = 0; j < input.Length; j++)
+                {
+                    char currentChar = input[j];
+                    char newChar = (char)((int)currentChar - count);
+                    command += newChar;
+                }
+                
+                regex = @"@(?<planet>[A-Z][a-z]+)[^|>:!-]*:(?<population>[0-9]+)[^|>:!-]*!(?<comm>[A|D])![^|>:!-]*->(?<soldier>[0-9]+)";
+                matches = Regex.Matches(command, regex);
+
+                foreach (Match planet in matches)
+                {
+                    string attacked = planet.Groups["comm"].Value;
+                    string name = planet.Groups["planet"].Value;
+
+                    if (!planets.ContainsKey(attacked))
+                    {
+                        planets.Add(attacked, new List<string>());
+                        planets[attacked].Add(name);
+                    }
+                    else
+                    {
+                        planets[attacked].Add(name);
+                    }
+                }
+                command = string.Empty;
+            }
+
+            var attackedPlanet = planets.Where(x => x.Key == "A");
+            var destruction = planets.Where(x => x.Key == "D");
+            bool isTrue = false;
+            
+            foreach (var planet in attackedPlanet.OrderBy(x => x.Value.OrderBy(y => y)))
+            {
+                isTrue = true;
+                Console.WriteLine("Attacked planets: {0}", planet.Value.Count);
+                foreach (var name in planet.Value.OrderBy(x => x))
+                {
+                    Console.WriteLine("-> {0}", name);
+                }
+            }
+
+            if (!isTrue)
+            {
+                Console.WriteLine("Attacked planets: 0");
+            }
+            isTrue = false;
+            foreach (var planet in destruction.OrderBy(x => x.Value.OrderBy(y => y)))
+            {
+                isTrue = true;
+                Console.WriteLine("Destroyed planets: {0}", planet.Value.Count);
+                foreach (var name in planet.Value.OrderBy(x => x))
+                {
+                    Console.WriteLine("-> {0}", name);
+                }
+            }
+            if (!isTrue)
+            {
+                Console.WriteLine("Destroyed planets: 0");
+            }
+        }
+    }
+}

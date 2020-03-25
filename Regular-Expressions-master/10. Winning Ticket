@@ -1,0 +1,63 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text.RegularExpressions;
+using System.Text;
+
+
+
+namespace Task_01
+{
+    class Program
+    {
+        public static void Main()
+        {
+            StringBuilder tickets = new StringBuilder();
+
+            string[] input = Console.ReadLine().Split(new[] { ' ', ',' }, StringSplitOptions.RemoveEmptyEntries);
+
+            var pattern = @"(\@{6,}|\${6,}|\^{6,}|\#{6,})";
+            var reg = new Regex(pattern);
+
+            foreach (var ticket in input)
+            {
+                if (ticket.Length != 20)
+                {
+                    Console.WriteLine("invalid ticket");
+                }
+                else
+                {
+                    var leftMatch = reg.Match(ticket.Substring(0, 10));
+                    var rightMatch = reg.Match(ticket.Substring(10));
+                    var minLen = Math.Min(leftMatch.Length, rightMatch.Length);
+
+                    if (!leftMatch.Success || !rightMatch.Success)
+                    {
+                        Console.WriteLine($"ticket \"{ticket}\" - no match");
+                    }
+                    else
+                    {
+                        var leftPart = leftMatch.Value.Substring(0, minLen);
+                        var rightPart = rightMatch.Value.Substring(0, minLen);
+
+                        if (leftPart.Equals(rightPart))
+                        {
+                            if (leftPart.Length == 10)
+                            {
+                                Console.WriteLine("ticket \"{0}\" - {1}{2} Jackpot!", ticket, minLen, leftPart.Substring(0,1));
+                            }
+                            else
+                            {
+                                Console.WriteLine("ticket \"{0}\" - {1}{2}", ticket, minLen, leftPart.Substring(0,1));
+                            }
+                        }
+                        else
+                        {
+                            Console.WriteLine("ticket \"{0}\" - no match", ticket);
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

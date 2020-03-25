@@ -1,0 +1,24 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text.RegularExpressions;
+
+namespace Task_01
+{
+    class Program
+    {
+        public static void Main()
+        {
+            string regex = @"\b[A-Z][a-z]+ [A-Z][a-z]+";
+            string names = Console.ReadLine();
+
+            MatchCollection matches = Regex.Matches(names, regex);
+
+            foreach (var name in matches)
+            {
+                Console.Write("{0} ", name);
+            }
+            Console.WriteLine();
+        }
+    }
+}
