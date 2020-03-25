@@ -1,0 +1,43 @@
+using System;
+
+namespace Task_07
+{
+    class Program
+    {
+        static void Main()
+        {
+            int n = int.Parse(Console.ReadLine());
+            double averageGrade = 0;
+            double averageGradeAll = 0;
+            double sumAllGrade = 0;
+            double sumGrade = 0;
+            int counter = 0;
+
+            while (true)           
+            {
+                string presentation = Console.ReadLine();
+
+                if (presentation == "Finish")
+                {
+                    break;
+                }
+
+                sumGrade = 0;
+
+                for (int j = 0; j < n; j++)
+                {
+                    double grade = double.Parse(Console.ReadLine());
+                    sumGrade += grade;
+                    
+                }
+                counter++;
+                averageGrade = sumGrade / n;
+                sumAllGrade += averageGrade;
+
+                Console.WriteLine("{0} - {1:F2}.", presentation, averageGrade);
+            }
+            averageGradeAll = sumAllGrade / counter;
+            Console.WriteLine("Student's final assessment is {0:F2}.",averageGradeAll );
+        }
+    }
+}

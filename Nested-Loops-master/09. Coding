@@ -1,0 +1,30 @@
+using System;
+
+namespace Task_03
+{
+    class Program
+    {
+        static void Main()
+        {
+            string number = Console.ReadLine();
+
+            for (int i = number.Length - 1; i >= 0; i--)
+            {
+                char currentDigit = number[i];
+                int currentDigitToNumber = int.Parse(currentDigit.ToString());
+
+                if (currentDigitToNumber == 0)
+                {
+                    Console.WriteLine("ZERO");
+                    continue;
+                }
+
+                for (int j = 1; j <= currentDigitToNumber; j++)
+                {
+                    Console.Write((char)(currentDigitToNumber + 33));
+                }
+                Console.WriteLine();
+            }
+        }
+    }
+}

@@ -1,0 +1,34 @@
+using System;
+
+namespace Task_07
+{
+    class Building
+    {
+        static void Main(string[] args)
+        {
+            int floor = int.Parse(Console.ReadLine());
+            int rooms = int.Parse(Console.ReadLine());
+
+            for (int i = floor; i >= 1; i--)
+            {
+                for (int j = 0; j < rooms; j++)
+                {
+                    if (i == floor)
+                    {
+                        Console.Write("L{0}{1} ", i, j);
+                    }
+                    else if (i % 2 != 0)
+                    {
+                        Console.Write("A{0}{1} ", i, j);
+                    }
+                    else
+                    {
+                        Console.Write("O{0}{1} ", i, j);
+                    }
+                    
+                }
+                Console.WriteLine();
+            }
+        }
+    }
+}

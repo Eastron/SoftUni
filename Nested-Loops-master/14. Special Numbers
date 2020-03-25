@@ -1,0 +1,50 @@
+using System;
+
+namespace Task_10
+{
+    class Program
+    {
+        static void Main()
+        {
+            int n = int.Parse(Console.ReadLine());
+            int digit;
+            bool isSpecial = false;
+
+            for (int i = 1111; i <= 9999; i++)
+            {
+                int res = i;
+
+                while (res != 0)
+                {
+                    digit = res % 10;
+                    res /= 10;
+                    if (digit != 0)
+                    {
+
+
+                        if (n % digit == 0)
+                        {
+                            isSpecial = true;
+                        }
+                        else
+                        {
+                            isSpecial = false;
+                            break;
+                        }
+                    }
+                    else
+                    {
+                        isSpecial = false;
+
+                        break;
+                    }
+                }
+
+                if (isSpecial == true)
+                {
+                    Console.Write("{0} ", i);
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,41 @@
+using System;
+
+namespace Task_05
+{
+    class Travelling
+    {
+        static void Main(string[] args)
+        {
+            
+            double sum = 0;
+
+            while (true)
+            {
+                string destination = Console.ReadLine();
+                if (destination == "End")
+                {
+                    break;
+                }
+                double vacation = double.Parse(Console.ReadLine());
+
+                for (int i = 0; i <= vacation; i++)
+                {
+                    string save = Console.ReadLine();
+                    if (save == "End")
+                    {
+                        return;
+                    }
+
+                    double money = double.Parse(save);
+                    sum += money;
+                    if (sum >= vacation)
+                    {
+                        Console.WriteLine("Going to {0}!", destination);
+                        sum = 0;
+                        break;
+                    }
+                }
+            }
+        }
+    }
+}

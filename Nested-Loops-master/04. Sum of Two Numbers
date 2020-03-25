@@ -1,0 +1,45 @@
+using System;
+
+namespace Task_04
+{
+    class SumOfTwoNumbers
+    {
+        static void Main(string[] args)
+        {
+            int firstNumber = int.Parse(Console.ReadLine());
+            int secondNumber = int.Parse(Console.ReadLine());
+            int magicalNumber = int.Parse(Console.ReadLine());
+
+            int cunter = 0;
+            int result = 0;
+            int counter = 0;
+
+            for (int i = firstNumber; i <= secondNumber; i++)
+            {
+                for (int j = firstNumber; j <= secondNumber; j++)
+                {
+                    counter++;
+                    result = i + j;
+                    if (result == magicalNumber)
+                    {
+                        
+                        Console.WriteLine("Combination N:{0} ({1} + {2} = {3})", counter, i, j, result);
+                        break;
+                    }
+                    else
+                    {
+                        cunter++;
+                    }
+                }
+                if (result == magicalNumber)
+                {
+                    break;
+                }
+            }
+            if (result != magicalNumber)
+            {
+                Console.WriteLine("{0} combinations - neither equals {1}", cunter, magicalNumber);
+            }
+        }
+    }
+}

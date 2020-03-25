@@ -1,0 +1,41 @@
+using System;
+
+namespace Task_04
+{
+    class Program
+    {
+        static void Main()
+        {
+            int a = int.Parse(Console.ReadLine()); 
+            int b = int.Parse(Console.ReadLine());
+            
+
+            for (int j = a; j <= b; j++)
+            {
+                int sumEven = 0;
+                int sumOdd = 0;
+                string newA = j.ToString();
+                for (int i = newA.Length - 1; i >= 0; i--)
+                {
+                    char currentDigit = newA[i];
+                    int currentDigitToNumber = int.Parse(currentDigit.ToString());
+
+                    if (i % 2 == 0)
+                    {
+                        sumEven += currentDigitToNumber;
+                    }
+                    else
+                    {
+                        sumOdd += currentDigitToNumber;
+                    }
+                }
+
+                if (sumOdd == sumEven)
+                {
+                    Console.Write("{0} ", newA);
+                }
+               
+            }
+        }
+    }
+}

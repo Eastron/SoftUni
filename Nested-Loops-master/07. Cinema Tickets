@@ -1,0 +1,74 @@
+using System;
+
+namespace Task_09
+{
+    class CinemaTickets
+    {
+        static void Main(string[] args)
+        {
+            string movie = String.Empty;
+            double seats = 0;
+            string type = String.Empty;
+
+            int student = 0;
+            int standard = 0;
+            int kid = 0;
+            double studentSum = 0;
+            double standardSum = 0;
+            double kidSum = 0;
+            double capacity = 0;
+            double tickets = 0;
+            double sum = 0;
+
+            while (true)
+            {
+                movie = Console.ReadLine();
+                if (movie == "Finish")
+                {
+                    break;
+                }
+                seats = int.Parse(Console.ReadLine());
+                for (int i = 0; i < seats; i++)
+                {
+                    type = Console.ReadLine();
+                    if (type =="student")
+                    {
+                        student++;
+                    }
+                    else if (type == "standard")
+                    {
+                        standard++;
+                    }
+                    else if (type == "kid")
+                    {
+                        kid++;
+                    }
+                    else if (type == "End")
+                    {
+                        break;
+                    }
+                }
+                
+                tickets = student + standard + kid;
+                sum += tickets;
+                studentSum += student;
+                standardSum += standard;
+                kidSum += kid;
+                capacity = (tickets / seats) * 100;
+
+                Console.WriteLine("{0} - {1:F2}% full.", movie, capacity);
+
+                student = 0;
+                standard = 0;
+                kid = 0;
+            }
+            Console.WriteLine("Total tickets: {0}", sum);
+            double studentTickets = (studentSum / sum) * 100;
+            Console.WriteLine("{0:F2}% student tickets.", studentTickets);
+            double standardTickets = (standardSum / sum) * 100;
+            Console.WriteLine("{0:F2}% standard tickets.", standardTickets);
+            double kidTickets = (kidSum / sum) * 100;
+            Console.WriteLine("{0:F2}% kids tickets.", kidTickets);
+        }
+    }
+}
