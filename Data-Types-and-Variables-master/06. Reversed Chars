@@ -1,0 +1,17 @@
+using System;
+
+namespace Task_06
+{
+    class ReversedChars
+    {
+        static void Main(string[] args)
+        {
+            string first = Console.ReadLine();
+            string second = Console.ReadLine();
+            string third = Console.ReadLine();
+
+            Console.WriteLine("{0} {1} {2}", third, second, first);
+
+        }
+    }
+}

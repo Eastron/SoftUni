@@ -1,0 +1,27 @@
+using System;
+
+namespace Task_05
+{
+    class SpecialNumbers
+    {
+        static void Main(string[] args)
+        {
+            int num = int.Parse(Console.ReadLine());
+
+            for (int i = 1; i <= num; i++)
+            {
+                int first = (i / 10) % 10;
+                int last = i % 10;
+
+                if (first + last == 5 || first + last == 7 || first + last == 11)
+                {
+                    Console.WriteLine("{0} -> True", i);
+                }
+                else
+                {
+                    Console.WriteLine("{0} -> False", i);
+                }
+            }
+        }
+    }
+}

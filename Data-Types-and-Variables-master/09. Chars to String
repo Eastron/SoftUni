@@ -1,0 +1,17 @@
+using System;
+
+namespace Task_09
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            char first = Convert.ToChar(Console.ReadLine());
+            char second = Convert.ToChar(Console.ReadLine());
+            char third = Convert.ToChar(Console.ReadLine());
+
+            string word = first.ToString() + second.ToString() + third.ToString();
+            Console.WriteLine(word);
+        }
+    }
+}

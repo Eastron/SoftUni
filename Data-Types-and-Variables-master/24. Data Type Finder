@@ -1,0 +1,42 @@
+using System;
+
+namespace Task_24
+{
+    class DataTypeFinder
+    {
+        static void Main(string[] args)
+        {
+            string input = Console.ReadLine();
+            while (input != "END")
+            {
+                bool intTryParseIsSuccess = int.TryParse(input, out int intValue);
+                bool doubleTryParseIsSuccess = double.TryParse(input, out double doubleValue);
+                bool charTryParseIsSuccess = char.TryParse(input, out char charValue);
+                bool boolTryParseIsSuccess = bool.TryParse(input, out bool boolValue);
+
+                if (intTryParseIsSuccess)
+                {
+                    Console.WriteLine("{0} is integer type", input);
+                }
+                else if (doubleTryParseIsSuccess)
+                {
+                    Console.WriteLine("{0} is floating point type", input);
+                }
+                else if (charTryParseIsSuccess)
+                {
+                    Console.WriteLine("{0} is character type", input);
+                }
+                else if (boolTryParseIsSuccess)
+                {
+                    Console.WriteLine("{0} is boolean type", input);
+                }
+                else
+                {
+                    Console.WriteLine("{0} is string type", input);
+                }
+
+                input = Console.ReadLine();
+            }
+        }
+    }
+}

@@ -1,0 +1,36 @@
+using System;
+using System.Numerics;
+using System.Collections.Generic;
+using System.Linq;
+
+public class StrongNumber
+{
+  	public  static void Main()
+  	{
+		long lines = long.Parse(Console.ReadLine());
+		
+		BigInteger snowballValueBest = 0;
+		BigInteger snowballSnowBest = 0;
+		BigInteger snowballTimeBest = 0;
+		BigInteger snowballQualityBest = 0;
+		
+		for(int i = 0; i < lines; i++)
+		{
+			int snowballSnow = int.Parse(Console.ReadLine());
+			int snowballTime = int.Parse(Console.ReadLine());
+			int snowballQuality = int.Parse(Console.ReadLine());
+			
+			BigInteger snowballValue = BigInteger.Pow((snowballSnow / snowballTime), snowballQuality);
+			
+			if(snowballValue > snowballValueBest)
+			{
+				snowballValueBest = snowballValue;
+				snowballSnowBest = snowballSnow;
+				snowballTimeBest = snowballTime;
+				snowballQualityBest= snowballQuality;
+			}
+		}
+		
+		Console.WriteLine("{0} : {1} = {2} ({3})", snowballSnowBest, snowballTimeBest, snowballValueBest, snowballQualityBest);
+	}
+}

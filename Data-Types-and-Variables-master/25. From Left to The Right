@@ -1,0 +1,37 @@
+using System;
+using System.Numerics;
+
+namespace Task_25
+{
+    class FromLeftToTheRight
+    {
+        static void Main(string[] args)
+        {
+            long lines = long.Parse(Console.ReadLine());
+
+            for (long i = 0; i < lines; i++)
+            {
+                string input = Console.ReadLine();
+                string[] token = input.Split();
+                long firstNumber = long.Parse(token[0]);
+                long secondNumber = long.Parse(token[1]);
+                long sum = 0;
+
+                long biggerNumber = secondNumber;
+
+                if (firstNumber > secondNumber)
+                {
+                    biggerNumber = firstNumber;
+                }
+
+                while (biggerNumber != 0)
+                {
+                    sum += biggerNumber % 10;
+                    biggerNumber /= 10; 
+                }
+
+                Console.WriteLine(Math.Abs(sum));
+            }
+        }
+    }
+}

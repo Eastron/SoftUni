@@ -1,0 +1,45 @@
+using System;
+
+namespace Task_29
+{
+    class BalancedBracket
+    {
+        static void Main(string[] args)
+        {
+            int lines = int.Parse(Console.ReadLine());
+
+            string lastBracket = String.Empty;
+            string balance = "BALANCED";
+
+            for (int i = 0; i < lines; i++)
+            {
+                string input = Console.ReadLine();
+
+                if (input == "(")
+                {
+                    if (lastBracket == "(")
+                    {
+                        balance = "UNBALANCED";
+                        break;
+                    }
+                    lastBracket = "(";
+                }
+                if (input == ")")
+                {
+                    if (lastBracket != "(")
+                    {
+                        balance = "UNBALANCED";
+                        break;
+                    }
+                    lastBracket = ")";
+                }
+            }
+
+            if (lastBracket == "(")
+            {
+                balance = "UNBALANCED";
+            }
+            Console.WriteLine(balance);
+        }
+    }
+}

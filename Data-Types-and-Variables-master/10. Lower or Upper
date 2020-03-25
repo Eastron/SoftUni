@@ -1,0 +1,21 @@
+using System;
+
+namespace Task_10
+{
+    class LowerOrUpper
+    {
+        static void Main(string[] args)
+        {
+            char symbol = Convert.ToChar(Console.ReadLine());
+
+            if (symbol >= 65 && symbol <= 90)
+            {
+                Console.WriteLine("upper-case");
+            }
+            else
+            {
+                Console.WriteLine("lower-case");
+            }
+        }
+    }
+}

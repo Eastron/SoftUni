@@ -1,0 +1,32 @@
+using System;
+
+namespace Task_12
+{
+    class RefactorSpecialNumbers
+    {
+        static void Main(string[] args)
+        {
+            int number = int.Parse(Console.ReadLine());
+
+            int first = 0;
+            int last = 0;
+            bool isSpecial = false;
+
+            for (int i = 1; i <= number; i++)
+            {
+                last = i;
+
+                while (i > 0)
+                {
+                    first += i % 10;
+                    i = i / 10;
+                }
+
+                isSpecial = (first == 5) || (first == 7) || (first == 11);
+                Console.WriteLine("{0} -> {1}", last, isSpecial);
+                first = 0;
+                i = last;
+            }
+        }
+    }
+}

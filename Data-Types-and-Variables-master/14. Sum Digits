@@ -1,0 +1,22 @@
+using System;
+
+namespace Task_14
+{
+    class SumDigits
+    {
+        static void Main(string[] args)
+        {
+            string number = Console.ReadLine();
+            int sum = 0;
+
+            for (int i = 0; i < number.Length; i++)
+            {
+                char currentNum = number[i];
+                int num = currentNum - '0';
+                sum += num;
+            }
+
+            Console.WriteLine(sum);
+        }
+    }
+}
