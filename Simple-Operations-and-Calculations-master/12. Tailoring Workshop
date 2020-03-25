@@ -1,0 +1,23 @@
+using System;
+
+namespace Task_04
+{
+    class TailoringWorkshop
+    {
+        static void Main(string[] args)
+        {
+            int tables = int.Parse(Console.ReadLine());
+            double length = double.Parse(Console.ReadLine());
+            double width = double.Parse(Console.ReadLine());
+
+            double tablecloths = tables * (length + (2 * 0.3)) * (width + (2 * 0.3));
+            double quads = tables * (length / 2) * (length / 2);
+
+            double usd = (tablecloths * 7) + (quads * 9);
+            double bgn = usd * 1.85;
+
+            Console.WriteLine("{0:F2} USD", usd);
+            Console.WriteLine("{0:F2} BGN", bgn);
+        }
+    }
+}

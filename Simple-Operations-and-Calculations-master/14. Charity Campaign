@@ -1,0 +1,26 @@
+using System;
+
+namespace Task_06
+{
+    class CharityCampaign
+    {
+        static void Main(string[] args)
+        {
+            int days = int.Parse(Console.ReadLine());
+            int confectioner = int.Parse(Console.ReadLine());
+            int cakes = int.Parse(Console.ReadLine());
+            int corrugations = int.Parse(Console.ReadLine());
+            int pancakes = int.Parse(Console.ReadLine());
+
+            decimal priceCakes = cakes * 45m;
+            decimal priceCorrugations = corrugations * 5.80m;
+            decimal pricePancakes = pancakes * 3.20m;
+
+            decimal profit = days * (confectioner * (priceCakes + priceCorrugations + pricePancakes));
+            decimal cost = profit * 0.125m;
+            decimal result = profit - cost;
+
+            Console.WriteLine("{0:F2}", result);
+        }
+    }
+}

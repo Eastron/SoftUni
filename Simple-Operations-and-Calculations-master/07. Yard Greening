@@ -1,0 +1,19 @@
+using System;
+
+namespace Task_15
+{
+    class YardGreening
+    {
+        static void Main(string[] args)
+        {
+            decimal sqrMeters = decimal.Parse(Console.ReadLine());
+
+            decimal cost = sqrMeters * 7.61m;
+            decimal discount = cost * 0.18m;
+            decimal finalPrice = cost - discount;
+
+            Console.WriteLine("The final price is: {0:F2} lv.", finalPrice);
+            Console.WriteLine("The discount is: {0:F2} lv.", discount);
+        }
+    }
+}

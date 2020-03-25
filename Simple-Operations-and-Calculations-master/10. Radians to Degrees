@@ -1,0 +1,14 @@
+using System;
+
+namespace Task_02
+{
+    class RadiansToDegrees
+    {
+        static void Main(string[] args)
+        {
+            double radians = double.Parse(Console.ReadLine());
+            double result = radians * (180 / Math.PI);
+            Console.WriteLine("{0}", Math.Round(result));
+        }
+    }
+}

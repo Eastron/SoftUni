@@ -1,0 +1,23 @@
+using System;
+
+namespace Task_16
+{
+    class FishTank
+    {
+        static void Main(string[] args)
+        {
+            int length = int.Parse(Console.ReadLine());
+            int width = int.Parse(Console.ReadLine());
+            int heigth = int.Parse(Console.ReadLine());
+            double percent = double.Parse(Console.ReadLine());
+
+            double v = length * width * heigth;
+            double litres = v * 0.001;
+            double a = percent / 100;
+            double space = litres * (1-a);
+            
+
+            Console.WriteLine("{0:F3}", space);
+        }
+    }
+}

@@ -1,0 +1,14 @@
+using System;
+
+namespace Lesson_Two
+{
+    class UsdToBgn
+    {
+        static void Main(string[] args)
+        {
+            decimal usd = decimal.Parse(Console.ReadLine());
+            decimal result = usd * 1.79549m;
+            Console.WriteLine("{0:F2}", result);
+        }
+    }
+}

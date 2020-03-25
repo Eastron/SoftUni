@@ -1,0 +1,31 @@
+using System;
+
+namespace Task_07
+{
+    class AlcoholMarket
+    {
+        static void Main(string[] args)
+        {
+            decimal priceWhiskey = decimal.Parse(Console.ReadLine());
+            double litresBeer = double.Parse(Console.ReadLine());
+            double litresWine = double.Parse(Console.ReadLine());
+            double litresRakia = double.Parse(Console.ReadLine());
+            double litresWhiskey = double.Parse(Console.ReadLine());
+
+            decimal priceRakia = priceWhiskey / 2m;
+            decimal priceWine = priceRakia - (priceRakia * 0.4m);
+            decimal priceBeer = priceRakia - (priceRakia * 0.8m);
+
+            decimal whiskey = priceWhiskey * (decimal)litresWhiskey;
+            decimal rakia = priceRakia * (decimal)litresRakia;
+            decimal wine = priceWine * (decimal)litresWine;
+            decimal beer = priceBeer * (decimal)litresBeer;
+
+            decimal result = whiskey + rakia + beer + wine;
+
+            Console.WriteLine("{0:F2}", result);
+            
+
+        }
+    }
+}

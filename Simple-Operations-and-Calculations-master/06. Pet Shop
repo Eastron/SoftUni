@@ -1,0 +1,19 @@
+using System;
+
+namespace Task_14
+{
+    class PetShop
+    {
+        static void Main(string[] args)
+        {
+            int dogs = int.Parse(Console.ReadLine());
+            int otherPets = int.Parse(Console.ReadLine());
+
+            decimal priceDogs = dogs * 2.5m;
+            decimal priceOtherPets = otherPets * 4m;
+            decimal costs = priceDogs + priceOtherPets;
+
+            Console.WriteLine("{0:F2} lv.", costs);
+        }
+    }
+}
