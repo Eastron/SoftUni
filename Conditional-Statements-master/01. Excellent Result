@@ -1,0 +1,17 @@
+using System;
+
+namespace Task_01
+{
+    class ExcellentResult
+    {
+        static void Main(string[] args)
+        {
+            double n = double.Parse(Console.ReadLine());
+
+            if (n >= 5.50)
+            {
+                Console.WriteLine("Excellent!");
+            }
+        }
+    }
+}

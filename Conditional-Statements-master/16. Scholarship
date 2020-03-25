@@ -1,0 +1,41 @@
+using System;
+
+namespace Task_16
+{
+    class Scholarship
+    {
+        static void Main(string[] args)
+        {
+            decimal profit = decimal.Parse(Console.ReadLine());
+            decimal grade = decimal.Parse(Console.ReadLine());
+            decimal minSalary = decimal.Parse(Console.ReadLine());
+
+            decimal excellentScholarship = grade * 25m;
+            decimal socialScholaship = minSalary * 0.35m;
+
+            if (grade >= 5.5m && profit <= minSalary)
+            {
+                if (excellentScholarship > socialScholaship)
+                {
+                    Console.WriteLine("You get a scholarship for excellent results {0:F0} BGN", Math.Floor(excellentScholarship));
+                }
+                else
+                {
+                    Console.WriteLine("You get a Social scholarship {0:F0} BGN", Math.Floor(socialScholaship));
+                }
+            }
+            else if (grade >= 5.50m)
+            {
+                Console.WriteLine("You get a scholarship for excellent results {0:F0} BGN", Math.Floor(excellentScholarship));
+            }
+            else if (grade >= 4.50m && profit <= minSalary )
+            {
+                Console.WriteLine("You get a Social scholarship {0:F0} BGN", Math.Floor(socialScholaship));
+            }
+            else
+            {
+                Console.WriteLine("You cannot get a scholarship!");
+            }
+        }
+    }
+}

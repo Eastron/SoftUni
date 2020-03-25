@@ -1,0 +1,39 @@
+using System;
+
+namespace Task_07
+{
+    class AreaOfFigures
+    {
+        static void Main(string[] args)
+        {
+            string name = Console.ReadLine();
+
+            if (name == "square")
+            {
+                double a = double.Parse(Console.ReadLine());
+                double result = a * a;
+                Console.WriteLine("{0:F3}", result);
+            }
+            else if (name == "rectangle")
+            {
+                double a = double.Parse(Console.ReadLine());
+                double b = double.Parse(Console.ReadLine());
+                double result = a * b;
+                Console.WriteLine("{0:F3}", result);
+            }
+            else if (name == "circle")
+            {
+                double a = double.Parse(Console.ReadLine());
+                double result = Math.PI * (a * a);
+                Console.WriteLine("{0:F3}", result);
+            }
+            else if (name == "triangle")
+            {
+                double a = double.Parse(Console.ReadLine());
+                double b = double.Parse(Console.ReadLine());
+                double result = (a * b) / 2;
+                Console.WriteLine("{0:F3}", result);
+            }
+        }
+    }
+}

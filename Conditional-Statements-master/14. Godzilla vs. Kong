@@ -1,0 +1,44 @@
+using System;
+
+namespace Task_14
+{
+    class GodzillaVsKong
+    {
+        static void Main(string[] args)
+        {
+            decimal budget = decimal.Parse(Console.ReadLine());
+            int extras = int.Parse(Console.ReadLine());
+            decimal priceCloth = decimal.Parse(Console.ReadLine());
+            decimal discount;
+            decimal costs;
+
+            decimal decor = budget * 0.1m;
+             
+            if (extras >= 150)
+            {
+                decimal a = priceCloth * 0.1m;
+                discount = priceCloth - a;
+                costs = (extras * discount) + decor;
+            }
+            else
+            {
+                costs = (extras * priceCloth) + decor;
+            }
+
+            decimal money = budget - costs;
+
+            if (money >= 0)
+            {
+                Console.WriteLine("Action!");
+                Console.WriteLine("Wingard starts filming with {0:F2} leva left.", money);
+            }
+            else
+            {
+                Console.WriteLine("Not enough money!");
+                Console.WriteLine("Wingard needs {0:F2} leva more.", Math.Abs(money));
+            }
+
+
+        }
+    }
+}

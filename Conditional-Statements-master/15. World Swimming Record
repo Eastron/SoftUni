@@ -1,0 +1,29 @@
+using System;
+
+namespace Task_15
+{
+    class WorldSwimmingRecord
+    {
+        static void Main(string[] args)
+        {
+            double record = double.Parse(Console.ReadLine());
+            double distance = double.Parse(Console.ReadLine());
+            double time = double.Parse(Console.ReadLine());
+
+            int lowSpeed = (int)distance / 15;
+            double lowSeconds = lowSpeed * 12.5;
+            double ivanTime = (distance * time) + lowSeconds;
+
+            if (ivanTime < record)
+            {
+                Console.WriteLine("Yes, he succeeded! The new world record is {0:F2} seconds.", ivanTime);
+            }
+            else
+            {
+
+                Console.WriteLine("No, he failed! He was {0:F2} seconds slower.", ivanTime - record);
+            }
+
+        }
+    }
+}

@@ -1,0 +1,45 @@
+using System;
+
+namespace Task_12
+{
+    class MeterToCentimeterToMilimeter
+    {
+        static void Main(string[] args)
+        {
+            double num = double.Parse(Console.ReadLine());
+            string input = Console.ReadLine();
+            string output = Console.ReadLine();
+
+            if (input == "mm" && output == "m")
+            {
+                double result = num / 1000;
+                Console.WriteLine("{0:F3}", result);
+            }
+            else if (input == "mm" && output == "cm")
+            {
+                double result = num / 10;
+                Console.WriteLine("{0:F3}", result);
+            }
+            else if (input == "m" && output == "cm")
+            {
+                double result = num * 100;
+                Console.WriteLine("{0:F3}", result);
+            }
+            else if (input == "m" && output == "mm")
+            {
+                double result = num * 1000;
+                Console.WriteLine("{0:F3}", result);
+            }
+            else if (input == "cm" && output == "m")
+            {
+                double result = num / 100;
+                Console.WriteLine("{0:F3}", result);
+            }
+            else if (input == "cm" && output == "mm")
+            {
+                double result = num * 10;
+                Console.WriteLine("{0:F3}", result);
+            }
+        }
+    }
+}

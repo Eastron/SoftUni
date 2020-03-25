@@ -1,0 +1,52 @@
+using System;
+
+namespace Task_08
+{
+    class ToyShop
+    {
+        static void Main(string[] args)
+        {
+            decimal priceHolidays = decimal.Parse(Console.ReadLine());
+            int puzzle = int.Parse(Console.ReadLine());
+            int talkingDoll = int.Parse(Console.ReadLine());
+            int teddyBear = int.Parse(Console.ReadLine());
+            int minions = int.Parse(Console.ReadLine());
+            int trucks = int.Parse(Console.ReadLine());
+          
+            decimal priceSum = (puzzle * 2.60m) + (talkingDoll * 3m) + (teddyBear * 4.10m) + (minions * 8.20m) + (trucks * 2m);
+            int sum = puzzle + talkingDoll + teddyBear + minions + trucks;
+
+            if (sum >= 50)
+            {
+                decimal discount = priceSum * 0.25m;
+                decimal result = priceSum - discount;
+                decimal rent = result * 0.1m;
+                decimal final = result - rent;
+                decimal a = final - priceHolidays;
+                if (final >= priceHolidays)
+                {
+                    Console.WriteLine("Yes! {0:F2} lv left.", a);
+                }
+                else
+                {
+                    Console.WriteLine( "Not enough money! {0:F2} lv needed.", Math.Abs(a));
+                }
+            }
+            else
+            {
+                decimal rent = priceSum * 0.1m;
+                decimal result = priceSum - rent;
+                decimal a = result - priceHolidays;
+
+                if (a >= 0)
+                {
+                    Console.WriteLine("Yes! {0:F2} lv left.", a);
+                }
+                else
+                {
+                    Console.WriteLine("Not enough money! {0:F2} lv needed.", Math.Abs(a));
+                }
+            }
+        }
+    }
+}
