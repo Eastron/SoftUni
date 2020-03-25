@@ -1,0 +1,18 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace Task_01
+{
+    class Program
+    {
+        public static void Main()
+        {
+            string[] input = Console.ReadLine().Split('\\');
+            string[] lastIndex = input[input.Length - 1].Split('.');
+            Console.WriteLine("File name: {0}", lastIndex[0]);
+            Console.WriteLine("File extension: {0}", lastIndex[1]);
+        }
+    }
+}

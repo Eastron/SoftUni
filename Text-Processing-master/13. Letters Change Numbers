@@ -1,0 +1,59 @@
+using System;
+using System.Collections.Generic;
+using System.Numerics;
+using System.Linq;
+using System.Text;
+using System.Text.RegularExpressions;
+
+namespace Task_01
+{
+  public  class Program
+    {
+        public static void Main()
+        {
+            string[] input =  Console.ReadLine().Split(new char[] { ' ', '\t' }, StringSplitOptions.RemoveEmptyEntries).ToArray();;
+			
+			double sum = 0;
+			
+			
+			foreach(var word in input)
+			{
+				string number = string.Empty;
+				
+				for(int i = 1; i <= word.Length - 2; i++)
+				{
+					number += word[i];
+				}
+				
+				long num = long.Parse(number);
+				double currentSum = 0;
+				
+				if(char.IsUpper(word[0]))
+				{
+					double index = word[0] - 64;
+					double divide = num / index;
+					currentSum += divide;
+				}
+				else
+				{
+					double index = char.ToUpper(word[0]) - 64;
+					double multiply = num * index;
+					currentSum += multiply;
+				}
+				
+				if(char.IsUpper(word[word.Length - 1]))
+				{
+					double index = word[word.Length - 1] - 64;
+					currentSum -= index;
+				}
+				else
+				{
+					double index = char.ToUpper(word[word.Length - 1]) - 64;
+					currentSum += index;
+				}
+				sum += currentSum;
+			}
+			Console.WriteLine("{0:F2}", sum);
+        }
+    }
+}

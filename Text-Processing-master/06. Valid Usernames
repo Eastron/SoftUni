@@ -1,0 +1,26 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace Task_01
+{
+    class Program
+    {
+        public static void Main()
+        {
+            string[] usernames = Console.ReadLine().Split(", ");
+
+            for (int i = 0; i < usernames.Length; i++)
+            {
+                if (usernames[i].Length >= 3 && usernames[i].Length <= 16)
+                {
+                    if (usernames[i].All(x => char.IsLetterOrDigit(x) || x.Equals('_') || x.Equals('-')))
+                    {
+                        Console.WriteLine(usernames[i]);
+                    }
+                }
+            }
+        }
+    }
+}

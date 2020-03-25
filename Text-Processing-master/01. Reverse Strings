@@ -1,0 +1,22 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace Task_01
+{
+    class Program
+    {
+        public static void Main()
+        {
+            string input = Console.ReadLine();
+            while (input != "end")
+            {
+                char[] reverse = input.ToCharArray();
+                Array.Reverse(reverse);
+                Console.WriteLine("{0} = {1}", input, new string(reverse)); 
+                input = Console.ReadLine();
+            }
+        }
+    }
+}

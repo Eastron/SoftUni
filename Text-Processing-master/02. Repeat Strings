@@ -1,0 +1,29 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace Task_01
+{
+    class Program
+    {
+        public static void Main()
+        {
+            string[] input = Console.ReadLine().Split();
+            StringBuilder sb = new StringBuilder();
+            int n = 0;
+
+
+            for (int i = 0; i < input.Length; i++)
+            {
+                n = input[i].Length;
+                for (int j = 0; j < n; j++)
+                {
+                    sb.Append(input[i]);
+                }
+            }
+
+            Console.WriteLine(sb);
+        }
+    }
+}

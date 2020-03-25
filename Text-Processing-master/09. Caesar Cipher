@@ -1,0 +1,25 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace Task_01
+{
+    class Program
+    {
+        public static void Main()
+        {
+            string input = Console.ReadLine();
+
+            string myString = string.Empty;
+
+            for (int i = 0; i < input.Length; i++)
+            {
+                char currentChar = input[i];
+                myString += Convert.ToChar(currentChar + 3);
+            }
+
+            Console.WriteLine(myString);
+        }
+    }
+}
