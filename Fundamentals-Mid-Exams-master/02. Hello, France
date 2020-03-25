@@ -1,0 +1,84 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace Task_01
+{
+    class Program
+    {
+        public static void Main()
+        {
+            List<string> seq = Console.ReadLine().Split('|').ToList();
+            decimal budget = decimal.Parse(Console.ReadLine());
+
+            List<string> items = new List<string>();
+            List<decimal>price = new List<decimal>();
+
+            foreach (var item in seq)
+            {
+                string[] token = item.Split("->");
+                decimal num = decimal.Parse(token[1]);
+                if (token[0] == "Clothes" && num <= 50.00m)
+                {
+                    if (budget >= num)
+                    {
+                        items.Add(token[0]);
+                        price.Add(decimal.Parse(token[1]));
+                        budget -= num;
+                    }
+                }
+                else if (token[0] == "Shoes" && num <= 35.00m)
+                {
+                    if (budget >= num)
+                    {
+                        items.Add(token[0]);
+                        price.Add(decimal.Parse(token[1]));
+                        budget -= num;
+                    }
+                }
+                else if (token[0] == "Accessories" && num <= 20.50m)
+                {
+                    if (budget >= num)
+                    {
+                        items.Add(token[0]);
+                        price.Add(decimal.Parse(token[1]));
+                        budget -= num;
+                    }
+                }
+             }
+
+            List<decimal> newPrice = new List<decimal>();
+
+            foreach (var item in price)
+            {
+                decimal result = item + (item * 0.40m);
+                newPrice.Add(result);
+                budget += result;
+            }
+
+            foreach (var item in newPrice)
+            {
+                Console.Write("{0:F2} ", item);
+            }
+            Console.WriteLine();
+            decimal profit = 0;
+
+            for (int i = 0; i < newPrice.Count; i++)
+            {
+                profit += newPrice[i] - price[i];
+            }
+
+            Console.WriteLine("Profit: {0:F2}", profit);
+
+            if (budget >= 150)
+            {
+                Console.WriteLine("Hello, France!");
+            }
+            else
+            {
+                Console.WriteLine("Time to go.");
+            }
+        }
+    }
+}

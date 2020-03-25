@@ -1,0 +1,96 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+public class StrongNumber
+{
+  	public  static void Main()
+  	{
+		List<string> tanks = Console.ReadLine().Split(',').ToList();
+		tanks = tanks.Select(t => t.Trim()).ToList();
+		int commands = int.Parse(Console.ReadLine());
+		
+		for(int i = 0; i < commands; i++)
+		{
+			string input = Console.ReadLine();
+			string[] token = input.Trim().Split(',');
+			
+			switch(token[0])
+			{
+				case "Add":
+					{
+						if(tanks.Contains(token[1].Trim()))
+						{
+							Console.WriteLine("Tank is already bought");
+						}
+						else
+						{
+							Console.WriteLine("Tank successfully bought");
+							tanks.Add(token[1].Trim());
+						}
+					}
+					break;
+				case "Remove":
+					{
+						if(tanks.Contains(token[1].Trim()))
+						{
+							Console.WriteLine("Tank successfully sold");
+							tanks.Remove(token[1].Trim());
+						}
+						else
+						{
+							Console.WriteLine("Tank not found");
+						}
+					}
+					break;
+				case "Remove At":
+					{
+						int index = int.Parse(token[1]);
+						if(index >= tanks.Count)
+						{
+							Console.WriteLine("Index out of range");
+						}
+						else
+						{
+							tanks.RemoveAt(index);
+							Console.WriteLine("Tank successfully sold");
+						}
+					}
+					break;
+				case "Insert":
+					{
+						int index = int.Parse(token[1]);
+						
+						if(index > 0 && index < tanks.Count)
+						{
+							if(tanks.Contains(token[2].Trim()))
+							{
+								Console.WriteLine("Tank is already bought");
+							}
+							else
+							{
+								tanks.Insert(index,token[2].Trim());
+								Console.WriteLine("Tank successfully bought");
+							}
+						}
+						else
+						{
+							Console.WriteLine("Index out of range");
+						}
+					}
+					break;
+				}
+			}
+			for(int i = 0; i < tanks.Count; i++)
+				{
+					if(i != tanks.Count - 1)
+					{
+						Console.Write("{0}, ", tanks[i]);
+					}
+					else
+					{
+						Console.Write("{0}", tanks[i]);
+					}
+				}
+  	}
+}

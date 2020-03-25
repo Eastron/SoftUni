@@ -1,0 +1,45 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+public class StrongNumber
+{
+  	public  static void Main()
+  	{
+		int producedPerDay = int.Parse(Console.ReadLine());
+		int workers = int.Parse(Console.ReadLine());
+		int competingFactoryProduced = int.Parse(Console.ReadLine());
+		
+		int producePerDay = 0;
+		
+		for(int i = 1; i <= 30; i++)
+		{
+			if(i % 3 == 0)
+			{
+				producePerDay += (int)(Math.Floor((producedPerDay * workers) * 0.75));
+			}
+			else
+			{
+				producePerDay += producedPerDay * workers;
+			}
+		}
+		
+		Console.WriteLine("You have produced {0} biscuits for the past month.", producePerDay);
+		
+		if(producePerDay >= competingFactoryProduced)
+		{
+			double different = producePerDay - competingFactoryProduced;
+			double percent = (different / competingFactoryProduced) * 100;
+			
+			Console.WriteLine("You produce {0:F2} percent more biscuits.", percent);
+		}
+		else
+		{
+			double different = competingFactoryProduced - producePerDay;
+			double percent = (different / competingFactoryProduced) * 100;
+			
+			Console.WriteLine("You produce {0:F2} percent less biscuits.", percent);
+		}
+		
+  	}
+}

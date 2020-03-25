@@ -1,0 +1,61 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace Task_01
+{
+    class Program
+    {
+        public static void Main()
+        {
+            int days = int.Parse(Console.ReadLine());
+            decimal budget = decimal.Parse(Console.ReadLine());
+            int people = int.Parse(Console.ReadLine());
+            decimal priceOfFuel = decimal.Parse(Console.ReadLine());
+            decimal foodExpensesPerPerson = decimal.Parse(Console.ReadLine());
+            decimal priceOfRoomForOneNight = decimal.Parse(Console.ReadLine());
+
+            decimal food = foodExpensesPerPerson * people * days;
+            decimal nights = priceOfRoomForOneNight * people * days;
+            if (people > 10)
+            {
+                nights -= nights * 0.25m;
+            }
+            decimal expenses = food + nights;
+
+            for (int i = 1; i <= days; i++)
+            {
+                decimal kilometers = decimal.Parse(Console.ReadLine());
+
+                decimal fuel = priceOfFuel * kilometers;
+                expenses += fuel;
+
+                if (i % 3 == 0 || i % 5 == 0)
+                {
+                    expenses += expenses * 0.4m;
+                }
+
+                if (i % 7 == 0)
+                {
+                    expenses -= expenses / people;
+                }
+
+                
+
+                if (expenses > budget)
+                {
+                    decimal result = expenses - budget;
+                    Console.WriteLine("Not enough money to continue the trip. You need {0:F2}$ more.", result);
+                    break;
+                }
+            }
+
+            if (budget >= expenses)
+            {
+                decimal result = budget - expenses;
+                Console.WriteLine("You have reached the destination. You have {0:F2}$ budget left.", result);
+            }
+        }
+    }
+}

@@ -1,0 +1,36 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace Task_01
+{
+    class Program
+    {
+        public static void Main()
+        {
+            int steps = int.Parse(Console.ReadLine());
+            decimal lenghtOfStep = decimal.Parse(Console.ReadLine());
+            int distance = int.Parse(Console.ReadLine());
+
+            decimal stepDistance = 0;
+
+            for (int i = 1; i <= steps; i++)
+            {
+                
+                if (i % 5 == 0)
+                {
+                    stepDistance += lenghtOfStep - (lenghtOfStep * 0.30m);
+                }
+                else
+                {
+                    stepDistance += lenghtOfStep;
+                }
+            }
+
+            decimal result = stepDistance / distance;
+
+            Console.WriteLine("You travelled {0:F2}% of the distance!", result);
+        }
+    }
+}

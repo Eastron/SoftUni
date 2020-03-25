@@ -1,0 +1,38 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace Task_01
+{
+    class Program
+    {
+        public static void Main()
+        {
+            decimal sizeOfSide = decimal.Parse(Console.ReadLine());
+            int sheetsOfPaper = int.Parse(Console.ReadLine());
+            decimal areaOfSingleSheet = decimal.Parse(Console.ReadLine());
+
+            decimal areaOfBox = (sizeOfSide * sizeOfSide) * 6;
+            decimal area = 0;
+
+
+            for (int i = 1; i <= sheetsOfPaper; i++)
+            {
+                if (i % 3 == 0)
+                {
+                    decimal a = areaOfSingleSheet * 0.25m;
+                    area += a;
+                }
+                else
+                {
+                    area += areaOfSingleSheet;
+                }
+            }
+
+            decimal percentage = (area / areaOfBox) * 100;
+
+            Console.WriteLine("You can cover {0:F2}% of the box.",percentage);
+        }
+    }
+}

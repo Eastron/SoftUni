@@ -1,0 +1,79 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace Task_01
+{
+    class Program
+    {
+        public static void Main()
+        {
+            string[] particles = Console.ReadLine().Split('|').ToArray();
+
+            string input = Console.ReadLine();
+
+            while (input != "Done")
+            {
+                string[] command = input.Split();
+
+                if (command[0] == "Move")
+                {
+                    int index = int.Parse(command[2]);
+                    if (command[1] == "Left")
+                    {
+                        if (index >= 0 && index < particles.Length)
+                        {
+                            if (index != 0)
+                            {
+                                string temp = particles[index];
+                                particles[index] = particles[index - 1];
+                                particles[index - 1] = temp;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        if (index >= 0 && index < particles.Length)
+                        {
+                            if (index != particles.Length - 1)
+                            {
+                                string temp = particles[index];
+                                particles[index] = particles[index + 1];
+                                particles[index + 1] = temp;
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    if (command[1] == "Even")
+                    {
+                        for (int i = 0; i < particles.Length; i++)
+                        {
+                            if (i % 2 == 0)
+                            {
+                                Console.Write("{0} ", particles[i]);
+                            }
+                        }
+                        Console.WriteLine();
+                    }
+                    else
+                    {
+                        for (int i = 0; i < particles.Length; i++)
+                        {
+                            if (i % 2 != 0)
+                            {
+                                Console.Write("{0} ", particles[i]);
+                            }
+                        }
+                        Console.WriteLine();
+                    }
+                }
+
+                input = Console.ReadLine();
+            }
+
+            Console.WriteLine("You crafted {0}!", String.Join("",particles));
+        }
+    }
+}

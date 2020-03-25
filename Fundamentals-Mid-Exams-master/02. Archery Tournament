@@ -1,0 +1,112 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace Task_01
+{
+    class Program
+    {
+        public static void Main()
+        {
+            List<int> field = Console.ReadLine().Split('|').Select(int.Parse).ToList();
+            string input = Console.ReadLine();
+            int index = 0;
+            int length = 0;
+            int points = 0;
+
+            while (input != "Game over")
+            {
+                string[] token = input.Split('@');
+                string command = token[0];
+                if (token.Length > 1)
+                {
+                    index = int.Parse(token[1]);
+                    length = int.Parse(token[2]);
+                }
+
+
+                switch (command)
+                {
+                    case "Shoot Left":
+                        {
+                            if (index >= 0 && index < field.Count)
+                            {
+                                while (length >= 0)
+                                {
+                                    for (int i = index; i >= 0; i--)
+                                    {
+                                        
+                                        if (length < 0)
+                                        {
+                                            break;
+                                        }
+                                        if (length <= 0)
+                                        {
+                                            if (field[i] >= 5)
+                                            {
+                                                field[i] -= 5;
+                                                points += 5;
+                                            }
+                                            else
+                                            {
+                                                int temp = field[i];
+                                                points += temp;
+                                                field[i] -= temp;
+                                            }
+                                        }
+                                        length--;
+                                    }
+                                    index = field.Count- 1; 
+                                }
+                            }
+                        }
+                        break;
+                    case "Shoot Right":
+                        {
+                            if (index >= 0 && index < field.Count)
+                            {
+                                while (length >= 0)
+                                {
+                                    for (int i = index; i < field.Count; i++)
+                                    {
+                                        if (length < 0)
+                                        {
+                                            break;
+                                        }
+                                        if (length <= 0)
+                                        {
+                                            if (field[i] >= 5)
+                                            {
+                                                field[i] -= 5;
+                                                points += 5;
+                                            }
+                                            else
+                                            {
+                                                int temp = field[i];
+                                                points += temp;
+                                                field[i] -= temp;
+                                            }
+                                        }
+
+                                        length--;
+                                    }
+                                    index = 0;
+                                }
+                            }
+                        }
+                        break;
+                    case "Reverse":
+                        {
+                            field.Reverse();
+                        }
+                        break;
+                }
+
+                input = Console.ReadLine();
+            }
+
+            Console.WriteLine(string.Join(" - ", field));
+            Console.WriteLine("Iskren finished the archery tournament with {0} points!", points);
+        }
+    }
+}

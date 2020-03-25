@@ -1,0 +1,113 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace Task_01
+{
+    class Program
+    {
+        public static void Main()
+        {
+            List<int> tasks = Console.ReadLine().Split().Select(int.Parse).ToList();
+
+            string command = Console.ReadLine();
+
+            while (command != "End")
+            {
+                string[] token = command.Split();
+
+                switch (token[0])
+                {
+                    case "Complete":
+                        {
+                            int index = int.Parse(token[1]);
+                            if (index >= 0 && index < tasks.Count)
+                            {
+                                tasks[index] = 0;
+                            }
+                        }
+                        break;
+                    case "Change":
+                        {
+                            int index = int.Parse(token[1]);
+                            int time = int.Parse(token[2]);
+                            if (index >= 0 && index < tasks.Count)
+                            {
+                                tasks[index] = time;
+                            }
+                        }
+                        break;
+                    case "Drop":
+                        {
+                            int index = int.Parse(token[1]);
+                            if (index >= 0 && index < tasks.Count)
+                            {
+                                tasks[index] = -1;
+                            }
+                        }
+                        break;
+                    case "Count":
+                        {
+                            int count = 0;
+                            switch (token[1])
+                            {
+                                case "Completed":
+                                    {
+                                        foreach (var task in tasks)
+                                        {
+                                            if (task == 0)
+                                            {
+                                                count++;
+                                            }
+                                            
+                                        }
+                                        Console.WriteLine(count);
+                                        count = 0;
+                                    }
+                                    break;
+                                case "Incomplete":
+                                    {
+                                        foreach (var task in tasks)
+                                        {
+                                            if (task > 0)
+                                            {
+                                                count++;
+                                            }
+                                        }
+                                        Console.WriteLine(count);
+                                        count = 0;
+                                        
+                                    }
+                                    break;
+                                case "Dropped":
+                                    {
+                                        foreach (var task in tasks)
+                                        {
+                                            if (task < 0)
+                                            {
+                                                count++;
+                                            }
+                                        }
+                                        Console.WriteLine(count);
+                                        count = 0;
+                                    }
+                                    break;
+                            }
+                        }
+                        break;
+                }
+
+                command = Console.ReadLine();
+            }
+
+            foreach (var task in tasks)
+            {
+                if (task > 0)
+                {
+                    Console.Write("{0} ", task);
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,43 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+ 
+namespace Task_01
+{
+    class Program
+    {
+        public static void Main()
+        {
+            int days = int.Parse(Console.ReadLine());
+            int dailyPlunder = int.Parse(Console.ReadLine());
+            decimal expectedPlunder = decimal.Parse(Console.ReadLine());
+ 
+            decimal sum = 0;
+ 
+            for (int i = 1; i <= days; i++)
+            {
+                sum += dailyPlunder;
+ 
+                if (i % 3 == 0)
+                {
+                    sum += dailyPlunder * 0.50m;
+                }
+                if (i % 5 == 0)
+                {
+                    sum -= sum * 0.30m;
+                }
+               
+            }
+ 
+            if (sum >= expectedPlunder)
+            {
+                Console.WriteLine("Ahoy! {0:F2} plunder gained.", sum);
+            }
+            else
+            {
+                decimal result = (sum / expectedPlunder) * 100;
+                Console.WriteLine("Collected only {0:F2}% of the plunder.", result);
+            }
+        }
+    }
+}

@@ -1,0 +1,69 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace Task_01
+{
+    class Program
+    {
+        public static void Main()
+        {
+            List<string> books = Console.ReadLine().Split('&').ToList();
+            string input = Console.ReadLine();
+
+            while (input != "Done")
+            {
+                string[] command = input.Split(" | ");
+
+                switch (command[0])
+                {
+                    case "Add Book":
+                        {
+                            if (!books.Contains(command[1]))
+                            {
+                                books.Insert(0,command[1]);
+                            }
+                        }
+                        break;
+                    case "Take Book":
+                        {
+                            if (books.Contains(command[1]))
+                            {
+                                books.Remove(command[1]);
+                            }
+                        }
+                        break;
+                    case "Swap Books":
+                        {
+                            if (books.Contains(command[1]) && books.Contains(command[2]))
+                            {
+                                int index1 = books.IndexOf(command[1]);
+                                int index2 = books.IndexOf(command[2]);
+                                string temp = books[index1];
+                                books[index1] = books[index2];
+                                books[index2] = temp;
+                            }
+                        }
+                        break;
+                    case "Insert Book":
+                        {
+                            books.Add(command[1]);
+                        }
+                        break;
+                    case "Check Book":
+                        {
+                            int index = int.Parse(command[1]);
+                            if (index >= 0 && index < books.Count)
+                            {
+                                Console.WriteLine(books[index]);
+                            }
+                        }
+                        break;
+                }
+
+                input = Console.ReadLine();
+            }
+            Console.WriteLine(string.Join(", ", books));
+        }
+    }
+}

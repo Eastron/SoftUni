@@ -1,0 +1,41 @@
+using System;
+using System.Numerics;
+using System.Collections.Generic;
+using System.Linq;
+
+public class StrongNumber
+{
+  	public  static void Main()
+  	{
+		decimal journeyCost = decimal.Parse(Console.ReadLine());
+		int month = int.Parse(Console.ReadLine());
+		
+		decimal save = 0;
+		
+		for(int i = 1; i <= month; i++)
+		{
+			if(i % 2 != 0 && i != 1)
+			{
+				save -= save * 0.16m;
+			}
+			
+			if(i % 4 == 0)
+			{
+				save += save * 0.25m;
+			}
+			
+			save +=  journeyCost * 0.25m;	
+		}
+		
+		decimal result = save - journeyCost;
+		
+		if(result >= 0)
+		{
+			Console.WriteLine("Bravo! You can go to Disneyland and you will have {0:F2}lv. for souvenirs.", result);
+		}
+		else
+		{
+			Console.WriteLine("Sorry. You need {0:F2}lv. more.", Math.Abs(result));
+		}
+	}
+}

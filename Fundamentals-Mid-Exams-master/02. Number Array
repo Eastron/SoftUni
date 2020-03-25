@@ -1,0 +1,91 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace Task_01
+{
+    class Program
+    {
+        public static void Main()
+        {
+            List<int> seq = Console.ReadLine().Split().Select(int.Parse).ToList();
+
+            string input = Console.ReadLine();
+
+            while (input != "End")
+            {
+                string[] command = input.Split();
+
+                switch (command[0])
+                {
+                    case "Switch":
+                        {
+                            int index = int.Parse(command[1]);
+                            if (index >= 0 && index < seq.Count)
+                            {
+                                seq[index] *= -1;
+                            }
+                        }
+                        break;
+                    case "Change":
+                        {
+                            int index = int.Parse(command[1]);
+                            int value = int.Parse(command[2]);
+
+                            if (index >= 0 && index < seq.Count)
+                            {
+                                seq[index] = value;
+                            }
+                        }
+                        break;
+                    case "Sum":
+                        {
+                            int sum = 0;
+                            if (command[1] == "Negative")
+                            {
+
+                                foreach (var num in seq)
+                                {
+                                    if (num < 0)
+                                    {
+                                        sum += num;
+                                    }
+                                }
+                                
+                            }
+                            else if (command[1] == "Positive")
+                            {
+                                foreach (var num in seq)
+                                {
+                                    if (num >= 0)
+                                    {
+                                        sum += num;
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                foreach (var num in seq)
+                                {
+                                    sum += num;
+                                }
+                            }
+                            Console.WriteLine(sum);
+                        }
+                        break;
+                }
+
+                input = Console.ReadLine();
+            }
+
+            foreach (var num in seq)
+            {
+                if (num >= 0)
+                {
+                    Console.Write("{0} ", num);
+                }
+            }
+        }
+    }
+}
