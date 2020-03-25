@@ -1,0 +1,21 @@
+using System;
+using System.Numerics;
+using System.Collections.Generic;
+using System.Linq;
+
+public class StrongNumber
+{
+  	public  static void Main()
+  	{
+		string[] arrFirst = Console.ReadLine().Split();
+		string[] arrSecond = Console.ReadLine().Split();
+		
+		foreach(var item in arrSecond)
+		{
+			if(arrFirst.Contains(item))
+			{
+				Console.Write("{0} ",item);
+			}
+		}
+	}
+}

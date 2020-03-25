@@ -1,0 +1,109 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace Task_01
+{
+    class Program
+    {
+        public static int[] MoveRigth(int[] field, int index, int lenght, int count)
+        {
+            if (index >= 0 && index < field.Length && field[index] == 1)
+            {
+                if (lenght >= 0)
+                {
+                    field[index] = 0;
+                    count = index + lenght;
+
+                    for (int i = 0; i < field.Length; i++)
+                    {
+                        if ((lenght >= 0 && lenght < field.Length) && count < field.Length && field[count] == 0)
+                        {
+                            field[count] = 1;
+                            break;
+                        }
+
+                        count += lenght;
+                    }
+                }
+                else
+                {
+                    lenght = Math.Abs(lenght);
+                    MoveLeft(field, index, lenght, count);
+                }
+            }
+
+            return field;
+        }
+
+        public static int[] MoveLeft(int[] field, int index, int lenght, int count)
+        {
+            if (index >= 0 && index < field.Length && field[index] == 1)
+            {
+                if (lenght >= 0)
+                {
+                    field[index] = 0;
+                    count = index - lenght;
+                    for (int i = 0; i < field.Length; i++)
+                    {
+                        if ((lenght >= 0 && lenght < field.Length) && count >= 0 && field[count] == 0)
+                        {
+                            field[count] = 1;
+                            break;
+                        }
+
+                        count -= lenght;
+                    }
+                }
+                else
+                {
+                    lenght = Math.Abs(lenght);
+                    MoveRigth(field, index, lenght, count);
+                }
+            }
+
+            return field;
+        }
+        static void Main(string[] args)
+        {
+            int size = int.Parse(Console.ReadLine());
+            int[] indixes = Console.ReadLine().Split().Select(int.Parse).ToArray();
+
+            int[] field = new int[size];
+            int count = 0;
+
+            for (int i = 0; i < indixes.Length; i++)
+            {
+                if (indixes[i] >= 0 && indixes[i] < field.Length)
+                {
+                    field[indixes[i]] = 1;
+                }
+            }
+
+            string input = Console.ReadLine();
+
+            while (input != "end")
+            {
+                string[] token = input.Split();
+
+                int index = int.Parse(token[0]);
+                string direction = token[1];
+                int lenght = int.Parse(token[2]);
+
+
+                if (direction == "right")
+                {
+                    MoveRigth(field, index, lenght, count);
+                }
+                else
+                {
+                    MoveLeft(field, index, lenght, count);
+                }
+
+                input = Console.ReadLine();
+            }
+
+            Console.WriteLine(string.Join(" ", field));
+        }
+    }
+}

@@ -1,0 +1,47 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace Task_01
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            int num = int.Parse(Console.ReadLine());
+
+            string[] sequenceOfString = new string[num];
+            int[] sequenceOfInt = new int[num];
+
+
+
+            for (int i = 0; i < sequenceOfString.Length; i++)
+            {
+                sequenceOfString[i] = Console.ReadLine();
+
+                string word = sequenceOfString[i];
+
+                for (int j = 0; j < word.Length; j++)
+                {
+                    char currentChar = word[j];
+
+                    if (currentChar == 'a' || currentChar == 'e' || currentChar == 'i' || currentChar == 'o' || currentChar == 'u'
+                        || currentChar == 'A' || currentChar == 'E' || currentChar == 'I' || currentChar == 'O' || currentChar == 'U')
+                    {
+                        sequenceOfInt[i] += currentChar * sequenceOfString[i].Length;
+                    }
+                    else
+                    {
+                        sequenceOfInt[i] += currentChar / sequenceOfString[i].Length;
+                    }
+                }
+            }
+
+            foreach (var number in sequenceOfInt.OrderBy(x => x))
+            {
+                Console.WriteLine(number);
+            }
+            
+        }
+    }
+}

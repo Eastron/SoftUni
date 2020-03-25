@@ -1,0 +1,86 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace Task_01
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            int num = int.Parse(Console.ReadLine());
+
+            int[] arr1 = new int[2];
+            int[] arr2 = new int[arr1.Length + 1];
+
+            for (int i = 0; i < arr1.Length; i++)
+            {
+                arr1[i] = 1;
+                arr2[i] = 1;
+            }
+
+            for (int i = 0; i < num; i++)
+            {
+                if (i % 2 == 0)
+                {
+                    for (int j = 0; j <= i; j++)
+                    {
+                        Console.Write("{0} ", arr2[j]);
+                    }
+                }
+                else
+                {
+                    for (int j = 0; j <= i; j++)
+                    {
+                        Console.Write("{0} ", arr1[j]);
+                    }
+                }
+
+
+                if (i >= 1)
+                {
+                    if (i % 2 != 0)
+                    {
+                        int count = 0;
+                        for (int k = 0; k < arr2.Length; k++)
+                        {
+                            if (k == 0 || k == arr2.Length - 1)
+                            {
+                                arr2[k] = 1;
+                            }
+                            else
+                            {
+                                arr2[k] = arr1[count] + arr1[count + 1];
+                                count++;
+                            }
+
+                        }
+
+                        arr1 = new int[arr2.Length + 1];
+                    }
+                    else
+                    {
+                        int count = 0;
+
+                        for (int k = 0; k < arr1.Length; k++)
+                        {
+                            if (k == 0 || k == arr1.Length - 1)
+                            {
+                                arr1[k] = 1;
+                            }
+                            else
+                            {
+                                arr1[k] = arr2[count] + arr2[count + 1];
+                                count++;
+                            }
+                        }
+
+                        arr2 = new int[arr1.Length + 1];
+                    }
+                }
+                Console.WriteLine();
+            }
+
+        }
+    }
+}

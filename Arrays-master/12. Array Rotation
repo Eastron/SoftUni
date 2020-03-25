@@ -1,0 +1,37 @@
+using System;
+using System.Numerics;
+using System.Collections.Generic;
+using System.Linq;
+
+public class StrongNumber
+{
+  	public  static void Main()
+  	{
+		string[] first = Console.ReadLine().Split();
+		int n = int.Parse(Console.ReadLine());
+		
+		string[] arr = new string[first.Length];
+		int count = 0;
+		
+		if(n > first.Length)
+		{
+			n = n - first.Length;
+		}
+		
+		for(int i = n; i <= first.Length - 1; i++)
+		{
+			arr[count] = first[i];
+			count++;
+		}
+		
+		count = 0;
+		
+		for(int i = first.Length - n; i <= first.Length - 1; i++)
+		{
+			arr[i] = first[count];
+			count++;
+		}
+		
+		Console.WriteLine(string.Join(" ", arr));
+	}
+}

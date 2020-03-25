@@ -1,0 +1,42 @@
+using System;
+using System.Numerics;
+using System.Collections.Generic;
+using System.Linq;
+
+public class StrongNumber
+{
+  	public  static void Main()
+  	{
+		int[] first = Console.ReadLine().Split().Select(int.Parse).ToArray();
+		
+		for(int i = 0; i < first.Length; i++)
+		{
+			int sumLeft = 0;
+			int sumRight = 0;
+			
+			for(int j = 0; j < i; j++)
+			{
+				sumLeft += first[j];
+			}
+			
+			for(int k = i + 1; k < first.Length; k++)
+			{
+				sumRight += first[k];
+			}
+			
+			if(sumLeft == sumRight)
+			{
+				Console.WriteLine(i);
+				if(first[i] == 0 && first[i + 1] == 0)
+				{
+					continue;
+				}
+				else
+				{
+					return;
+				}
+			}
+		}
+		Console.WriteLine("no");
+	}
+}

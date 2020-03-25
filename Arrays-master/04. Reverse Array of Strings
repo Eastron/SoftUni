@@ -1,0 +1,18 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace Task_01
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            string[] arr = Console.ReadLine().Split().ToArray();
+
+            var arrs = arr.Reverse();
+
+            Console.WriteLine(String.Join(" ", arrs));
+        }
+    }
+}

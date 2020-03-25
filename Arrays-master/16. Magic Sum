@@ -1,0 +1,25 @@
+using System;
+using System.Numerics;
+using System.Collections.Generic;
+using System.Linq;
+
+public class StrongNumber
+{
+  	public  static void Main()
+  	{
+		int[] first = Console.ReadLine().Split().Select(int.Parse).ToArray();
+		
+		int sum = int.Parse(Console.ReadLine());
+		
+		for(int i = 0; i < first.Length; i++)
+		{
+			for(int j = i + 1; j < first.Length; j++)
+			{
+				if(first[i] + first[j] == sum)
+				{
+					Console.WriteLine("{0} {1}", first[i], first[j]);
+				}
+			}
+		}
+	}
+}

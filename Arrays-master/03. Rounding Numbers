@@ -1,0 +1,20 @@
+using System;
+using System.Linq;
+
+namespace Task_16
+{
+    class RoundingNumbers
+    {
+        static void Main(string[] args)
+        {
+            string input = Console.ReadLine();
+            double[] arr = input.Split(' ').Select(double.Parse).ToArray();
+            
+            for (int i = 0; i < arr.Length; i++)
+            {
+                int rounded = (int)Math.Round(arr[i], MidpointRounding.AwayFromZero);
+                Console.WriteLine("{0} => {1}", arr[i], rounded);
+            }
+        }
+    }
+}

@@ -1,0 +1,43 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace Task_01
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            int[] arr = Console.ReadLine().Split().Select(int.Parse).ToArray();
+
+            int[] arr1 = new int[arr.Length / 2];
+            int[] arr2 = new int[arr.Length / 2];
+
+            int start = arr.Length / 4;
+            int counter = 0;
+            int count = 0;
+            for (int i = 0; i < arr.Length; i++)
+            {
+                if (i < start)
+                {
+                    arr1[i] = arr[start - 1 - i];
+                }
+                else if (i >= start && i < arr.Length - start)
+                {
+                    arr2[counter] = arr[i];
+                    counter++;
+                }
+                else if (i >= arr.Length - start)
+                {
+                    arr1[start + count] = arr[arr.Length - 1 - count];
+                    count++;
+                }
+            }
+
+            for (int i = 0; i < arr1.Length; i++)
+            {
+                Console.Write("{0} ",arr1[i] + arr2[i] );
+            }
+        }
+    }
+}

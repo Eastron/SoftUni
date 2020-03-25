@@ -1,0 +1,25 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace Task_01
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            string[] days = new string[7] { "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"};
+
+            int input = int.Parse(Console.ReadLine());
+
+            if (input > 0 && input <= days.Length)
+            {
+                Console.WriteLine(days[input - 1]);
+            }
+            else
+            {
+                Console.WriteLine("Invalid day!");
+            }
+        }
+    }
+}
