@@ -1,0 +1,45 @@
+using System;
+using System.Numerics;
+using System.Collections.Generic;
+using System.Linq;
+
+public class StrongNumber
+{	
+	
+  	public  static void Main()
+  	{
+		List<int> seq1 = Console.ReadLine().Split().Select(int.Parse).ToList();
+		List<int> seq2 = Console.ReadLine().Split().Select(int.Parse).ToList();
+		
+		List<int> result = new List<int>();
+		
+		if(seq1.Count > seq2.Count)
+		{
+			for(int i = 0; i < seq2.Count; i++)
+			{
+				result.Add(seq1[i]);
+				result.Add(seq2[i]);
+				seq1.RemoveAt(i);
+				seq2.RemoveAt(i);
+				i = -1;
+			}
+			
+			result.AddRange(seq1);
+		}
+		else
+		{
+			for(int i = 0; i < seq1.Count; i++)
+			{
+				result.Add(seq1[i]);
+				result.Add(seq2[i]);
+				seq1.RemoveAt(i);
+				seq2.RemoveAt(i);
+				i = -1;
+			}
+			
+			result.AddRange(seq2);
+		}
+		
+		Console.WriteLine(String.Join(" ", result));
+	}  
+}

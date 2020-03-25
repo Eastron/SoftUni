@@ -1,0 +1,50 @@
+using System;
+using System.Numerics;
+using System.Collections.Generic;
+using System.Linq;
+
+public class StrongNumber
+{	
+	
+  	public  static void Main()
+  	{
+		List<int> numbers = Console.ReadLine().Split().Select(int.Parse).ToList();
+		
+		int finish = numbers.Count / 2;
+		double leftCar = 0;
+		double rightCar = 0;
+		
+		for(int i = 0; i < finish; i++)
+		{
+			if(numbers[i] == 0)
+			{
+				leftCar *= 0.8;
+			}
+			else
+			{
+				leftCar += numbers[i];
+			}
+		}
+		
+		for(int i = numbers.Count - 1; i > finish; i--)
+		{
+			if(numbers[i] == 0)
+			{
+				rightCar *= 0.8;
+			}
+			else
+			{
+				rightCar += numbers[i];
+			}
+		}
+		
+		if(leftCar < rightCar)
+		{
+			Console.WriteLine("The winner is left with total time: {0}", leftCar);
+		}
+		else
+		{
+			Console.WriteLine("The winner is right with total time: {0}", rightCar);
+		}
+	}  
+}

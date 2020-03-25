@@ -1,0 +1,77 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+public class StrongNumber
+{	
+	
+  	public  static void Main()
+  	{
+		List<int> numbers = Console.ReadLine().Split().Select(int.Parse).ToList();
+		int[] input = Console.ReadLine().Split().Select(int.Parse).ToArray();
+		
+		int number = input[0];
+		int power = input[1];
+		int index = 0;
+		for(int i = 0; i < numbers.Count; i++)
+		{	
+			if(numbers[i] == number)
+			{
+				index = i;	
+				
+				if(power == 0)
+				{
+					for(int j = 0; j < numbers.Count; j++)
+					{
+						if(numbers.Contains(number))
+						{
+							numbers.Remove(number);
+						}
+					}
+					break;
+				}
+				
+				if(index - power < 0 && (power * 2) + 1 > numbers.Count - 1)
+				{
+					numbers.Clear();		
+				}
+				else if(index - power < 0 || (power * 2) + 1 > numbers.Count - 1)
+				{
+					if(index - power < 0)
+					{
+						numbers.RemoveRange(0, power * 2);
+					}
+					else
+					{
+						
+						numbers.RemoveRange(index - power, (numbers.Count - (index - power)));
+						
+					}
+				}
+				else
+				{
+					
+					numbers.RemoveRange(index - power, (power * 2) + 1);
+					
+				}
+				
+				if(numbers.Count > 0)
+				{
+					if(numbers[0] == number)
+					{
+						i = -1;
+					}
+				}
+			}
+			
+		}
+		
+		int sum = 0;
+		
+		foreach(var item in numbers)
+		{
+			sum += item;
+		}
+		Console.WriteLine(sum);
+	}  
+}

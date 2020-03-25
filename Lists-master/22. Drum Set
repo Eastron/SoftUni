@@ -1,0 +1,57 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace Task_01
+{
+    class Program
+    {
+        public static void Main()
+        {
+            decimal saves = decimal.Parse(Console.ReadLine());
+            List<int> drums = Console.ReadLine().Split().Select(int.Parse).ToList();
+            List<int> originalDrums = new List<int>();
+
+            foreach (var drum in drums)
+            {
+                originalDrums.Add(drum);
+            }
+
+            string input = Console.ReadLine();
+
+            while (input != "Hit it again, Gabsy!")
+            {
+                int power = int.Parse(input);
+
+                for (int i = 0; i < drums.Count; i++)
+                {
+                    drums[i] -= power;
+                    if (drums[i] <= 0)
+                    {
+                        decimal price = originalDrums[i] * 3;
+                        if (price <= saves)
+                        {
+                            saves -= price;
+                            drums[i] = originalDrums[i];
+                        }
+                    }
+                }
+
+                for (int i = 0; i < drums.Count; i++)
+                {
+                    if (drums[i] <= 0)
+                    {
+                        drums.Remove(drums[i]);
+                        originalDrums.Remove(originalDrums[i]);
+                        i--;
+                    }
+                }
+
+                input = Console.ReadLine();
+            }
+
+            Console.WriteLine(string.Join(" ", drums));
+            Console.WriteLine("Gabsy has {0:F2}lv.", saves);
+        }
+    }
+}

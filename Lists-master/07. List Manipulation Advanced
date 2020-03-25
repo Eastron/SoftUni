@@ -1,0 +1,161 @@
+using System;
+using System.Numerics;
+using System.Collections.Generic;
+using System.Linq;
+
+public class StrongNumber
+{	
+	
+  	public  static void Main()
+  	{
+		List<int> seq = Console.ReadLine().Split().Select(int.Parse).ToList();
+		
+		List<int> otherSeq = new List<int>();
+		
+		otherSeq.AddRange(seq);
+		
+		string input = Console.ReadLine();
+		
+		while(input != "end")
+		{
+			string[] token = input.Split();
+			
+			switch(token[0])
+			{
+				case "Contains":
+					{
+						int number = int.Parse(token[1]);
+						if(seq.Contains(number))
+						{
+							Console.WriteLine("Yes");
+						}
+						else
+						{
+							Console.WriteLine("No such number");
+						}
+					}
+					break;
+				case "PrintEven":
+					{
+						foreach(var number in seq)
+						{
+							if(number % 2 == 0)
+							{
+								Console.Write("{0} ", number);
+							}
+						}
+						Console.WriteLine();
+					}
+					break;
+				case "PrintOdd":
+					{
+						foreach(var number in seq)
+						{
+							if(number % 2 != 0)
+							{
+								Console.Write("{0} ", number);
+							}
+						}
+						Console.WriteLine();
+					}
+					break;
+				case "GetSum":
+					{
+						int sum = 0;
+						foreach(var number in seq)
+						{
+							sum += number;
+						}
+						Console.WriteLine(sum);
+					}
+					break;
+				case "Filter":
+					{
+						int num = int.Parse(token[2]);
+						string symbol = token[1];
+						if(symbol == "<")
+						{
+							foreach(var number in seq)
+							{
+								if(number < num)
+								{
+									Console.Write("{0} ", number);
+								}
+							}
+							Console.WriteLine();
+						}
+						else if(symbol == ">")
+						{
+							foreach(var number in seq)
+							{
+								if(number > num)
+								{
+									Console.Write("{0} ", number);
+								}
+							}
+							Console.WriteLine();
+						}
+						else if(symbol == ">=")
+						{
+							foreach(var number in seq)
+							{
+								if(number >= num)
+								{
+									Console.Write("{0} ", number);
+								}
+							}
+							Console.WriteLine();
+						}
+						else if(symbol == "<=")
+						{
+							foreach(var number in seq)
+							{
+								if(number <= num)
+								{
+									Console.Write("{0} ", number);
+								}
+							}
+							Console.WriteLine();
+						}
+					}
+					break;
+				case "Add":
+					{
+						int number = int.Parse(token[1]);
+						seq.Add(number);
+					}
+					break;
+				case "Remove":
+					{
+						int number = int.Parse(token[1]);
+						seq.Remove(number);
+					}
+					break;
+				case "RemoveAt":
+					{
+						int index = int.Parse(token[1]);
+						seq.RemoveAt(index);
+					}
+					break;
+				case "Insert":
+					{
+						int number = int.Parse(token[1]);
+						int index = int.Parse(token[2]);
+						seq.Insert(index, number);
+					}
+					break;
+			}
+			input = Console.ReadLine();
+		}
+		
+		
+		for(int i = 0; i < seq.Count; i++)
+		{
+			if(seq[i] != otherSeq[i] || seq.Count != otherSeq.Count)
+			{
+				Console.WriteLine(String.Join(" ", seq));
+				break;
+			}
+		}
+	}  
+}

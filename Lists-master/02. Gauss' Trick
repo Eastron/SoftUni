@@ -1,0 +1,24 @@
+using System;
+using System.Numerics;
+using System.Collections.Generic;
+using System.Linq;
+
+public class StrongNumber
+{	
+  	public  static void Main()
+  	{
+		List<int> seq = Console.ReadLine().Split().Select(int.Parse).ToList();
+		
+		for(int i = 0; i < seq.Count; i++)
+		{
+			if(i != seq.Count - 1)
+			{
+				int temp = seq[seq.Count - 1];
+				seq[i] += temp;
+				seq.RemoveAt(seq.Count - 1);
+			}
+		}
+		
+		Console.WriteLine(String.Join(" ", seq));
+	}  
+}

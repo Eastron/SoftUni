@@ -1,0 +1,35 @@
+using System;
+using System.Numerics;
+using System.Collections.Generic;
+using System.Linq;
+
+public class StrongNumber
+{	
+	
+  	public  static void Main()
+  	{
+		List<int> numbers = Console.ReadLine().Split().Select(int.Parse).ToList();
+		string input = Console.ReadLine();
+		
+		while(input != "end")
+		{
+			string[] command = input.Split();
+			
+			if(command[0] == "Delete")
+			{
+				int element = int.Parse(command[1]);
+				numbers.RemoveAll(x => x == element);
+			}
+			else
+			{
+				int element = int.Parse(command[1]);
+				int index = int.Parse(command[2]);
+				numbers.Insert(index, element);
+			}
+			
+			input = Console.ReadLine();
+		}
+		
+		Console.WriteLine(string.Join(" ", numbers));
+	}  
+}

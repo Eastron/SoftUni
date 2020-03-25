@@ -1,0 +1,64 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace Task_01
+{
+    class Program
+    {
+        public static void Main()
+        {
+            List<int> seq1 = Console.ReadLine().Split().Select(int.Parse).ToList();
+            List<int> seq2 = Console.ReadLine().Split().Select(int.Parse).ToList();
+
+            List<int> result = new List<int>();
+
+            for (int i = 0; i < seq1.Count; i++)
+            {
+                result.Add(seq1[i]);
+            }
+
+            int odd = 1;
+
+            for (int i = seq2.Count - 1; i >= 0; i--)
+            {
+                if (odd < result.Count)
+                {
+                    result.Insert(odd, seq2[i]);
+                    odd += 2;
+                }
+                else
+                {
+                    for (int j = i; j >= 0; j--)
+                    {
+                        result.Add(seq2[j]);
+                    }
+                    break;
+                }
+                
+            }
+
+            int start = 0;
+            int end = 0;
+
+            if (result[result.Count - 2] > result[result.Count - 1])
+            {
+                start = result[result.Count - 1];
+                end = result[result.Count - 2];
+            }
+            else
+            {
+                start = result[result.Count - 2];
+                end = result[result.Count - 1];
+            }
+
+            foreach (var item in result.OrderBy(x => x))
+            {
+                if (item > start && item < end)
+                {
+                    Console.Write("{0} ", item);
+                }
+            }
+        }
+    }
+}

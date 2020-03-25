@@ -1,0 +1,26 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace Task_01
+{
+    class Program
+    {
+        public static void Main()
+        {
+            List<string> input = Console.ReadLine().Split('|').ToList();
+            input.Reverse();
+            List<int> number = new List<int>();
+
+            foreach (var item in input)
+            {
+                number.AddRange(item.Split(" ", StringSplitOptions.RemoveEmptyEntries).Select(int.Parse).ToList());
+            }
+            foreach (var item in number)
+            {
+                Console.Write(item + " ");
+            }
+        }
+    }
+}

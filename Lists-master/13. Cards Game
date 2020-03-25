@@ -1,0 +1,59 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+public class StrongNumber
+{	
+	
+	public static int GetSum(List<int> deck, int sum)
+	{
+		foreach(var card in deck)
+		{
+			sum += card;
+		}
+		
+		return sum;
+	}
+	
+  	public  static void Main()
+  	{
+		List<int> deck1 = Console.ReadLine().Split().Select(int.Parse).ToList();
+		List<int> deck2 = Console.ReadLine().Split().Select(int.Parse).ToList();
+		
+		while(deck1.Count != 0 && deck2.Count != 0)
+		{
+			if(deck2[0] > deck1[0])
+			{
+				deck2.Add(deck2[0]);
+				deck2.RemoveAt(0);
+				deck2.Add(deck1[0]);
+				deck1.RemoveAt(0);
+			}
+			else if (deck1[0] > deck2[0])
+			{
+				deck1.Add(deck1[0]);
+				deck1.RemoveAt(0);
+				deck1.Add(deck2[0]);
+				deck2.RemoveAt(0);
+			}
+			else
+			{
+				deck1.RemoveAt(0);
+				deck2.RemoveAt(0);
+			}
+		}
+		
+		int sum = 0;
+		
+		if(deck1.Count > 0)
+		{
+			sum =  GetSum(deck1, sum);
+			Console.WriteLine("First player wins! Sum: {0}", sum);
+		}
+		else
+		{
+			sum = GetSum(deck2, sum);
+			Console.WriteLine("Second player wins! Sum: {0}", sum);
+		}	
+	}  
+}

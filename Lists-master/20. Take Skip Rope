@@ -1,0 +1,81 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace Task_01
+{
+    class Program
+    {
+        public static void Main()
+        {
+            string input = Console.ReadLine();
+
+            List<int> numbers = new List<int>();
+            List<char> words = new List<char>();
+            string message = string.Empty;
+
+            for (int i = 0; i < input.Length; i++)
+            {
+                char currentChar = input[i];
+
+                if (input[i] >= 48 && input[i] <= 57)
+                {
+                    int digit = currentChar - '0';
+                    numbers.Add(digit);
+                }
+                else
+                {
+                    words.Add(currentChar);
+                }
+            }
+
+            List<int> take = new List<int>();
+            List<int> skip = new List<int>();
+
+            for (int i = 0; i < numbers.Count; i++)
+            {
+                if (i % 2 == 0)
+                {
+                    take.Add(numbers[i]);
+                }
+                else
+                {
+                    skip.Add(numbers[i]);
+                }
+            }
+
+            for (int i = 0; i < take.Count; i++)
+            {
+                int count = 0;
+                if (take[i] != 0)
+                {
+                    for (int j = 0; j < take[i]; j++)
+                    {
+                        if (words.Count == 0)
+                        {
+                            break;
+                        }
+                        char currentChar = words[count];
+                        message += currentChar;
+                        words.RemoveAt(count);
+                    }
+                }
+
+                if (skip[i] != 0)
+                {
+                    
+                    for (int j = 0; j < skip[i]; j++)
+                    {
+                        if (words.Count == 0)
+                        {
+                            break;
+                        }
+                        words.RemoveAt(count);
+                    }
+                }
+            }
+
+            Console.WriteLine(message);
+        }
+    }
+}

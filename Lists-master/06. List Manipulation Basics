@@ -1,0 +1,53 @@
+using System;
+using System.Numerics;
+using System.Collections.Generic;
+using System.Linq;
+
+public class StrongNumber
+{	
+	
+  	public  static void Main()
+  	{
+		List<int> seq = Console.ReadLine().Split().Select(int.Parse).ToList();
+		
+		string input = Console.ReadLine();
+		
+		while(input != "end")
+		{
+			string[] token = input.Split();
+			
+			switch(token[0])
+			{
+				case "Add":
+					{
+						int number = int.Parse(token[1]);
+						seq.Add(number);
+					}
+					break;
+				case "Remove":
+					{
+						int number = int.Parse(token[1]);
+						seq.Remove(number);
+					}
+					break;
+				case "RemoveAt":
+					{
+						int index = int.Parse(token[1]);
+						seq.RemoveAt(index);
+					}
+					break;
+				case "Insert":
+					{
+						int number = int.Parse(token[1]);
+						int index = int.Parse(token[2]);
+						seq.Insert(index, number);
+					}
+					break;
+			}
+			input = Console.ReadLine();
+		}
+		
+		Console.WriteLine(String.Join(" ", seq));
+		
+	}  
+}

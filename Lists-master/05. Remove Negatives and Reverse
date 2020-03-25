@@ -1,0 +1,32 @@
+using System;
+using System.Numerics;
+using System.Collections.Generic;
+using System.Linq;
+
+public class StrongNumber
+{	
+	
+  	public  static void Main()
+  	{
+		List<int> seq = Console.ReadLine().Split().Select(int.Parse).ToList();
+		
+		for(int i = 0; i < seq.Count; i++)
+		{
+			if(seq[i] < 0)
+			{
+				seq.RemoveAt(i);
+				i--;
+			}
+		}
+		
+		if(seq.Count > 0)
+		{
+			seq.Reverse();
+			Console.WriteLine(String.Join(" ", seq));
+		}
+		else
+		{
+			Console.WriteLine("empty");
+		}
+	}  
+}

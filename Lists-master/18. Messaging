@@ -1,0 +1,45 @@
+using System;
+using System.Numerics;
+using System.Collections.Generic;
+using System.Linq;
+
+public class StrongNumber
+{	
+	
+  	public  static void Main()
+  	{
+		List<string> numbers = Console.ReadLine().Split().ToList();
+		string input = Console.ReadLine();
+		
+		string newInput = string.Empty;
+		int index = 0;
+		string message = string.Empty;
+		
+		foreach(var number in numbers)
+		{
+			for(int i = 0; i < number.Length; i++)
+			{
+				char currentDigit = number[i];
+				int digit = currentDigit - '0';
+				index += digit;
+			}
+			
+			if(index >= input.Length)
+			{
+				int currentIndex = index - input.Length;
+				message += input[currentIndex];
+				newInput = input.Remove(currentIndex, 1);
+				input = newInput;
+			}
+			else
+			{
+				message += input[index];
+				newInput = input.Remove(index, 1);
+				input = newInput;
+			}
+			index = 0;
+		}
+		
+		Console.WriteLine(message);
+	}  
+}

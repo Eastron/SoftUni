@@ -1,0 +1,47 @@
+using System;
+using System.Numerics;
+using System.Collections.Generic;
+using System.Linq;
+
+public class StrongNumber
+{	
+	
+  	public  static void Main()
+  	{
+		int command = int.Parse(Console.ReadLine());
+		List<string> guests = new List<string>();
+		
+		for(int i = 0; i < command; i++)
+		{
+			string[] token = Console.ReadLine().Split();
+			
+			if(token[2] != "not")
+			{
+				if(!guests.Contains(token[0]))
+				{
+					guests.Add(token[0]);
+				}
+				else
+				{
+					Console.WriteLine("{0} is already in the list!", token[0]);
+				}
+			}
+			else
+			{
+				if(guests.Contains(token[0]))
+				{
+					guests.Remove(token[0]);
+				}
+				else
+				{
+					Console.WriteLine("{0} is not in the list!", token[0]);
+				}
+			}
+		}
+		
+		foreach(var guest in guests)
+		{
+			Console.WriteLine(guest);
+		}
+	}  
+}

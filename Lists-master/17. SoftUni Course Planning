@@ -1,0 +1,138 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace Task_01
+{
+    class Program
+    {
+        public static void Main()
+        {
+            List<string> courses = Console.ReadLine()
+                .Split(", ")
+                .ToList();
+
+            string command = Console.ReadLine();
+
+            while (command != "course start")
+            {
+                string[] token = command.Split(':');
+
+                switch (token[0])
+                {
+                    case "Add":
+                        {
+                            if (!courses.Contains(token[1]))
+                            {
+                                courses.Add(token[1]);
+                            }
+                        }
+                        break;
+                    case "Insert":
+                        {
+                            int index = int.Parse(token[2]);
+                            if (!courses.Contains(token[1]))
+                            {
+                                courses.Insert(index, token[1]);
+                            }
+                        }
+                        break;
+                    case "Remove":
+                        {
+                            if (courses.Contains(token[1]))
+                            {
+                                if (courses.Contains(token[1]+"-Exercise"))
+                                {
+                                    courses.Remove(token[1]);
+                                    courses.Remove(token[1]+"-Exercise");
+                                }
+                                else
+                                {
+                                    courses.Remove(token[1]);
+                                }
+                                
+                            }
+                        }
+                        break;
+                    case "Swap":
+                        {
+                            if (courses.Contains(token[1]) && courses.Contains(token[2]))
+                            {
+                                int first = courses.IndexOf(token[1]);
+                                int second = courses.IndexOf(token[2]);
+                                if (courses.Contains(token[1] + "-Exercise") && courses.Contains(token[2] + "-Exercise"))
+                                {
+                                    string temp = token[1];
+                                    string temExercise = token[1] + "-Exercise";
+                                    courses.RemoveAt(first + 1);
+                                    courses.RemoveAt(first);
+                                    courses.Insert(first, token[2]);
+                                    courses.Insert(first + 1, token[2] + "-Exercise");
+                                    courses.RemoveAt(second + 1);
+                                    courses.RemoveAt(second);
+                                    courses.Insert(second, temp);
+                                    courses.Insert(second + 1, temExercise);
+                                }
+                                else if (courses.Contains(token[1] + "-Exercise"))
+                                {
+                                    string temp = token[1];
+                                    string temExercise = token[1] + "-Exercise";
+                                    courses.RemoveAt(first + 1);
+                                    courses.RemoveAt(first);
+                                    courses.Insert(first, token[2]);
+                                    courses.RemoveAt(second);
+                                    courses.Insert(second, temp);
+                                    courses.Insert(second + 1, temExercise);
+                                }
+                                else if (courses.Contains(token[2] + "-Exercise"))
+                                {
+                                    string temp = token[2];
+                                    string temExercise = token[2] + "-Exercise";
+                                    courses.RemoveAt(second + 1);
+                                    courses.RemoveAt(second);
+                                    courses.Insert(second, token[1]);
+                                    courses.RemoveAt(first);
+                                    courses.Insert(first, temp);
+                                    courses.Insert(first + 1, temExercise);
+                                }
+                                else
+                                {
+                                    string temp = token[1];
+                                    courses.RemoveAt(first);
+                                    courses.Insert(first, token[2]);
+                                    courses.RemoveAt(second);
+                                    courses.Insert(second, temp);
+                                }
+                            }
+                        }
+                        break;
+                    case "Exercise":
+                        {
+                            if (!courses.Contains(token[1]))
+                            {
+                                courses.Add(token[1]);
+                                courses.Add(token[1] + "-Exercise");
+                            }
+                            else if (!courses.Contains(token[1] + "-Exercise"))
+                            {
+                                int index = courses.IndexOf(token[1]) + 1;
+                                courses.Insert(index, token[1] + "-Exercise");
+                            }
+                        }
+                        break;
+                }
+
+                command = Console.ReadLine();
+            }
+
+            int count = 1;
+
+            foreach (var course in courses)
+            {
+                Console.WriteLine("{0}.{1}", count, course);
+                count++;
+            }
+        }
+    }
+}

@@ -1,0 +1,75 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace Task_01
+{
+    class Program
+    {
+        public static void Main()
+        {
+            List<string> seq = Console.ReadLine().Split().ToList();
+
+            string input = Console.ReadLine();
+
+            while (input != "3:1")
+            {
+                string[] token = input.Split();
+
+                if (token[0] == "merge")
+                {
+                    int start = int.Parse(token[1]);
+                    int end = int.Parse(token[2]);
+                    string temp = string.Empty;
+                    if (start < 0 || start > seq.Count - 1)
+                    {
+                        start = 0;
+                    }
+
+                    if (end < 0 || end > seq.Count - 1)
+                    {
+                        end = seq.Count - 1;
+                    }
+                        
+                        for (int i = start; i <= end; i++)
+                        {
+                            temp += seq[i];
+                        }
+                        seq.RemoveRange(start, (end - start) + 1);
+                        seq.Insert(start, temp);
+                    
+                }
+                else
+                {
+                    List<string> divided = new List<string>();
+                    int divide = int.Parse(token[2]);
+                    int index = int.Parse(token[1]);
+                    string word = seq[index];
+                    seq.RemoveAt(index);
+                    int parts = word.Length / divide;
+
+                    for (int i = 0; i < divide; i++)
+                    {
+                        if (i == divide - 1)
+                        {
+                            divided.Add(word);
+                        }
+                        else
+                        {
+                            string element = word.Substring(0, parts);
+                            word = word.Substring(parts);
+                            divided.Add(element);
+                        }
+                    }
+
+                    seq.InsertRange(index, divided);
+                }
+
+                input = Console.ReadLine();
+            }
+
+            Console.WriteLine(string.Join(" ", seq));
+        }
+    }
+}

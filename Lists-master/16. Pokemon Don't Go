@@ -1,0 +1,58 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace Task_01
+{
+    class Program
+    {
+        public static void Main()
+        {
+            List<int> seq = Console.ReadLine().Split().Select(int.Parse).ToList();
+            
+
+            int sum = 0;
+
+            while (seq.Count != 0)
+            {
+                int index = int.Parse(Console.ReadLine());
+                int temp = 0;
+                if (index < 0)
+                {
+                    temp = seq[0];
+                    int last = seq[seq.Count - 1];
+                    seq.RemoveAt(0);
+                    seq.Insert(0, last);
+                }
+                else if (index > seq.Count - 1)
+                {
+                    temp = seq[seq.Count - 1];
+                    int first = seq[0];
+                    seq.RemoveAt(seq.Count - 1);
+                    seq.Add(first);
+                }
+                else
+                {
+                    temp = seq[index];
+                    seq.RemoveAt(index);
+                }
+
+                for (int i = 0; i < seq.Count; i++)
+                {
+                    if (seq[i] <= temp)
+                    {
+                        seq[i] += temp;
+                    }
+                    else
+                    {
+                        seq[i] -= temp;
+                    }
+                }
+                    sum += temp;    
+            }
+
+            Console.WriteLine(sum);
+        }
+    }
+}
