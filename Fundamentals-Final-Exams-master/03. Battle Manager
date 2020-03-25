@@ -1,0 +1,93 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text.RegularExpressions;
+using System.Text;
+
+namespace Task_01
+{
+    class Program
+    {
+        public static void Main()
+        {
+            Dictionary<string, int> peopleHealth = new Dictionary<string, int>();
+            Dictionary<string, int> peopleEnergy = new Dictionary<string, int>();
+
+            string input = Console.ReadLine();
+            while (input != "Results")
+            {
+                string[] token = input.Split(':');
+
+                if (token[0].Equals("Add"))
+                {
+                    string name = token[1];
+                    int health = int.Parse(token[2]);
+                    int energy = int.Parse(token[3]);
+
+                    if (!peopleHealth.ContainsKey(name))
+                    {
+                        peopleHealth.Add(name, health);
+                        peopleEnergy.Add(name, energy);
+                    }
+                    else
+                    {
+                        peopleHealth[name] += health;
+                    }
+                }
+                else if (token[0].Equals("Attack"))
+                {
+                    string attackerName = token[1];
+                    string defenderName = token[2];
+                    int damage = int.Parse(token[3]);
+
+                    if (peopleHealth.ContainsKey(attackerName) && peopleHealth.ContainsKey(defenderName))
+                    {
+                        peopleHealth[defenderName] -= damage;
+
+                        if (peopleHealth[defenderName] <= 0)
+                        {
+                            peopleHealth.Remove(defenderName);
+                            peopleEnergy.Remove(defenderName);
+                            Console.WriteLine($"{defenderName} was disqualified!");
+                        }
+
+                        peopleEnergy[attackerName]--;
+                        if (peopleEnergy[attackerName] <= 0)
+                        {
+                            peopleEnergy.Remove(attackerName);
+                            peopleHealth.Remove(attackerName);
+                            Console.WriteLine($"{attackerName} was disqualified!");
+                        }
+                    }
+                }
+                else if (token[0].Equals("Delete"))
+                {
+                    string username = token[1];
+                    if (username.Equals("All"))
+                    {
+                        peopleEnergy.Clear();
+                        peopleHealth.Clear();
+                    }
+                    else if (peopleHealth.ContainsKey(username))
+                    {
+                        peopleHealth.Remove(username);
+                        peopleEnergy.Remove(username);
+                    }
+                }
+
+                input = Console.ReadLine();
+            }
+
+            Console.WriteLine("People count: {0}", peopleHealth.Count);
+
+            foreach (var person in peopleHealth.OrderByDescending(x => x.Value).ThenBy(x => x.Key))
+            {
+                if (peopleEnergy.ContainsKey(person.Key))
+                {
+                    Console.WriteLine("{0} - {1} - {2}", person.Key, person.Value, peopleEnergy[person.Key]);
+                }
+                
+            }
+        }
+    }
+}
