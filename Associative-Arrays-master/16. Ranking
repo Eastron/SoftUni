@@ -1,0 +1,92 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text.RegularExpressions;
+
+namespace Task_01
+{
+    class Program
+    { 
+       public static void Main()
+        {
+            Dictionary<string, string> contestsPass = new Dictionary<string, string>();
+
+            string input1 = Console.ReadLine();
+
+            while (input1 != "end of contests")
+            {
+                string[] token = input1.Split(':');
+
+                string contest = token[0];
+                string password = token[1];
+
+                if (!contestsPass.ContainsKey(contest))
+                {
+                    contestsPass.Add(contest, password);
+                }
+
+                input1 = Console.ReadLine();
+            }
+
+            Dictionary<string, Dictionary<string, int>> usersContents = new Dictionary<string, Dictionary<string, int>>();
+            Dictionary<string, int> usersPoints = new Dictionary<string, int>();
+
+            string input2 = Console.ReadLine();
+
+            while (input2 != "end of submissions")
+            {
+                string[] token = input2.Split("=>");
+
+                string contest = token[0];
+                string password = token[1];
+                string username = token[2];
+                int points = int.Parse(token[3]);
+
+                if (contestsPass.ContainsKey(contest) && contestsPass[contest] == password)
+                {
+                    if (usersContents.ContainsKey(username))
+                    {
+                        if (usersContents[username].ContainsKey(contest))
+                        {
+                            if (usersContents[username][contest] < points)
+                            {
+                                usersContents[username][contest] = points;
+                            }
+                        }
+                        else
+                        {
+                            usersContents[username].Add(contest, points);
+                        }
+                    }
+                    else
+                    {
+                        usersContents.Add(username, new Dictionary<string, int>());
+                        usersContents[username].Add(contest, points);
+                    }
+                }
+
+                input2 = Console.ReadLine();
+            }
+
+            foreach (var user in usersContents)
+            {
+                usersPoints.Add(user.Key, user.Value.Sum(x => x.Value));
+            }
+
+            foreach (var user in usersPoints.OrderByDescending(x => x.Value))
+            {
+                Console.WriteLine($"Best candidate is {user.Key} with total {user.Value} points.");
+                break;
+            }
+            Console.WriteLine("Ranking:");
+            foreach (var user in usersContents.OrderBy(x => x.Key))
+            {
+                Console.WriteLine(user.Key);
+                foreach (var item in user.Value.OrderByDescending(x => x.Value))
+                {
+                    Console.WriteLine("#  {0} -> {1}", item.Key, item.Value);
+                }
+            }
+        }
+    }
+}

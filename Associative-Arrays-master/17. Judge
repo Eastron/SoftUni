@@ -1,0 +1,81 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+					
+public class Program
+{
+	public static void Main()
+	{
+		Dictionary<string, Dictionary<string, int>> contestsUsers = new Dictionary<string, Dictionary<string, int>>();
+		
+		string input = Console.ReadLine();
+		string delimiter = " -> ";
+		while(input != "no more time")
+		{
+			string[] token = input.Split(new []{delimiter}, StringSplitOptions.None);
+			
+			string username = token[0];
+			string contest = token[1];
+			int points = int.Parse(token[2]);
+			
+			if(contestsUsers.ContainsKey(contest))
+			{
+				if(contestsUsers[contest].ContainsKey(username))
+				{
+					if(contestsUsers[contest][username] < points)
+					{
+						contestsUsers[contest][username] = points;
+					}
+				}
+				else
+				{
+					contestsUsers[contest].Add(username, points);
+				}
+			}
+			else
+			{
+				contestsUsers.Add(contest, new Dictionary<string, int>());
+				contestsUsers[contest].Add(username, points);
+			}
+			
+			input = Console.ReadLine();
+		}
+		int position = 1;
+		foreach(var contest in contestsUsers)
+		{
+			Console.WriteLine("{0}: {1} participants", contest.Key, contest.Value.Count);
+			
+			foreach(var user in contest.Value.OrderByDescending(x => x.Value).ThenBy(x => x.Key))
+			{
+				Console.WriteLine("{0}. {1} <::> {2}", position, user.Key, user.Value);
+				position++;
+			}
+			position = 1;
+		}
+		
+		Dictionary<string, int> users = new Dictionary<string, int>();
+		
+		foreach(var contest in contestsUsers)
+		{
+			foreach(var user in contest.Value.OrderByDescending(x => x.Value).ThenBy(x => x.Key))
+			{
+				if(users.ContainsKey(user.Key))
+				{
+					users[user.Key] += user.Value;
+				}
+				else
+				{
+					users.Add(user.Key, user.Value);	
+				}
+				
+			}
+		}
+		position = 1;
+		Console.WriteLine("Individual standings:");
+		foreach(var user in users.OrderByDescending(x => x.Value).ThenBy(x => x.Key))
+		{
+			Console.WriteLine("{0}. {1} -> {2}",position, user.Key, user.Value);
+			position++;
+		}
+	}
+}

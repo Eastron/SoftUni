@@ -1,0 +1,18 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Globalization;
+using System.Numerics;
+
+namespace Task_01
+{
+	public  class Program
+    {
+        public static void Main()
+        {	
+			      List<string> words = Console.ReadLine().Split().Where(w => w.Length % 2 == 0).ToList();
+			
+			      words.ForEach(w => Console.WriteLine(w));
+        }
+    }
+}

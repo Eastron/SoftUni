@@ -1,0 +1,57 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace Task_01
+{
+    class Program
+    {
+        public static void Main()
+        {
+            int lines = int.Parse(Console.ReadLine());
+            Dictionary<string, string> database = new Dictionary<string, string>();
+
+            for (int i = 0; i < lines; i++)
+            {
+                string[] input = Console.ReadLine().Split();
+
+                if (input[0] == "register")
+                {
+                    string username = input[1];
+                    string serialNumber = input[2];
+
+                    if (database.ContainsKey(username))
+                    {
+                        Console.WriteLine("ERROR: already registered with plate number {0}", database[username]);
+                    }
+                    else
+                    {
+                        database.Add(username, serialNumber);
+                        Console.WriteLine("{0} registered {1} successfully", username, serialNumber);
+                    }
+
+                }
+                else
+                {
+                    string username = input[1];
+
+                    if (database.ContainsKey(username))
+                    {
+                        database.Remove(username);
+                        Console.WriteLine("{0} unregistered successfully", username);
+                    }
+                    else
+                    {
+                        Console.WriteLine("ERROR: user {0} not found", username);
+                    }
+                }
+            }
+
+            foreach (var user in database)
+            {
+                Console.WriteLine("{0} => {1}", user.Key, user.Value);
+            }
+        }
+    }
+}

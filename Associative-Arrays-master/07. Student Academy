@@ -1,0 +1,49 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace Task_01
+{
+    class Program
+    {
+        public static void Main()
+        {
+            Dictionary<string, List<double>> students = new Dictionary<string, List<double>>();
+
+            int lines = int.Parse(Console.ReadLine());
+
+            for (int i = 0; i < lines; i++)
+            {
+                string student = Console.ReadLine();
+                double grade = double.Parse(Console.ReadLine());
+
+                if (students.ContainsKey(student))
+                {
+                    students[student].Add(grade);
+                }
+                else
+                {
+                    students.Add(student, new List<double>());
+                    students[student].Add(grade);
+                }
+            }
+
+            Dictionary<string, double> sortedStudents = new Dictionary<string, double>();
+
+            foreach (var student in students)
+            {
+               
+                if (student.Value.Average(x => x) >= 4.50)
+                {
+                    sortedStudents.Add(student.Key, student.Value.Average(x => x));
+                }
+            }
+
+            foreach (var student in sortedStudents.OrderByDescending(x => x.Value))
+            {
+                Console.WriteLine("{0} -> {1:F2}", student.Key, student.Value);
+            }
+        }
+    }
+}

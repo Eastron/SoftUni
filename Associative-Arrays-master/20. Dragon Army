@@ -1,0 +1,73 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text.RegularExpressions;
+
+namespace Task_01
+{
+    class Program
+    {
+        public static void Main()
+        {
+            Dictionary<string, Dictionary<string, List<double>>> dragons = new Dictionary<string,Dictionary<string, List<double>>>();
+
+            int lines = int.Parse(Console.ReadLine());
+
+            for (int i = 0; i < lines; i++)
+            {
+                string[] token = Console.ReadLine().Split();
+
+                string type = token[0];
+                string name = token[1];
+                int damage = token[2] != "null" ? int.Parse(token[2]) : 45;
+                int health = token[3] != "null" ? int.Parse(token[3]) : 250;
+                int armor = token[4] != "null" ? int.Parse(token[4]) : 10;
+
+                if (!dragons.ContainsKey(type))
+                {
+                    dragons.Add(type, new Dictionary<string, List<double>>());
+                }
+                
+                if (!dragons[type].ContainsKey(name))
+                {
+                    dragons[type].Add(name, new List<double>());
+                    dragons[type][name].Add(damage);
+                    dragons[type][name].Add(health);
+                    dragons[type][name].Add(armor);
+                }
+                else
+                {
+                    dragons[type][name].Clear();
+                    dragons[type][name].Add(damage);
+                    dragons[type][name].Add(health);
+                    dragons[type][name].Add(armor);
+                }
+            }
+
+            foreach (KeyValuePair<string, Dictionary<string, List<double>>> dragonType in dragons)
+            {
+                double avgDamage = 0;
+                double avgHealth = 0;
+                double avgArmor = 0;
+                double count = 0;
+                foreach (KeyValuePair<string, List<double>> stats in dragonType.Value)
+                {
+                    List<double> dragonStats = stats.Value;
+                    avgDamage += dragonStats[0];
+                    avgHealth += dragonStats[1];
+                    avgArmor += dragonStats[2];
+                    count++;
+                }
+                Console.WriteLine("{0}::({1:F2}/{2:F2}/{3:F2})", dragonType.Key, avgDamage / count, avgHealth / count, avgArmor / count);
+
+                foreach (var dragon in dragonType.Value.OrderBy(x => x.Key))
+                {
+                    List<double> dragonInfo = dragon.Value;
+                    Console.WriteLine("-{0} -> damage: {1}, health: {2}, armor: {3}", dragon.Key, dragonInfo[0], dragonInfo[1], dragonInfo[2]);
+                }
+            }
+            
+            
+        }
+    }
+}

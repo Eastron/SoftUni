@@ -1,0 +1,104 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text.RegularExpressions;
+
+namespace Task_01
+{
+ public class Program
+    {
+        public static void Main()
+        {
+            Dictionary<string, List<string>> users = new Dictionary<string, List<string>>();
+
+            string input = Console.ReadLine();
+
+            string pattern = @"\s(\-\>|\|)\s";
+
+            while (input != "Lumpawaroo")
+            {
+                var token = Regex.Split(input, pattern);
+
+                string delimiter = token[1];
+
+                if (delimiter == "|")
+                {
+                    string forceSide = token[0];
+                    string forceUser = token[2];
+					
+                   if (users.ContainsKey(forceSide))
+            		{
+            		    if (!users[forceSide].Contains(forceUser))
+            		    {
+            		        users[forceSide].Add(forceUser);
+            		    } 
+            		}
+            		else
+            		{
+            		    users.Add(forceSide, new List<string>());
+            		    users[forceSide].Add(forceUser);
+            		}
+					
+					foreach (var key in users.Keys)
+            		{
+            	    	if (key != forceSide)
+            	    	{
+            	    	    if (users[key].Contains(forceUser))
+            	    	    {
+            	    	        users[forceSide].Remove(forceUser);
+            	    	    }
+            	    	}
+            		}
+                }
+                else
+                {
+                    string forceUser = token[0];
+                    string forceSide = token[2];
+
+                    if (users.ContainsKey(forceSide))
+            		{
+            		    if (!users[forceSide].Contains(forceUser))
+            		    {
+            		        users[forceSide].Add(forceUser);
+            		        Console.WriteLine("{0} joins the {1} side!", forceUser, forceSide);
+            		    } 
+            		}
+            		else
+            		{
+            		    users.Add(forceSide, new List<string>());
+            		    users[forceSide].Add(forceUser);
+            		    Console.WriteLine("{0} joins the {1} side!", forceUser, forceSide);   
+            		}
+			
+            		foreach (var key in users.Keys)
+            		{
+            		    if (key != forceSide)
+            		    {
+            		        if (users[key].Contains(forceUser))
+            		        {
+            		            users[key].Remove(forceUser);
+            		        }
+            		    }
+            		}
+                }
+
+                input = Console.ReadLine();
+            }
+
+            var sortedUsers = users.OrderByDescending(x => x.Value.Count).ThenBy(x => x.Key);
+
+            foreach (var user in sortedUsers)
+            {
+                if (user.Value.Count > 0)
+                {
+                    Console.WriteLine("Side: {0}, Members: {1}", user.Key, user.Value.Count);
+
+                    foreach (var member in user.Value.OrderBy(x => x))
+                    {
+                        Console.WriteLine("! {0}", member);
+                    }
+                }
+            }
+        }
+    }
+}

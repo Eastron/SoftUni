@@ -1,0 +1,64 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text.RegularExpressions;
+
+namespace Task_01
+{
+  class Dwarf
+    {
+        public string Name { get; set; }
+        public string Color { get; set; }
+        public int Physic { get; set; }
+    }
+    class Program
+    { 
+       public static void Main()
+        {
+            Dictionary<string, List<Dwarf>> dwarfs = new Dictionary<string, List<Dwarf>>();
+            List<Dwarf> result = new List<Dwarf>();
+
+            string delimiter = " <:> ";
+
+            string input = Console.ReadLine();
+
+            while (input != "Once upon a time")
+            {
+                string[] token = input.Split(new[] { delimiter }, StringSplitOptions.None);
+
+                string name = token[0];
+                string color = token[1];
+                int physic = int.Parse(token[2]);
+
+                if (!dwarfs.ContainsKey(color))
+                {
+                    dwarfs[color] = new List<Dwarf>();
+                }
+
+                if (!dwarfs[color].Any(x => x.Name == name))
+                {
+                    Dwarf dwarf = new Dwarf();
+                    dwarf.Name = name;
+                    dwarf.Color = color;
+                    dwarf.Physic = physic;
+                    dwarfs[color].Add(dwarf);
+                    result.Add(dwarf);
+                }
+                else
+                {
+                    var temDwarf = dwarfs[color].FirstOrDefault(x => x.Name == name);
+                    temDwarf.Physic = Math.Max(temDwarf.Physic, physic);
+                }
+
+                input = Console.ReadLine();
+            }
+
+            result = result.OrderByDescending(x => x.Physic).ThenByDescending(a => dwarfs[a.Color].Count).ToList();
+
+            foreach (var dwarf in result)
+            {
+                Console.WriteLine("({0}) {1} <-> {2}", dwarf.Color, dwarf.Name, dwarf.Physic);
+            }
+        }
+    }
+}

@@ -1,0 +1,115 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+					
+public class Program
+{
+	public static void Main()
+	{
+		Dictionary<string, Dictionary<string, int>> players = new Dictionary<string, Dictionary<string, int>>();
+		
+		string input = Console.ReadLine();
+		string delimiter1 = " -> ";
+		string delimiter2 = " vs ";
+		while(input != "Season end")
+		{
+			string[] token = input.Split(new []{delimiter1, delimiter2}, StringSplitOptions.None);
+			
+			if(token.Length == 3)
+			{
+				string player = token[0];
+				string position = token[1];
+				int skill = int.Parse(token[2]);
+				
+				if(players.ContainsKey(player))
+				{
+					if(players[player].ContainsKey(position))
+					{
+						if(players[player][position] < skill)
+						{
+							players[player][position] = skill;
+						}
+					}
+					else
+					{
+						players[player].Add(position, skill);
+					}
+				}
+				else
+				{
+					players.Add(player, new Dictionary<string, int>());
+					players[player].Add(position, skill);
+				}
+			}
+			else
+			{
+				string player1 = token[0];
+				string player2 = token[1];
+				
+				
+				if(players.ContainsKey(player1) && players.ContainsKey(player2))
+				{
+					foreach(var position1 in players[player1])
+					{
+						foreach(var position2 in players[player2])
+						{
+							if(position1.Key == position2.Key)
+							{
+								if(position1.Value > position2.Value)
+								{
+									players.Remove(player2);
+									break;
+								}
+								else if(position1.Value < position2.Value)
+								{
+									players.Remove(player1);
+									break;
+								}
+							}
+						}
+						
+						if(!players.ContainsKey(player1))
+						{
+							break;
+						}
+						else if(!players.ContainsKey(player2))
+						{
+							break;
+						}
+					}
+				}
+			}
+			
+			input = Console.ReadLine();
+		}
+		
+		Dictionary<string, int> sortedPlayers = new Dictionary<string, int>();
+		
+		foreach(var player in players)
+		{
+			sortedPlayers.Add(player.Key, 0);
+			if(sortedPlayers.ContainsKey(player.Key))
+			{
+				foreach(var skill in player.Value)
+				{
+					sortedPlayers[player.Key] += skill.Value;
+				}
+			}
+		}
+		
+		foreach(var player in sortedPlayers.OrderByDescending(x => x.Value).ThenBy(x => x.Key))
+		{
+			Console.WriteLine("{0}: {1} skill", player.Key, player.Value);
+			foreach(var p in players)
+			{
+				if(p.Key == player.Key)
+				{
+					foreach(var position in p.Value.OrderByDescending(x => x.Value).ThenBy(x => x.Key))
+					{
+						Console.WriteLine("- {0} <::> {1}", position.Key, position.Value);
+					}
+				}
+			}
+		}
+	}
+}

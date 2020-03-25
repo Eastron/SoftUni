@@ -1,0 +1,83 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace Task_01
+{
+    class Program
+    {
+        public static void Main()
+        { 
+            Dictionary<string, int> resources = new Dictionary<string, int>();
+            Dictionary<string, int> keyResources = new Dictionary<string, int>();
+
+            keyResources.Add("shards", 0);
+            keyResources.Add("fragments", 0);
+            keyResources.Add("motes", 0);
+
+            bool isTrue = false;
+
+            while(!isTrue)
+            {
+                string[] input = Console.ReadLine().Split();
+                for (int i = 0; i < input.Length - 1; i += 2)
+                {
+                    int quantity = int.Parse(input[i]);
+                    string material = input[i + 1].ToLower();
+
+                    if (resources.ContainsKey(material))
+                    {
+                        resources[material] += quantity;
+                    }
+                    else
+                    {
+                        resources.Add(material, quantity);
+                    }
+
+                    if ((material == "shards" || material == "fragments" || material == "motes") && resources[material] >= 250)
+                    {
+                        resources[material] -= 250;
+                        string item = string.Empty;
+                        if (material == "shards")
+                        {
+                            item = "Shadowmourne";
+                        }
+                        else if (material == "fragments")
+                        {
+                            item = "Valanyr";
+                        }
+                        else if (material == "motes")
+                        {
+                            item = "Dragonwrath";
+                        }
+                        Console.WriteLine("{0} obtained!", item);
+                        isTrue = true;
+                        break;
+                    }
+                }
+            }
+
+            foreach (var resource in resources)
+            {
+                if (resource.Key == "shards" || resource.Key == "motes" || resource.Key == "fragments")
+                {
+                    keyResources[resource.Key] += resource.Value;
+                }
+            }
+
+            foreach (var resource in keyResources.OrderByDescending(x => x.Value).ThenBy(x => x.Key))
+            {
+                Console.WriteLine("{0}: {1}", resource.Key, resource.Value);
+            }
+
+            foreach (var resource in resources.OrderBy(x => x.Key).ThenBy(x => x.Value))
+            {
+                if (resource.Key != "shards" && resource.Key != "motes" && resource.Key != "fragments")
+                {
+                    Console.WriteLine("{0}: {1}", resource.Key, resource.Value);
+                }
+            }
+        }
+    }
+}

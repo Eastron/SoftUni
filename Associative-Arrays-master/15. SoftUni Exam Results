@@ -1,0 +1,73 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text.RegularExpressions;
+
+namespace Task_01
+{
+ public class Program
+    {
+        public static void Main()
+        {
+            Dictionary<string, int> users = new Dictionary<string, int>();
+			Dictionary<string, int> languages = new Dictionary<string, int>();
+			
+			string input = Console.ReadLine();
+			
+			while(input != "exam finished")
+			{
+				string[] token = input.Split('-');
+				
+				if(token[1] == "banned")
+				{
+					string username = token[0];
+					if(users.ContainsKey(username))
+					{
+						users.Remove(username);
+					}
+				}
+				else
+				{
+					string username = token[0];
+					string language = token[1];
+					int point = int.Parse(token[2]);
+					
+					if(users.ContainsKey(username))
+					{
+						if(users[username] < point)
+						{
+							users[username] = point;
+						}
+						
+					}
+					else
+					{
+						users.Add(username, point);
+					}
+					
+					if(languages.ContainsKey(language))
+					{
+						languages[language]++;
+					}
+					else
+					{
+						languages.Add(language, 1);
+					}
+				}
+					
+				input = Console.ReadLine();
+			}
+			
+			Console.WriteLine("Results:");
+			foreach(var user in users.OrderByDescending(x => x.Value).ThenBy(x => x.Key))
+			{
+				Console.WriteLine("{0} | {1}", user.Key, user.Value);
+			}
+			Console.WriteLine("Submissions:");
+			foreach(var language in languages.OrderByDescending(x => x.Value).ThenBy(x => x.Key))
+			{
+				Console.WriteLine("{0} - {1}", language.Key, language.Value);
+			}
+        }
+    }
+}

@@ -1,0 +1,55 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace Task_01
+{
+    class Program
+    {
+      class Product
+    { 
+        public int Quantity { get; set; }
+        public decimal Price { get; set; }
+    }
+        public static void Main()
+        { 
+            Dictionary<string, Product> products = new Dictionary<string, Product>();
+
+            string input = Console.ReadLine();
+
+            while (input != "buy" && input != "Buy")
+            {
+                string[] token = input.Split();
+
+                string name = token[0];
+                decimal price = decimal.Parse(token[1]);
+                int quantity = int.Parse(token[2]);
+
+                if (products.ContainsKey(name))
+                {
+                    products[name].Quantity += quantity;
+                    if (products[name].Price != price)
+                    {
+                        products[name].Price = price;
+                    }
+                }
+                else
+                {
+                    Product product = new Product();
+                    product.Price = price;
+                    product.Quantity = quantity;
+
+                    products.Add(name, product);
+                }
+
+                input = Console.ReadLine();
+            }
+
+            foreach (var product in products)
+            {
+                Console.WriteLine("{0} -> {1:F2}", product.Key, product.Value.Quantity * product.Value.Price);
+            }
+        }
+    }
+}
