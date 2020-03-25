@@ -1,0 +1,20 @@
+using System;
+		
+public class Program
+{
+	public static void Main()
+	{
+		int n = int.Parse(Console.ReadLine());
+		int times = int.Parse(Console.ReadLine());
+		
+		for(int i = times; i <= 10; i++)
+		{
+			Console.WriteLine("{0} X {1} = {2}", n, i, n * i);
+		}
+		
+		if(times > 10)
+		{
+			Console.WriteLine("{0} X {1} = {2}", n, times, n * times);
+		}
+	}
+}

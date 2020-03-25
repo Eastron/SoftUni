@@ -1,0 +1,46 @@
+using System;
+
+public class HolidaysBetweenTwoDates
+{
+  public  static void Main()
+  {
+	  string user = Console.ReadLine();
+	  int counter = 0;
+	  int count = 0;
+	  
+	  while(true)
+	  {
+		  string password = Console.ReadLine();
+		  
+		  counter++;
+		 
+		  for(int i = 0; i < user.Length; i++)
+		  {
+			  char first = user[i];
+			  char last = password[password.Length - i - 1];
+			  
+			  if(first == last)
+			  {
+				  count++;
+			  }	  
+		  }
+		  
+		  if(counter == 4)
+		  {
+			  Console.WriteLine("User {0} blocked!", user);
+			  break;
+		  }
+		  
+		  if(count == user.Length)
+		  {
+			  Console.WriteLine("User {0} logged in.", user);
+			  break;
+		  }
+		  else
+		  {
+			Console.WriteLine("Incorrect password. Try again.");
+			count = 0;
+		  }  
+	  }  	  
+  }
+}

@@ -1,0 +1,50 @@
+using System;
+
+public class HolidaysBetweenTwoDates
+{
+  public  static void Main()
+    {
+		int n = int.Parse(Console.ReadLine());
+		string people = Console.ReadLine();
+	  	string day = Console.ReadLine();
+	  
+	  	decimal price = 0;	
+	  
+	  	switch(people)
+		{
+			case "Students":
+				{
+					if(day == "Friday") price = n * 8.45m;
+					else if(day == "Saturday") price = n * 9.80m;
+					else if(day == "Sunday") price = n * 10.46m;
+				}
+				break;
+			case "Business":
+				{
+					if(day == "Friday") price = n * 10.90m;
+					else if(day == "Saturday") price = n * 15.60m;
+					else if(day == "Sunday") price = n * 16m;
+				}
+				break;
+			case "Regular":
+				{
+					if(day == "Friday") price = n * 15m;
+					else if(day == "Saturday") price = n * 20m;
+					else if(day == "Sunday") price = n * 22.50m;
+				}
+				break;
+		}
+	  
+	  if(people == "Students" && n >= 30) price = price * 0.85m;
+	  else if(people == "Business" && n >= 100)
+	  {
+		  if(day == "Friday") price = price - (10.90m * 10);
+		  else if(day == "Saturday") price = price - (15.60m * 10);
+		  else if(day == "Sunday") price = price - (16 * 10);
+	  }
+	  else if(people == "Regular" && n >= 10 && n <= 20) price = price * 0.95m;
+	  
+	  Console.WriteLine("Total price: {0:F2}", Math.Abs(price));
+	  
+    }
+}

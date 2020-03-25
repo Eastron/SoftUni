@@ -1,0 +1,48 @@
+using System;
+
+public class StrongNumber
+{
+  	public  static void Main()
+  	{
+		int count = int.Parse(Console.ReadLine());
+		decimal priceHeadset = decimal.Parse(Console.ReadLine());
+		decimal priceMouse = decimal.Parse(Console.ReadLine());
+		decimal priceKeyboard = decimal.Parse(Console.ReadLine());
+		decimal priceDisplay = decimal.Parse(Console.ReadLine());
+		
+		decimal sum = 0;
+		int headset = 0;
+		int mouse = 0;
+		int keyboard = 0;
+		int display = 0;
+		
+		for(int i = 1; i <= count; i++)
+		{
+			if(i % 2 == 0)
+			{
+				sum++;
+				headset++;
+			}
+			if(i % 3 == 0)
+			{
+				sum++;
+				mouse++;
+			}
+			if(sum == 2)
+			{
+				keyboard++;
+				
+				if(keyboard % 2 == 0)
+				{
+					display++;
+				}
+				
+			}
+			sum = 0;			
+		}
+				
+		decimal cost = (headset * priceHeadset) + (mouse * priceMouse) + (keyboard * priceKeyboard) + (display * priceDisplay);
+		
+		Console.WriteLine("Rage expenses: {0:F2} lv.", cost);
+  	}
+}

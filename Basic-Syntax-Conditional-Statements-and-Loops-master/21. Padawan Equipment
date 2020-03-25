@@ -1,0 +1,46 @@
+using System;
+
+public class StrongNumber
+{
+  	public  static void Main()
+  	{
+		decimal money = decimal.Parse(Console.ReadLine());
+		int students = int.Parse(Console.ReadLine());
+		decimal lightsabers = decimal.Parse(Console.ReadLine());
+		decimal robes = decimal.Parse(Console.ReadLine());
+		decimal belts = decimal.Parse(Console.ReadLine());
+		
+		decimal priceLightsabers = Math.Ceiling(students + (students * 0.1m)) * lightsabers;
+		decimal priceRobes = robes * students;
+		decimal priceBelts = 0;
+		int count = 0;
+		
+		for(int i = 1; i <= students; i++)
+		{
+			if(i % 6 == 0)
+			{
+				count++;
+			}
+		}
+		
+		if(count > 0)
+		{
+				priceBelts = (students - count) * belts;
+		}
+		else
+		{
+				priceBelts = students * belts;
+		}
+		
+		decimal cost = priceLightsabers + priceRobes + priceBelts;
+		
+		if(cost <= money)
+		{
+			Console.WriteLine("The money is enough - it would cost {0:F2}lv.", cost);
+		}
+		else
+		{
+			Console.WriteLine("Ivan Cho will need {0:F2}lv more.", cost - money);
+		}
+  	}
+}
