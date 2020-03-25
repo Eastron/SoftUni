@@ -1,0 +1,17 @@
+using System;
+
+namespace Nums1To10
+{
+    class Nums1To10
+    {
+        static void Main(string[] args)
+        {
+            int num = 10;
+
+            for (int i = 1; i <= num; i++)
+            {
+                Console.WriteLine(i);
+            }
+        }
+    }
+}
