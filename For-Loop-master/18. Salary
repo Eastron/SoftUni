@@ -1,0 +1,44 @@
+using System;
+
+namespace Task_07
+{
+    class Program
+    {
+        static void Main()
+        {
+            int tabs = int.Parse(Console.ReadLine());
+            int salary = int.Parse(Console.ReadLine());
+            string webSites = string.Empty;
+
+            for (int i = 0; i < tabs; i++)
+            {
+                webSites = Console.ReadLine();
+
+                if (webSites == "Facebook")
+                {
+                    salary -= 150;
+                }
+                if (webSites == "Instagram")
+                {
+                    salary -= 100;
+                }
+                if (webSites == "Reddit")
+                {
+                    salary -= 50;
+                }
+                if (salary == 0)
+                {
+                    break;
+                }
+            }
+            if (salary == 0)
+            {
+                Console.WriteLine("You have lost your salary.");
+            }
+            else
+            {
+                Console.WriteLine(salary);
+            }
+        }
+    }
+}

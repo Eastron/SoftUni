@@ -1,0 +1,97 @@
+using System;
+
+namespace Task_03
+{
+    class Program
+    {
+        static void Main()
+        {
+            int n = int.Parse(Console.ReadLine());
+            double sumOdd = 0;
+            double minOdd = double.MaxValue;
+            double maxOdd = double.MinValue;
+            double sumEven = 0;
+            double minEven = double.MaxValue;
+            double maxEven = double.MinValue;
+            int j = 0;
+
+            if (n == 1)
+            {
+                double oddN = double.Parse(Console.ReadLine());
+                sumOdd += oddN;
+                minOdd = oddN;
+                maxOdd = oddN;
+
+
+            }
+            else
+            {
+
+
+                for (int i = 1; i <= n; i += 2)
+                {
+                    double odd = double.Parse(Console.ReadLine());
+                    sumOdd += odd;
+
+                    if (maxOdd < odd)
+                    {
+                        maxOdd = odd;
+                    }
+
+                    if (minOdd > odd)
+                    {
+                        minOdd = odd;
+                    }
+
+                    if (i == n)
+                    {
+                        break;
+                    }
+
+                    for (int k = 0; j < i; j += 2)
+                    {
+
+                        double even = double.Parse(Console.ReadLine());
+                        sumEven += even;
+
+                        if (maxEven < even)
+                        {
+                            maxEven = even;
+                        }
+                        if (minEven > even)
+                        {
+                            minEven = even;
+                        }
+                    }
+                }
+            }
+            Console.WriteLine("OddSum={0:F2},", sumOdd);
+
+            if (n != 0)
+            {
+                Console.WriteLine("OddMin={0:F2},", minOdd);
+                Console.WriteLine("OddMax={0:F2},", maxOdd);
+            }
+            else
+            {
+                Console.WriteLine("OddMin=No,");
+                Console.WriteLine("OddMax=No,");
+            }
+            
+            Console.WriteLine("EvenSum={0:F2},", sumEven);
+
+            if (n != 1 && n != 0)
+            {
+                Console.WriteLine("EvenMin={0:F2},", minEven);
+                Console.WriteLine("EvenMax={0:F2}", maxEven);
+            }
+            else
+            {
+                Console.WriteLine("EvenMin=No,");
+                Console.WriteLine("EvenMax=No");
+            }
+            
+            
+        }
+    }
+}

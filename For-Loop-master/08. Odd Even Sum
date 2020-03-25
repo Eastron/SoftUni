@@ -1,0 +1,49 @@
+using System;
+
+namespace Task_08
+{
+    class OddEvenSum
+    {
+        static void Main(string[] args)
+        {
+
+
+            int n = int.Parse(Console.ReadLine());
+
+            int EvenSum = 0;
+            int OddSum = 0;
+            int result = 0;
+
+            for (int i = 1; i <= n; i++)
+            {
+                int number = int.Parse(Console.ReadLine());
+
+                if (i % 2 == 0)
+                {
+                    EvenSum += number;
+                }
+                else
+                {
+                    OddSum += number;
+                }
+            }
+
+            result = EvenSum - OddSum;
+
+            if (EvenSum == OddSum)
+            {
+                Console.WriteLine("Yes");
+                Console.WriteLine("Sum = {0}", EvenSum);
+            }
+            else
+            {
+                Console.WriteLine("No");
+                Console.WriteLine("Diff = {0}", Math.Abs(result));
+            }
+
+        }
+    }
+
+}
+
+

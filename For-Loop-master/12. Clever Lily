@@ -1,0 +1,46 @@
+using System;
+
+namespace Task_12
+{
+    class CleverLily
+    {
+        static void Main(string[] args)
+        {
+            int age = int.Parse(Console.ReadLine());
+            double price = double.Parse(Console.ReadLine());
+            int toyPrice = int.Parse(Console.ReadLine());
+
+            int sum = 0;
+            int sumMoney = 0;
+            int sumToy = 0;
+            int counter = 0;
+            
+
+            for (int i = 1; i <= age; i++)
+            {
+                if (i % 2 == 0)
+                {
+                    sum += 10;
+                    sumMoney += sum;
+                    counter++;
+                    
+                }
+                else
+                {
+                    sumToy += toyPrice; 
+                }
+            }
+
+            double result = (sumMoney + sumToy - (counter)) - price;
+          
+            if (result >= 0)
+            {
+                Console.WriteLine("Yes! {0:F2}", Math.Abs(result));
+            }
+            else
+            {
+                Console.WriteLine("No! {0:F2}", Math.Abs(result));
+            }
+        }
+    }
+}
