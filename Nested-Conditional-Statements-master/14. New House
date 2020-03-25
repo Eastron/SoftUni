@@ -1,0 +1,94 @@
+using System;
+
+namespace Task14
+{
+    class NewHouse
+    {
+        static void Main(string[] args)
+        {
+            string flowers = Console.ReadLine();
+            int quantityFlowers = int.Parse(Console.ReadLine());
+            int budget = int.Parse(Console.ReadLine());
+
+            double cost = 0;
+
+            switch (flowers)
+            {
+                case "Roses":
+                    {
+                        if (quantityFlowers > 80)
+                        {
+                            cost = (quantityFlowers * 5) - ((quantityFlowers * 5) * 0.1);
+                        }
+                        else
+                        {
+                            cost = quantityFlowers * 5;
+                        }
+                    }
+                    break;
+                case "Dahlias":
+                    {
+                        if (quantityFlowers > 90)
+                        {
+                            cost = (quantityFlowers * 3.80) - ((quantityFlowers * 3.80) * 0.15);
+                        }
+                        else
+                        {
+                            cost = quantityFlowers * 3.80;
+                        }
+                    }
+                    break;
+                case "Tulips":
+                    {
+                        if (quantityFlowers > 80)
+                        {
+                            cost = (quantityFlowers * 2.80) - ((quantityFlowers * 2.80) * 0.15);
+                        }
+                        else
+                        {
+                            cost = quantityFlowers * 2.80;
+                        }
+                    }
+                    break;
+                case "Narcissus":
+                    {
+                        if (quantityFlowers < 120)
+                        {
+                            cost = (quantityFlowers * 3) + ((quantityFlowers * 3) * 0.15);
+                        }
+                        else
+                        {
+                            cost = quantityFlowers * 3;
+                        }
+                    }
+                    break;
+                case "Gladiolus":
+                    {
+                        if (quantityFlowers < 80)
+                        {
+                            cost = (quantityFlowers * 2.50) + ((quantityFlowers * 2.50) * 0.2);
+                        }
+                        else
+                        {
+                            cost = quantityFlowers * 2.50;
+                        }
+                    }
+                    break;
+
+            }
+
+
+            if (budget >= cost)
+            {
+                double result = budget - cost;
+                Console.WriteLine("Hey, you have a great garden with {0} {1} and {2:F2} leva left.",
+                    quantityFlowers, flowers, result);
+            }
+            else
+            {
+                double result = cost - budget;
+                Console.WriteLine("Not enough money, you need {0:F2} leva more.", result);
+            }
+        }
+    }
+}

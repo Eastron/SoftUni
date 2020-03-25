@@ -1,0 +1,47 @@
+using System;
+
+namespace Task13
+{
+    class SummerOutfit
+    {
+        static void Main(string[] args)
+        {
+            int gradus = int.Parse(Console.ReadLine());
+            string timeDay = Console.ReadLine();
+
+            if (gradus >= 10 && gradus <= 18)
+            {
+                switch (timeDay)
+                {
+                    case "Morning": Console.WriteLine("It's {0} degrees, get your Sweatshirt and Sneakers.", gradus); break;
+                    case "Afternoon": Console.WriteLine("It's {0} degrees, get your Shirt and Moccasins.", gradus); break;
+                    case "Evening": Console.WriteLine("It's {0} degrees, get your Shirt and Moccasins.", gradus); break;
+                    default:
+                        break;
+                }
+            }
+            else if (gradus > 18 && gradus <= 24)
+            {
+                switch (timeDay)
+                {
+                    case "Morning": Console.WriteLine("It's {0} degrees, get your Shirt and Moccasins.", gradus); break;
+                    case "Afternoon": Console.WriteLine("It's {0} degrees, get your T-Shirt and Sandals.", gradus); break;
+                    case "Evening": Console.WriteLine("It's {0} degrees, get your Shirt and Moccasins.", gradus); break;
+                    default:
+                        break;
+                }
+            }
+            else if (gradus >= 25)
+            {
+                switch (timeDay)
+                {
+                    case "Morning": Console.WriteLine("It's {0} degrees, get your T-Shirt and Sandals.", gradus); break;
+                    case "Afternoon": Console.WriteLine("It's {0} degrees, get your Swim Suit and Barefoot.", gradus); break;
+                    case "Evening": Console.WriteLine("It's {0} degrees, get your Shirt and Moccasins.", gradus); break;
+                    default:
+                        break;
+                }
+            }
+        }
+    }
+}

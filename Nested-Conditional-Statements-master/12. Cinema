@@ -1,0 +1,25 @@
+using System;
+
+namespace Task_12
+{
+    class Cinema
+    {
+        static void Main(string[] args)
+        {
+            string type = Console.ReadLine();
+            double row = double.Parse(Console.ReadLine());
+            double column = double.Parse(Console.ReadLine());
+
+            double cost = row * column;
+
+            switch (type)
+            {
+                case "Premiere": Console.WriteLine("{0:F2} leva", cost * 12); break;
+                case "Normal": Console.WriteLine("{0:F2} leva", cost * 7.50); break;
+                case "Discount": Console.WriteLine("{0:F2} leva", cost * 5); break;
+                default:
+                    break;
+            }
+        }
+    }
+}

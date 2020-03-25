@@ -1,0 +1,85 @@
+using System;
+
+namespace Task_17
+{
+    class OperationsBetweenNumbers
+    {
+        static void Main(string[] args)
+        {
+            double num = double.Parse(Console.ReadLine());
+            double number = double.Parse(Console.ReadLine());
+            string operators = Console.ReadLine();
+
+            switch (operators)
+            {
+                case "+":
+                    {
+                        double result = num + number;
+                        if (result % 2 == 0)
+                        {
+                            Console.WriteLine("{0} + {1} = {2} - even", num, number, result);
+                        }
+                        else
+                        {
+                            Console.WriteLine("{0} + {1} = {2} - odd", num, number, result);
+                        }
+                    }
+                    break;
+                case "-":
+                    {
+                        double result = num - number;
+                        if (result % 2 == 0)
+                        {
+                            Console.WriteLine("{0} - {1} = {2} - even", num, number, result);
+                        }
+                        else
+                        {
+                            Console.WriteLine("{0} - {1} = {2} - odd", num, number, result);
+                        }
+                    }
+                    break;
+                case "*":
+                    {
+                        double result = num * number;
+                        if (result % 2 == 0)
+                        {
+                            Console.WriteLine("{0} * {1} = {2} - even", num, number, result);
+                        }
+                        else
+                        {
+                            Console.WriteLine("{0} * {1} = {2} - odd", num, number, result);
+                        }
+                    }
+                    break;
+                case "/":
+                    {
+                        if (number == 0)
+                        {
+                            Console.WriteLine("Cannot divide {0} by zero", num);
+                        }
+                        else
+                        {
+                            double result = num / number;
+                            Console.WriteLine("{0} / {1} = {2:F2}", num, number, result);
+                        }
+                       
+                        
+                    }
+                    break;
+                case "%":
+                    {
+                        if (number == 0)
+                        {
+                            Console.WriteLine("Cannot divide {0} by zero", num);
+                        }
+                        else
+                        {
+                            double result = num % number;
+                            Console.WriteLine("{0} % {1} = {2}", num, number, result);
+                        }
+                    }
+                    break;
+            }
+        }
+    }
+}

@@ -1,0 +1,75 @@
+using System;
+
+namespace Task_10
+{
+    class SkiTrip
+    {
+        static void Main(string[] args)
+        {
+            int day = int.Parse(Console.ReadLine());
+            string roomType = Console.ReadLine();
+            string evaluate = Console.ReadLine();
+
+            int nights = day - 1;
+            decimal price = 0;
+            decimal discount = 0;
+            decimal finalcost = 0;
+            decimal cost = 0;
+
+            if (roomType == "room for one person")
+            {
+                finalcost = nights * 18.00m;
+            }
+            else if (roomType == "apartment")
+            {
+                price = nights * 25.00m;
+
+                if (day < 10)
+                {
+                    discount = price * 0.3m;
+                    finalcost = price - discount;
+                }
+                else if (day >= 10 && day <=15)
+                {
+                    discount = price * 0.35m;
+                    finalcost = price - discount;
+                }
+                else if (day > 15)
+                {
+                    discount = price * 0.5m;
+                    finalcost = price - discount;
+                }
+            }
+            else if (roomType == "president apartment")
+            {
+                price = nights * 35.00m;
+                if (day < 10)
+                {
+                    discount = price * 0.1m;
+                    finalcost = price - discount;
+                }
+                else if (day >= 10 && day <= 15)
+                {
+                    discount = price * 0.15m;
+                    finalcost = price - discount;
+                }
+                else if (day > 15)
+                {
+                    discount = price * 0.2m;
+                    finalcost = price - discount;
+                }
+            }
+
+            if (evaluate == "positive")
+            {
+                cost = finalcost + (finalcost * 0.25m);
+                Console.WriteLine("{0:F2}", cost);
+            }
+            else if (evaluate == "negative")
+            {
+                cost = finalcost - (finalcost * 0.10m);
+                Console.WriteLine("{0:F2}", cost);
+            }
+        }
+    }
+}

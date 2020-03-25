@@ -1,0 +1,60 @@
+using System;
+
+namespace Task_19
+{
+    class OnTimeForTheExam
+    {
+        static void Main(string[] args)
+        {
+            int hourExam = int.Parse(Console.ReadLine());
+            int minuteExam = int.Parse(Console.ReadLine());
+            int hourArrive = int.Parse(Console.ReadLine());
+            int minuteArrive = int.Parse(Console.ReadLine());
+
+            int examStart = hourExam * 60 + minuteExam;
+            int arrivalTime = hourArrive * 60 + minuteArrive;
+
+            int resultMinutes = arrivalTime - examStart;
+            int hour = Math.Abs(resultMinutes / 60);
+            double minutes = Math.Abs(resultMinutes % 60);
+
+            if (resultMinutes < -30)
+            {
+                Console.WriteLine("early");
+            }
+            else if (resultMinutes <= 0)
+            {
+                Console.WriteLine("On time");
+            }
+            else
+            {
+                Console.WriteLine("late");
+            }
+
+            if (hour > 0)
+            {
+                if (minutes < 10)
+                {
+                    Console.Write("{0}:0{1} hours ", hour, minutes);
+                }
+                else
+                {
+                    Console.Write("{0}:{1} hours ", hour, minutes);
+                }
+            }
+            else
+            {
+                Console.Write("{0} minutes ", minutes);
+            }
+
+            if (resultMinutes < 0)
+            {
+                Console.Write("before the start");
+            }
+            else
+            {
+                Console.Write("after the start");
+            }
+        }
+    }
+}

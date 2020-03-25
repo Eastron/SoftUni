@@ -1,0 +1,62 @@
+using System;
+
+namespace Task_16
+{
+    class Journey
+    {
+        static void Main(string[] args)
+        {
+            double budget = double.Parse(Console.ReadLine());
+            string season = Console.ReadLine();
+
+            if (season == "summer")
+            {
+                if (budget <= 100)
+                {
+                    double cost = budget * 0.3;
+
+                    Console.WriteLine("Somewhere in Bulgaria");
+                    Console.WriteLine("Camp - {0:F2}", cost);
+                }
+                else if (budget > 100 && budget <= 1000)
+                {
+                    double cost = budget * 0.4;
+
+                    Console.WriteLine("Somewhere in Balkans");
+                    Console.WriteLine("Camp - {0:F2}", cost);
+                }
+                else
+                {
+                    double cost = budget * 0.9;
+
+                    Console.WriteLine("Somewhere in Europe");
+                    Console.WriteLine("Hotel - {0:F2}", cost);
+                }
+            }
+            else
+            {
+                if (budget <= 100)
+                {
+                    double cost = budget * 0.7;
+
+                    Console.WriteLine("Somewhere in Bulgaria");
+                    Console.WriteLine("Hotel - {0:F2}", cost);
+                }
+                else if (budget > 100 && budget <= 1000)
+                {
+                    double cost = budget * 0.8;
+
+                    Console.WriteLine("Somewhere in Balkans");
+                    Console.WriteLine("Hotel - {0:F2}", cost);
+                }
+                else
+                {
+                    double cost = budget * 0.9;
+
+                    Console.WriteLine("Somewhere in Europe");
+                    Console.WriteLine("Hotel - {0:F2}", cost);
+                }
+            }
+        }
+    }
+}

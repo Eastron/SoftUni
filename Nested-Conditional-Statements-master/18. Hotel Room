@@ -1,0 +1,73 @@
+using System;
+
+namespace Task_18
+{
+    class HotelRoom
+    {
+        static void Main(string[] args)
+        {
+            string month = Console.ReadLine();
+            int nights = int.Parse(Console.ReadLine());
+
+            if (month == "May" || month == "October")
+            {
+                if (nights > 14)
+                {
+                    double result = (nights * 65) - ((nights * 65) * 0.1);
+                    Console.WriteLine("Apartment: {0:F2} lv.", result);
+                    double results = (nights * 50) - ((nights * 50) * 0.3);
+                    Console.WriteLine("Studio: {0:F2} lv.", results);
+                }
+                else if (nights > 7 && nights <= 14)
+                {
+                    double result = nights * 65;
+                    Console.WriteLine("Apartment: {0:F2} lv.", result);
+                    double results = (nights * 50) - ((nights * 50) * 0.05);
+                    Console.WriteLine("Studio: {0:F2} lv.", results);
+                }
+                else
+                {
+                    double result = nights * 65;
+                    Console.WriteLine("Apartment: {0:F2} lv.", result);
+                    double results = nights * 50;
+                    Console.WriteLine("Studio: {0:F2} lv.", results);
+                }
+
+            }
+            else if (month == "June" || month == "September")
+            {
+                if (nights > 14)
+                {
+                    double result = (nights * 68.70) - ((nights * 68.70) * 0.1) ;
+                    Console.WriteLine("Apartment: {0:F2} lv.", result);
+                    double results = (nights * 75.20) - ((nights * 75.20) * 0.2);
+                    Console.WriteLine("Studio: {0:F2} lv.", results);
+                }
+                else
+                {
+                    double result = nights * 68.70;
+                    Console.WriteLine("Apartment: {0:F2} lv.", result);
+                    double results = nights * 75.20;
+                    Console.WriteLine("Studio: {0:F2} lv.", results);
+                }
+            }
+            else if (month == "July" || month == "August")
+            {
+                if (nights > 14)
+                {
+                    double result = (nights * 77) - ((nights * 77) * 0.1);
+                    Console.WriteLine("Apartment: {0:F2} lv.", result);
+                    double results = nights * 76;
+                    Console.WriteLine("Studio: {0:F2} lv.", results);
+                }
+                else
+                {
+                    double result = nights * 77;
+                    Console.WriteLine("Apartment: {0:F2} lv.", result);
+                    double results = nights * 76;
+                    Console.WriteLine("Studio: {0:F2} lv.", results);
+                }
+            }
+        }
+    }
+}
