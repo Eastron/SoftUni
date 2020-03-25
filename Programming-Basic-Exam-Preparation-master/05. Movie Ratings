@@ -1,0 +1,42 @@
+using System;
+
+namespace Task_05
+{
+    class MovieRatings
+    {
+        static void Main(string[] args)
+        {
+            int movies = int.Parse(Console.ReadLine());
+
+            double max = double.MinValue;
+            string maxName = String.Empty;
+            double min = double.MaxValue;
+            string minName = String.Empty;
+            double sum = 0;
+
+            for (int i = 0; i < movies; i++)
+            {
+                string nameMovie = Console.ReadLine();
+                double rating = double.Parse(Console.ReadLine());
+
+                if (rating > max)
+                {
+                    max = rating;
+                    maxName = nameMovie;
+                }
+                if (rating < min)
+                {
+                    min = rating;
+                    minName = nameMovie;
+                }
+
+                sum += rating;
+            }
+
+            double average = sum / movies;
+            Console.WriteLine("{0} is with highest rating: {1:F1}", maxName, max);
+            Console.WriteLine("{0} is with lowest rating: {1:F1}", minName, min);
+            Console.WriteLine("Average rating: {0:F1}", average);
+        }
+    }
+}

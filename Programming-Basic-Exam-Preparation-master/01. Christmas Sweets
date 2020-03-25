@@ -1,0 +1,25 @@
+using System;
+
+namespace Task_01
+{
+    class ChristmasSweets
+    {
+        static void Main(string[] args)
+        {
+            double baklavaPrice = double.Parse(Console.ReadLine());
+            double muffinsPrice = double.Parse(Console.ReadLine());
+            double shtollenKilos = double.Parse(Console.ReadLine());
+            double bonbonsKilos = double.Parse(Console.ReadLine());
+            double biscuitsKilos = double.Parse(Console.ReadLine());
+
+            double biscuitsPrice = biscuitsKilos * 7.5;
+            double shtollenPrice = baklavaPrice + (baklavaPrice * 0.6);
+            double bonbonsPrice = muffinsPrice + (muffinsPrice * 0.8);
+            double shtollen = shtollenKilos * shtollenPrice;
+            double bonbons = bonbonsKilos * bonbonsPrice;
+            double result = shtollen + biscuitsPrice + bonbons;
+
+            Console.WriteLine("{0:F2}", result);
+        }
+    }
+}

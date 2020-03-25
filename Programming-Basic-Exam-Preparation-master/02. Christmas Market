@@ -1,0 +1,34 @@
+using System;
+
+namespace Task_02
+{
+    class ChristmasMarket
+    {
+        static void Main(string[] args)
+        {
+            decimal goal = decimal.Parse(Console.ReadLine());
+            int fantasy = int.Parse(Console.ReadLine());
+            int horror = int.Parse(Console.ReadLine());
+            int romantic = int.Parse(Console.ReadLine());
+
+            decimal money = (fantasy * 14.90m) + (horror * 9.80m) + (romantic * 4.30m);
+            decimal donation = money * 0.8m;
+            
+
+            if (donation > goal)
+            {
+                decimal result = donation - goal;
+                decimal bonus = result * 0.1m;
+                decimal a = result - (int)bonus;
+                decimal b = goal + a;
+                Console.WriteLine("{0:F2} leva donated.", b);
+                Console.WriteLine("Sellers will receive {0:F0} leva.", (int)bonus);
+            }
+            else
+            {
+                decimal result = goal - donation;
+                Console.WriteLine("{0:F2} money needed.", result);
+            }
+        }
+    }
+}

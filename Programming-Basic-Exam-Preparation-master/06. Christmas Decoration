@@ -1,0 +1,49 @@
+using System;
+
+namespace Task_06
+{
+    class ChristmasDecoration
+    {
+        static void Main(string[] args)
+        {
+            int budget = int.Parse(Console.ReadLine());
+
+            int sumItem = 0;
+           
+
+            while (true)
+            {
+                string input = Console.ReadLine();
+                if (input == "Stop")
+                {
+                    break;
+                }
+
+                for (int i = 0; i < input.Length; i++)
+                {
+                    char currentSymbol = input[i];
+                    sumItem += currentSymbol;
+                }
+
+                
+                
+                if (sumItem <= budget)
+                {
+                    Console.WriteLine("Item successfully purchased!");
+                }
+                else
+                {
+                    Console.WriteLine("Not enough money!");
+                    break;
+                }
+                
+            }
+            if (sumItem <= budget)
+            {
+                int result = budget - sumItem;
+                Console.WriteLine("Money left: {0}", result);
+            }
+            
+        }
+    }
+}

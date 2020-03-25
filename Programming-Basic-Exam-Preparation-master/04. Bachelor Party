@@ -1,0 +1,45 @@
+using System;
+
+namespace Task_04
+{
+    class BachelorParty
+    {
+        static void Main(string[] args)
+        {
+            int singer = int.Parse(Console.ReadLine());
+
+            int sum = 0;
+            int people = 0;
+
+            while (true)
+            {
+                string input = Console.ReadLine();
+                if (input == "The restaurant is full")
+                {
+                    break;
+                }
+
+                int group = int.Parse(input);
+                people += group;
+                if (group < 5)
+                {
+                    sum += group * 100;
+                }
+                else
+                {
+                    sum += group * 70;
+                }
+            }
+
+            if (sum >= singer)
+            {
+                int result = sum - singer;
+                Console.WriteLine("You have {0} guests and {1} leva left.", people, result);
+            }
+            else
+            {
+                Console.WriteLine("You have {0} guests and {1} leva income, but no singer.", people, sum);
+            }
+        }
+    }
+}
