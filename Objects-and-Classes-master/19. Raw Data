@@ -1,0 +1,76 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Task_12
+{
+    class RawData
+    {
+        static void Main(string[] args)
+        {
+            
+            int n = int.Parse(Console.ReadLine());
+            Car[] cars = new Car[n]; 
+            for (int i = 0; i < n; i++)
+            {
+                string input = Console.ReadLine();
+
+                string[] token = input.Split();
+
+                string model = token[0];
+                int engineSpeed = int.Parse(token[1]);
+                int enginePower = int.Parse(token[2]);
+                int cargoWeight = int.Parse(token[3]);
+                string cargoType = token[4];
+
+                cars[i] = new Car(model, new Engine(engineSpeed, enginePower), new Cargo(cargoType, cargoWeight));
+            }
+
+            string command = Console.ReadLine();
+
+            if (command == "fragile")
+            {
+                cars.Where(c => c.cargo.Type == "fragile").Where(c => c.cargo.Weight < 1000).Select(c => c.Model).ToList().ForEach(m => Console.WriteLine(m));
+            }
+            else
+            {
+                cars.Where(c => c.cargo.Type == "flamable").Where(c => c.engine.EnginePower > 250).Select(c => c.Model).ToList().ForEach(m => Console.WriteLine(m));
+            }
+        }
+    }
+  public class Car
+    {
+        public string Model { get; set; } 
+        public Engine engine { get; set; }
+        public Cargo cargo { get; set; }
+        public Car(string model, Engine engine, Cargo cargo)
+        {
+            this.Model = model;
+            this.engine = engine;
+            this.cargo = cargo;
+        }
+        
+    }
+  public class Cargo
+    {
+        public string Type { get; set; }
+        public int Weight { get; set; }
+        public Cargo(string type, int weight)
+        {
+            this.Weight = weight;
+            this.Type = type;
+        }
+    }
+  public  class Engine
+    {
+        public int EngineSpeed { get; set; }
+        public int EnginePower { get; set; }
+        public Engine(int engineSpeed, int enginePower)
+        {
+            this.EngineSpeed = engineSpeed;
+            this.EnginePower = enginePower;
+        }
+    }
+}

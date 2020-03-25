@@ -1,0 +1,50 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace Task_20
+{
+  
+  public  class Person
+    {
+        public string Name { get; set; }
+        public string ID { get; set; }
+        public int Age { get; set; }
+    }
+    class OrderByAge
+    {
+        static void Main(string[] args)
+        {
+            List<Person> people = new List<Person>();
+
+            while (true)
+            {
+                string input = Console.ReadLine();
+                if (input == "End")
+                {
+                    break;
+                }
+                string[] token = input.Split();
+
+                string name = token[0];
+                string id = token[1];
+                int age = int.Parse(token[2]);
+
+                Person person = new Person()
+                {
+                    Name = name,
+                    ID = id,
+                    Age = age
+                };
+
+                people.Add(person);
+
+            }
+
+            foreach (Person person in people.OrderBy(a => a.Age))
+            {
+                Console.WriteLine("{0} with ID: {1} is {2} years old.", person.Name, person.ID, person.Age);
+            }
+        }
+    }
+}

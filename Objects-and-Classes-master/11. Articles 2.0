@@ -1,0 +1,59 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Globalization;
+using System.Numerics;
+
+namespace Task_01
+{
+	public class Article
+	{
+		public string Title {get; set;}
+		public string Content {get; set;}
+		public string Author {get; set;}
+		
+		public static void Print(List<Article> list, string type)
+		{
+			
+			
+			if(type == "title" || type == "Title")
+			{
+				list.OrderBy(x => x.Title).ToList().ForEach(x => { Console.WriteLine("{0} - {1}: {2}", x.Title.Trim(), x.Content.Trim(), x.Author.Trim());});
+			}
+			else if(type == "content" || type == "Content")
+			{
+				list.OrderBy(x => x.Content).ToList().ForEach(x => { Console.WriteLine("{0} - {1}: {2}", x.Title.Trim(), x.Content.Trim(), x.Author.Trim());});
+			}
+			else
+			{
+				list.OrderBy(x => x.Author).ToList().ForEach(x => { Console.WriteLine("{0} - {1}: {2}", x.Title.Trim(), x.Content.Trim(), x.Author.Trim());});
+			}
+		}
+	}
+	public  class Program
+    {
+        public static void Main()
+        {	
+			List<Article> articles = new List<Article>();
+			
+			int lines = int.Parse(Console.ReadLine());
+			
+			for(int i = 0; i < lines; i++)
+			{
+				string[] input = Console.ReadLine().Split(',').ToArray();
+				
+				Article article = new Article();
+			
+				article.Title = input[0];
+				article.Content = input[1];
+				article.Author = input[2];
+				
+				articles.Add(article);
+			}
+			
+			string type = Console.ReadLine();
+			
+			Article.Print(articles, type);
+        }
+    }
+}

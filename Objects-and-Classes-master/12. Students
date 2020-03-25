@@ -1,0 +1,44 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Globalization;
+using System.Numerics;
+
+namespace Task_01
+{
+	public class Student
+	{
+		public string FirstName {get; set;}
+		public string LastName {get; set;}
+		public double Grade {get; set;}
+		
+		public static void Print(List<Student> list)
+		{		
+			list.OrderByDescending(x => x.Grade).ToList().ForEach(x => { Console.WriteLine("{0} {1}: {2:F2}", x.FirstName, x.LastName, x.Grade);});
+		}
+	}
+	public  class Program
+    {
+        public static void Main()
+        {	
+			List<Student> students = new List<Student>();
+			
+			int lines = int.Parse(Console.ReadLine());
+			
+			for(int i = 0; i < lines; i++)
+			{
+				string[] input = Console.ReadLine().Split().ToArray();
+				
+				Student student = new Student();
+			
+				student.FirstName = input[0];
+				student.LastName = input[1];
+				student.Grade = double.Parse(input[2]);
+				
+				students.Add(student);
+			}
+			
+			Student.Print(students);
+        }
+    }
+}

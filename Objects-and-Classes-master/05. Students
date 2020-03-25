@@ -1,0 +1,55 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Globalization;
+using System.Numerics;
+
+namespace Task_01
+{
+	public class Student
+	{
+		public string FirstName {get; set;}
+		public string LastName {get; set;}
+		public int Age {get; set;}
+		public string Hometown {get; set;}
+	}
+	public  class Program
+    {
+        public static void Main()
+        {	
+			List<Student> students = new List<Student>();
+			
+			string input = Console.ReadLine();
+			
+			while(input != "end")
+			{
+				string[] token = input.Split();
+				
+				string firstName = token[0];
+				string lastName = token[1];
+				int age = int.Parse(token[2]);
+				string hometown = token[3];
+				
+				Student student = new Student();
+				
+				student.FirstName = firstName;
+				student.LastName = lastName;
+				student.Age = age;
+				student.Hometown = hometown;
+				
+				students.Add(student);
+				
+				input = Console.ReadLine();
+			}
+			
+			string town = Console.ReadLine();
+			
+			List<Student> filteredStudent = students.Where(s => s.Hometown == town).ToList();
+			
+			foreach(var student in filteredStudent)
+			{
+				Console.WriteLine("{0} {1} is {2} years old.", student.FirstName, student.LastName, student.Age);
+			}
+        }
+    }
+}

@@ -1,0 +1,27 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Globalization;
+
+namespace Task_01
+{
+	public  class Program
+    {
+        public static void Main()
+        {
+            string[] input = Console.ReadLine().Split().ToArray();
+			
+			      Random rnd = new Random();
+			
+			      for(int pos1 = 0; pos1 < input.Length; pos1++)
+			      {
+			      	  int  pos2 = rnd.Next(input.Length);
+			      	  string valueOfRandomElement = input[pos2];
+			      	  input[pos2] = input[pos1];
+			      	  input[pos1] = valueOfRandomElement;
+			      }
+			      
+			      Console.WriteLine(string.Join(Environment.NewLine, input));
+        }
+    }
+}

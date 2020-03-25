@@ -1,0 +1,104 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace Task_18
+{
+  
+  public class Teams
+    {
+        public string Creator { get; set; }
+        public string TeamName { get; set; }
+        public List<string> Member { get; set; }
+    }
+    class TeamworkProjects
+    {
+        static void Main(string[] args)
+        {
+            int n = int.Parse(Console.ReadLine());
+
+            List<Teams> teams = new List<Teams>();
+
+            for (int i = 0; i < n; i++)
+            {
+                string input = Console.ReadLine();
+                string[] token = input.Split('-');
+
+                string creator = token[0];
+                string teamName = token[1];
+
+                if (teams.Any(x => x.TeamName == teamName))
+                {
+                    Console.WriteLine("Team {0} was already created!", teamName);
+                }
+                else if (teams.Any(x => x.Creator == creator))
+                {
+                    Console.WriteLine("{0} cannot create another team!", creator);
+                }
+                else
+                {
+                    Teams team = new Teams()
+                    {
+                        Creator = creator,
+                        TeamName = teamName,
+                        Member = new List<string>()
+                    };
+
+                    Console.WriteLine("Team {0} has been created by {1}!", team.TeamName, team.Creator);
+
+                    teams.Add(team);
+                }
+            }
+
+            while (true)
+            {
+                string input = Console.ReadLine();
+
+                if (input == "end of assignment")
+                {
+                    break;
+                }
+                string[] token = input.Split("->", StringSplitOptions.None);
+
+                string member = token[0];
+                string teamName = token[1];
+
+                if (!teams.Any(x => x.TeamName == teamName))
+                {
+                    Console.WriteLine("Team {0} does not exist!", teamName);
+                }
+                else if (teams.Any(t => t.Member.Contains(member)) || teams.Any(x => x.Creator == member))
+                {
+                    Console.WriteLine("Member {0} cannot join team {1}!", member, teamName);
+                }
+                else
+                {
+                    var currentTeam = teams.First(x => x.TeamName == teamName);
+                    currentTeam.Member.Add(member);
+                }
+            }
+
+            var completedTeams = teams.Where(x => x.Member.Count > 0);
+            var disbandedTeams = teams.Where(x => x.Member.Count == 0);
+
+            foreach (var team in completedTeams.OrderByDescending(x => x.Member.Count).ThenBy(y => y.TeamName))
+            {
+                Console.WriteLine("{0}", team.TeamName);
+                Console.WriteLine("- {0}", team.Creator);
+                foreach (var member in team.Member.OrderBy(x => x))
+                {
+                    Console.WriteLine("-- {0}", member);
+                }
+                
+            }
+            Console.WriteLine("Teams to disband:");
+            if (disbandedTeams != null)
+            {
+                foreach (var team in disbandedTeams.OrderBy(x => x.TeamName))
+                {
+                    Console.WriteLine("{0}", team.TeamName);
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,73 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace Task_11
+{
+    class SpeedRacing
+    {
+        static void Main(string[] args)
+        {
+            int lines = int.Parse(Console.ReadLine());
+            Cars[] cars = new Cars[lines];
+            for (int i = 0; i < lines; i++)
+            {
+                string line = Console.ReadLine();
+                string[] token = line.Split();
+                Cars car = new Cars()
+                {
+                    Model = token[0],
+                    FuelAmount = double.Parse(token[1]),
+                    FuelConsumptionPerKilometer = double.Parse(token[2]),
+                    TraveledDistance = 0
+                };
+
+                cars[i] = car;
+            }
+
+            while (true)
+            {
+                string command = Console.ReadLine();
+                if (command == "End")
+                {
+                    break;
+                }
+
+                string[] token = command.Split();
+                string model = token[1];
+                double distance = double.Parse(token[2]);
+
+                cars.Where(c => c.Model == model).ToList().ForEach(c => c.Drive(distance));
+                
+            }
+
+            foreach (Cars car in cars)
+            {
+                Console.WriteLine("{0} {1:F2} {2}",car.Model, car.FuelAmount, car.TraveledDistance);
+            }
+        }
+    }
+  public  class Cars
+    {
+        public string Model { get; set; }
+
+        public double FuelAmount { get; set; }
+
+        public double FuelConsumptionPerKilometer { get; set; }
+
+        public double TraveledDistance { get; set; }
+
+        public void Drive(double distance)
+        {
+            if (FuelAmount < distance * FuelConsumptionPerKilometer)
+            {
+                Console.WriteLine("Insufficient fuel for the drive");
+            }
+            else
+            {
+                FuelAmount -= distance * FuelConsumptionPerKilometer;
+                TraveledDistance += distance;
+            }
+        }
+    }
+}

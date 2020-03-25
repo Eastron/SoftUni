@@ -1,0 +1,98 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Globalization;
+using System.Numerics;
+
+namespace Task_01
+{
+	public class Truck
+	{
+		public string Brand {get; set;}
+		public string Model {get; set;}
+		public int Weight {get; set;}
+	}
+	public class Car
+	{
+		public string Brand {get; set;}
+		public string Model {get; set;}
+		public int HorsePower {get; set;}
+	}
+	public class Catalog
+	{
+		public List<Car> Cars {get; set;}
+		public List<Truck> Trucks {get; set;}
+	}
+	public  class Program
+    {
+        public static void Main()
+        {	
+			List<Catalog> catalogs = new List<Catalog>();
+			
+			Catalog catalog = new Catalog();
+			catalog.Cars = new List<Car>();
+			catalog.Trucks = new List<Truck>();
+			
+			string input = Console.ReadLine();
+			
+			while(input != "end")
+			{
+				string[] token = input.Split('/');
+				
+				string type = token[0];
+				string brand = token[1];
+				string model = token[2];
+				int horsePowerOrWeight = int.Parse(token[3]);
+
+				if(type == "Car")
+				{
+					Car cars = new Car();
+					cars.Brand = brand;
+					cars.Model = model;
+					cars.HorsePower = horsePowerOrWeight;
+					
+					catalog.Cars.Add(cars);
+				}
+				else
+				{
+					Truck trucks = new Truck();
+					trucks.Brand = brand;
+					trucks.Model = model;
+					trucks.Weight = horsePowerOrWeight;
+					
+					catalog.Trucks.Add(trucks);
+				}
+				
+				input = Console.ReadLine();
+			}
+			
+			catalogs.Add(catalog);
+			
+			foreach(var item in catalogs)
+			{
+				if(item.Cars.Count == 0)
+				{
+					break;
+				}
+				Console.WriteLine("Cars:");
+				foreach(var car in item.Cars.OrderBy(c => c.Brand))
+				{
+					Console.WriteLine("{0}: {1} - {2}hp", car.Brand, car.Model, car.HorsePower);
+				}
+			}
+			
+			foreach(var item in catalogs)
+			{
+				if(item.Trucks.Count == 0)
+				{
+					break;
+				}
+				Console.WriteLine("Trucks:");
+				foreach(var truck in item.Trucks.OrderBy(t => t.Brand))
+				{
+					Console.WriteLine("{0}: {1} - {2}kg", truck.Brand, truck.Model, truck.Weight);
+				}
+			}
+        }
+    }
+}

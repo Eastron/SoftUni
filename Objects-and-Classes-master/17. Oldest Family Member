@@ -1,0 +1,87 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace Task_10
+{
+   public class Family
+    {
+        private List<Person> memberList;
+
+        public List<Person> MemberList
+        {
+            get { return memberList; }
+            set { memberList = value; }
+        }
+
+        public Family()
+        {
+            this.MemberList = new List<Person>();
+        }
+
+        public void AddMember(Person member)
+        {
+            this.MemberList.Add(member);
+        }
+
+        public Person GetOldestMember()
+        {
+            return this.memberList.OrderByDescending(p => p.Age).FirstOrDefault();
+        }
+    }
+  class OldestFamilyMember
+    {
+        static void Main(string[] args)
+        {            
+            int n = int.Parse(Console.ReadLine());
+
+            var family = new Family();
+
+            for (int i = 0; i < n; i++)
+            {
+                var input = Console.ReadLine().Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                var person = new Person(input[0], int.Parse(input[1]));
+
+                family.AddMember(person);
+            }
+
+            var oldestMember = family.GetOldestMember();
+            Console.WriteLine("{0} {1}", oldestMember.Name, oldestMember.Age);
+            
+        }
+    }
+  public  class Person
+    {
+        private string name;
+        private int age;
+
+        public string Name
+        {
+            get { return this.name; }
+            set { this.name = value; }
+        }
+        public int Age
+        {
+            get { return this.age; }
+            set { this.age = value; }
+        }
+
+        public Person()
+        {
+            this.Name = "No name";
+            this.Age = 1;
+        }
+
+        public Person(int age)
+        {
+            this.Name = "No name";
+            this.Age = age;
+        }
+
+        public Person(string name, int age)
+        {
+            this.Name = name;
+            this.Age = age;
+        }
+    }
+}

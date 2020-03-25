@@ -1,0 +1,19 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Globalization;
+
+namespace Task_01
+{
+	public  class Program
+    {
+        public static void Main()
+        {
+            string input = Console.ReadLine();
+			
+			      DateTime date = DateTime.ParseExact(input, "d-M-yyyy", CultureInfo.InvariantCulture);
+			
+			      Console.WriteLine(date.DayOfWeek);
+        }
+    }
+}

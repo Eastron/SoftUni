@@ -1,0 +1,70 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Globalization;
+using System.Numerics;
+
+namespace Task_01
+{
+	public class Article
+	{
+		public string Title {get; set;}
+		public string Content {get; set;}
+		public string Author {get; set;}
+		
+		public string Edit(string newContent)
+		{
+			this.Content = newContent;
+			return this.Content;
+		}
+		public string ChangeAuthor(string newAuthor)
+		{
+			this.Author = newAuthor;
+			return this.Author;
+		}
+		public string Rename(string newTitle)
+		{
+			this.Title = newTitle;
+			return this.Title;
+		}
+		public void Print(string title, string content, string author)
+		{
+			Console.WriteLine("{0} - {1}: {2}", title.Trim(), content.Trim(), author.Trim());
+		}
+	}
+	public  class Program
+    {
+        public static void Main()
+        {	
+			string[] input = Console.ReadLine().Split(',').ToArray();
+
+			Article article = new Article();
+			
+			article.Title = input[0];
+			article.Content = input[1];
+			article.Author = input[2];
+			
+			int lines = int.Parse(Console.ReadLine());
+			
+			for(int i = 0; i < lines; i++)
+			{
+				string[] command = Console.ReadLine().Split(':').ToArray();
+				
+				if(command[0] == "Edit")
+				{
+					article.Edit(command[1]);
+				}
+				else if(command[0] == "ChangeAuthor")
+				{
+					article.ChangeAuthor(command[1]);
+				}
+				else 
+				{
+					article.Rename(command[1]);
+				}
+			}
+			
+			article.Print(article.Title, article.Content, article.Author);
+        }
+    }
+}

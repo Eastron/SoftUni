@@ -1,0 +1,80 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace Task_09
+{
+    class Employee
+    {
+        public string Name { get; set; }
+        public decimal Salary { get; set; }
+        public string Department { get; set; }
+    }
+    class CompanyRoster
+    {
+        static void Main(string[] args)
+        {
+            int n = int.Parse(Console.ReadLine());
+            List<Employee> employees = new List<Employee>();
+
+            for (int i = 0; i < n; i++)
+            {
+                string input = Console.ReadLine();
+                string[] token = input.Split();
+
+                string name = token[0];
+                decimal salary = decimal.Parse(token[1]);
+                string department = token[2];
+
+                Employee employee = new Employee()
+                {
+                    Name = name,
+                    Salary = salary,
+                    Department = department
+                };
+                employees.Add(employee);
+            }
+
+            employees.Sort((x, y) => x.Department.CompareTo(y.Department));
+
+            int count = 0;
+            decimal average = 0;
+            decimal maxAverage = decimal.MinValue;
+            decimal sum = 0;
+            string departmentBest = String.Empty;
+
+            foreach (Employee employeeFirst in employees)
+            {
+                foreach (Employee employeeSecond in employees)
+                {
+                    if (employeeFirst.Department == employeeSecond.Department)
+                    {
+                        count++;
+                        sum += employeeSecond.Salary;
+                        
+                    }
+                    
+                }
+                average = sum / count;
+                if (average >= maxAverage)
+                {
+                    maxAverage = average;
+                    departmentBest = employeeFirst.Department;
+                }
+                count = 0;
+                sum = 0;
+            }
+
+            Console.WriteLine("Highest Average Salary: {0}", departmentBest);
+            List<Employee> SortedList = employees.OrderByDescending(o => o.Salary).ToList();
+            foreach (Employee employee in SortedList)
+            {
+                if (departmentBest == employee.Department)
+                {
+                    
+                    Console.WriteLine("{0} {1:F2}", employee.Name, employee.Salary);
+                }
+            }
+        }
+    }
+}
