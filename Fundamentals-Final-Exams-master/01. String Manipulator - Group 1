@@ -1,0 +1,87 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text.RegularExpressions;
+using System.Text;
+
+namespace Task_01
+{
+    class Program
+    {
+        public static void Main()
+        {
+            string input = Console.ReadLine();
+
+            string command = Console.ReadLine();
+
+            while (command != "End")
+            {
+                string[] token = command.Split();
+
+                if (token[0].Equals("Translate"))
+                {
+                    char oldChar = token[1][0];
+                    char newChar = token[2][0];
+
+                    if (input.Contains(oldChar))
+                    {
+                       input = input.Replace(oldChar, newChar);
+                        Console.WriteLine(input);
+                    }
+                }
+                else if (token[0].Equals("Includes"))
+                {
+                    string substring = token[1];
+
+                    if (input.Contains(substring))
+                    {
+                        Console.WriteLine("True");
+                    }
+                    else
+                    {
+                        Console.WriteLine("False");
+                    }
+                }
+                else if (token[0].Equals("Start"))
+                {
+                    string substring = token[1];
+
+                    if (input.StartsWith(substring))
+                    {
+                        Console.WriteLine("True");
+                    }
+                    else
+                    {
+                        Console.WriteLine("False");
+                    }
+                }
+                else if (token[0].Equals("Lowercase"))
+                {
+                    input = input.ToLower();
+                    Console.WriteLine(input);
+                }
+                else if (token[0].Equals("FindIndex"))
+                {
+                    char theChar = token[1][0];
+
+                    if (input.Contains(theChar))
+                    {
+                        int lastIndex = input.LastIndexOf(theChar);
+                        Console.WriteLine(lastIndex);
+                    }
+                    
+                }
+                else
+                {
+                    int startIndex = int.Parse(token[1]);
+                    int length = int.Parse(token[2]);
+
+                    input = input.Remove(startIndex, length);
+                    Console.WriteLine(input);
+                }
+
+                command = Console.ReadLine();
+            }
+        }
+    }
+}
