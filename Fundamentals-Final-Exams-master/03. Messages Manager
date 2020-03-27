@@ -1,0 +1,88 @@
+using System;
+using System.Collections.Generic;
+using System.Text;
+using System.Linq;
+using System.Text.RegularExpressions;
+
+					
+public class Program
+{
+	public static void Main()
+	{
+		Dictionary<string, int> usersS = new Dictionary<string, int>();
+		Dictionary<string, int> usersR = new Dictionary<string, int>();
+		
+		int capacity = int.Parse(Console.ReadLine());
+		string input = Console.ReadLine();
+		
+		while(input != "Statistics")
+		{
+			string[] token = input.Split('=');
+			
+			if (token[0].Equals("Add"))
+			{
+				string username = token[1];
+				int sent = int.Parse(token[2]);
+				int received = int.Parse(token[3]);
+				
+				if(!usersS.ContainsKey(username))
+				{
+					usersS.Add(username, sent);
+					usersR.Add(username, received);
+				}
+			}
+			else if (token[0].Equals("Message"))
+			{
+				string sender = token[1];
+				string receiver = token[2];
+				
+				if (usersS.ContainsKey(sender) && usersR.ContainsKey(receiver))
+				{
+					usersS[sender]++;
+					usersR[receiver]++;
+					
+					if (usersS[sender] + usersR[sender] >= capacity)
+					{
+						usersS.Remove(sender);
+						usersR.Remove(sender);
+						Console.WriteLine("{0} reached the capacity!", sender);
+					}
+					
+					if (usersR[receiver] + usersS[receiver] >= capacity)
+					{
+						usersS.Remove(receiver);
+						usersR.Remove(receiver);
+						Console.WriteLine("{0} reached the capacity!", receiver);
+					}
+				}
+			}
+			else if (token[0].Equals("Empty"))
+			{
+				if (token[1].Equals("All"))
+				{
+					usersS.Clear();
+					usersR.Clear();
+				}
+				
+				string user = token[1];
+				if (usersS.ContainsKey(user))
+				{
+					usersS.Remove(user);
+					usersR.Remove(user);
+				}
+			}
+			
+			input = Console.ReadLine();
+		}
+		
+		Console.WriteLine("Users count: {0}", usersS.Count);
+		
+		foreach(var user in usersR.OrderByDescending(x => x.Value).ThenBy(x => x.Key))
+		{
+			if (usersS.ContainsKey(user.Key))
+			{
+				Console.WriteLine("{0} - {1}", user.Key, user.Value + usersS[user.Key]);
+			}
+		}
+	}
+}
