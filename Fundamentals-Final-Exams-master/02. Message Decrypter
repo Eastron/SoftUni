@@ -1,0 +1,48 @@
+using System;
+using System.Collections.Generic;
+using System.Text;
+using System.Linq;
+using System.Text.RegularExpressions;
+
+					
+public class Program
+{
+	public static void Main()
+	{
+		int lines = int.Parse(Console.ReadLine());
+		
+		var regex = @"^(\$|\%)(?<tag>[A-Z][a-z]{3,})(\1)\:\s\[(?<first>[0-9]+)\]\|\[(?<second>[0-9]+)\]\|\[(?<third>[0-9]+)\]\|$";
+		
+		for(int i = 0; i < lines; i++)
+		{
+			string input = Console.ReadLine();
+			
+			var match = Regex.Match(input,regex);
+			
+			if (match.Success)
+			{
+				string tag = match.Groups["tag"].Value;
+				
+				string firstNum = match.Groups["first"].Value;
+				int first = int.Parse(firstNum);
+				char firstChar = (char)first;
+				
+				string secondNum = match.Groups["second"].Value;
+				int second = int.Parse(secondNum);
+				char secondChar = (char)second;
+				
+				string thirdNum = match.Groups["third"].Value;
+				int third = int.Parse(thirdNum);
+				char thirdChar = (char)third;
+				
+				string myString = firstChar.ToString() + secondChar.ToString() + thirdChar.ToString();
+				
+				Console.WriteLine("{0}: {1}", tag, myString);
+			}
+			else
+			{
+				Console.WriteLine("Valid message not found!");
+			}
+		}
+	}
+}
