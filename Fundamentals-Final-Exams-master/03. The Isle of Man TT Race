@@ -1,0 +1,51 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text.RegularExpressions;
+using System.Text;
+
+namespace Task_01
+{
+    class Program
+    {
+        public static void Main()
+        {
+            var regex = @"([#$%&*])(?<name>[A-z]+)(\1)=(?<num>[0-9]+)!!(?<code>.+)";
+
+            while (true)
+            {
+                string input = Console.ReadLine();
+                var match = Regex.Match(input, regex);
+
+                if (match.Success)
+                {
+                    string name = match.Groups["name"].Value;
+                    int num = int.Parse(match.Groups["num"].Value);
+                    string code = match.Groups["code"].Value;
+
+                    if (num == code.Length)
+                    {
+                        string newCode = string.Empty;
+
+                        for (int i = 0; i < code.Length; i++)
+                        {
+                            char newChar = (char)(code[i] + num);
+                            newCode += newChar;
+                        }
+
+                        Console.WriteLine("Coordinates found! {0} -> {1}", name, newCode);
+                        break;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Nothing found!");
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Nothing found!");
+                }
+            }
+        }
+    }
+}
