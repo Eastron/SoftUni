@@ -1,0 +1,83 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text.RegularExpressions;
+using System.Text;
+
+namespace Task_01
+{
+    class Program
+    {
+        public static void Main()
+        {
+            var regex = @"^(?<artist>[A-Z][a-z\'\s]*):(?<song>[A-Z]+[A-Z\s]*)$";
+
+            string input = Console.ReadLine();
+            while (input != "end")
+            {
+                var match = Regex.Match(input, regex);
+
+                if (match.Success)
+                {
+                    string artist = match.Groups["artist"].Value;
+                    int key = artist.Length;
+                    string newString = string.Empty;
+
+                    for (int i = 0; i < input.Length; i++)
+                    {
+                        if (Char.IsLetter(input[i]))
+                        {
+                            if (input[i] >= 65 && input[i] <= 90)
+                            {
+                                char newChar = (char)(input[i] + key);
+                                if (newChar > 90)
+                                {
+                                    int num = 90 - input[i];
+                                    int different = key - num;
+                                    newChar = (char)((65 + different) - 1);
+                                    newString += newChar;
+                                }
+                                else
+                                {
+                                    newString += newChar;
+                                }
+                            }
+                            else
+                            {
+                                char newChar = (char)(input[i] + key);
+                                if (newChar > 122)
+                                {
+                                    int num = 122 - input[i];
+                                    int different = key - num;
+                                    newChar = (char)((97 + different) - 1);
+                                    newString += newChar;
+                                }
+                                else
+                                {
+                                    newString += newChar;
+                                }
+                            }
+                            
+                            
+                        }
+                        else if (input[i].Equals(':'))
+                        {
+                            newString += '@';
+                        }
+                        else
+                        {
+                            newString += input[i];
+                        }
+                    }
+                    Console.WriteLine("Successful encryption: {0}", newString);
+                }
+                else
+                {
+                    Console.WriteLine("Invalid input!");
+                }
+
+                input = Console.ReadLine();
+            }
+        }
+    }
+}
