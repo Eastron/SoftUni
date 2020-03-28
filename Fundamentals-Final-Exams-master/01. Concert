@@ -1,0 +1,83 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text.RegularExpressions;
+using System.Text;
+
+namespace Task_01
+{
+    class Program
+    {
+        public static void Main()
+        {
+            Dictionary<string, int> bandTimes = new Dictionary<string, int>();
+            Dictionary<string, string> bandMembers = new Dictionary<string, string>();
+
+            string input = Console.ReadLine();
+
+            while (input != "start of concert")
+            {
+                string[] token = input.Split(new string[] { ", ", "; "},StringSplitOptions.RemoveEmptyEntries);
+
+                if (token[0].Equals("Add"))
+                {
+                    string bandName = token[1];
+                    if (!bandTimes.ContainsKey(bandName))
+                    {
+                        bandTimes.Add(bandName, 0);
+                    }
+
+                    for (int i = 2; i < token.Length; i++)
+                    {
+                        if (!bandMembers.ContainsKey(token[i]))
+                        {
+                            bandMembers.Add(token[i], bandName);
+                        }
+                    }
+                }
+                else if (token[0].Equals("Play"))
+                {
+                    string bandName = token[1];
+                    int time = int.Parse(token[2]);
+
+                    if (!bandTimes.ContainsKey(bandName))
+                    {
+                        bandTimes.Add(bandName, time);
+                    }
+                    else
+                    {
+                        bandTimes[bandName] += time;
+                    }
+                }
+
+                input = Console.ReadLine();
+            }
+
+            string nameBand = Console.ReadLine(); 
+
+            int totalTime = 0;
+
+            foreach (var band in bandTimes)
+            {
+                totalTime += band.Value;
+            }
+
+            Console.WriteLine("Total time: {0}", totalTime);
+
+            foreach (var band in bandTimes.OrderByDescending(x => x.Value).ThenBy(x => x.Key))
+            {
+                Console.WriteLine("{0} -> {1}", band.Key.Trim(), band.Value);
+            }
+
+            Console.WriteLine(nameBand);
+            foreach (var member in bandMembers)
+            {
+                if (nameBand.Equals(member.Value))
+                {
+                    Console.WriteLine("=> {0}", member.Key.Trim());
+                }
+            }
+            
+        }
+    }
+}
