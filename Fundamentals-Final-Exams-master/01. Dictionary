@@ -1,0 +1,69 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text.RegularExpressions;
+using System.Text;
+
+namespace Task_01
+{
+    class Program
+    {
+        public static void Main()
+        {
+            Dictionary<string, List<string>> words = new Dictionary<string, List<string>>();
+
+            string firstString = Console.ReadLine();
+
+            string[] token = firstString.Split(" | ");
+
+            for (int i = 0; i < token.Length; i++)
+            {
+                string[] spliter = token[i].Split(": ");
+                string word = spliter[0];
+                string definition = spliter[1];
+
+                if (!words.ContainsKey(word))
+                {
+                    words.Add(word, new List<string>());
+                    words[word].Add(definition);
+                }
+                else
+                {
+                    words[word].Add(definition);
+                }
+            }
+
+            string secondString = Console.ReadLine();
+
+            string[] b = secondString.Split(" | ");
+
+
+
+            string thirdString = Console.ReadLine();
+
+            if (thirdString == "End")
+            {
+                foreach (var word in b.OrderBy(x => x))
+                {
+                    if (words.ContainsKey(word))
+                    {
+                        Console.WriteLine("{0}", word);
+                        foreach (var d in words[word].OrderByDescending(x => x.Length))
+                        {
+                            Console.WriteLine("-{0}", d);
+                        }
+
+                    }
+                }
+            }
+            if (thirdString == "List")
+            {
+                foreach (var word in words.OrderBy(x => x.Key))
+                {
+                    Console.Write("{0} ", word.Key);
+                }
+                Console.WriteLine();
+            }
+        }
+    }
+}
