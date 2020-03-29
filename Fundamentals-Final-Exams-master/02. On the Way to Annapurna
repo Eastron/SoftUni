@@ -1,0 +1,68 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text.RegularExpressions;
+using System.Text;
+
+namespace Task_01
+{
+    class Program
+    {
+        public static void Main()
+        {
+            Dictionary<string, List<string>> stores = new Dictionary<string, List<string>>();
+
+            string input = Console.ReadLine();
+            while (input != "END")
+            {
+                string[] token = input.Split(new string[] { "->","," },StringSplitOptions.RemoveEmptyEntries);
+
+                if (token[0].Equals("Add"))
+                {
+                    string store = token[1];
+
+                    if (!stores.ContainsKey(store))
+                    {
+                        stores.Add(store, new List<string>());
+
+                        for (int i = 2; i < token.Length; i++)
+                        {
+                            stores[store].Add(token[i]);
+                        }
+                        
+                    }
+                    else
+                    {
+                        for (int i = 2; i < token.Length; i++)
+                        {
+                            stores[store].Add(token[i]);
+                        }
+                    }
+                }
+                else if (token[0].Equals("Remove"))
+                {
+                    string store = token[1];
+
+                    if (stores.ContainsKey(store))
+                    {
+                        stores.Remove(store);
+                    }
+                }
+
+                input = Console.ReadLine();
+            }
+
+            Console.WriteLine("Stores list:");
+
+            foreach (var store in stores.OrderByDescending(x => x.Value.Count).ThenByDescending(x => x.Key))
+            {
+                Console.WriteLine("{0}", store.Key);
+
+                foreach (var item in store.Value)
+                {
+                    Console.WriteLine("<<{0}>>", item);
+                }
+            }
+        }
+    }
+}
