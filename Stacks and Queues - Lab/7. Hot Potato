@@ -1,0 +1,38 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text.RegularExpressions;
+using System.Text;
+
+namespace Task_01
+{
+    class Program
+    {
+        public static void Main()
+        {
+            string[] kids = Console.ReadLine().Split();
+            int num = int.Parse(Console.ReadLine());
+
+            Queue<string> children = new Queue<string>(kids);
+
+            int count = 1;
+
+            while (children.Count != 1)
+            {
+                if (count % num != 0)
+                {
+                    string kid = children.Dequeue();
+                    children.Enqueue(kid);
+                    
+                }
+                else
+                {
+                    Console.WriteLine("Removed {0}", children.Dequeue());
+                }
+                count++;
+            }
+
+            Console.WriteLine("Last is {0}", children.Dequeue());
+        }
+    }
+}
