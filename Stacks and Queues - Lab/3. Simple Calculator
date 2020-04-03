@@ -1,0 +1,45 @@
+using System;
+using System.Collections.Generic;
+using System.Text;
+using System.Linq;
+using System.Text.RegularExpressions;
+
+					
+public class Program
+{
+	public static void Main()
+	{
+		string[] input = Console.ReadLine().Split();
+		Stack<string> symbols = new Stack<string>();
+		int result = 0;
+		
+		for(int i = input.Length - 1; i >= 0; i--)
+		{
+			symbols.Push(input[i]);
+		}
+		
+		while(symbols.Count != 0)
+		{
+			string symbol = symbols.Pop();
+			if (symbol.Equals("+"))
+			{
+				string nextSymbol = symbols.Pop();
+				int num = int.Parse(nextSymbol);
+				result += num;
+			}
+			else if (symbol.Equals("-"))
+			{
+				string nextSymbol = symbols.Pop();
+				int num = int.Parse(nextSymbol);
+				result -= num;
+			}
+			else
+			{
+				int num = int.Parse(symbol);
+				result += num;
+			}
+		}
+		
+		Console.WriteLine(result);
+	}
+}
