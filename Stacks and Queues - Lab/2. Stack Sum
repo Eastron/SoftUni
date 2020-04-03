@@ -1,0 +1,60 @@
+using System;
+using System.Collections.Generic;
+using System.Text;
+using System.Linq;
+using System.Text.RegularExpressions;
+
+					
+public class Program
+{
+	public static void Main()
+	{
+		string[] input = Console.ReadLine().Split();
+		Stack<int> numbers = new Stack<int>();
+		
+		for(int i = 0; i < input.Length; i++)
+		{
+			numbers.Push(int.Parse(input[i]));
+		}
+		
+		string command = Console.ReadLine().ToLower();
+
+		int sum = 0;
+		
+		while(command != "end")
+		{
+			string[] token = command.Split();
+			
+			if(token[0].Equals("add"))
+			{
+				for(int i = 1; i < token.Length; i++)
+				{
+					int num = int.Parse(token[i]);
+					numbers.Push(num);
+				}
+			}
+			else
+			{
+				int lines = int.Parse(token[1]);
+				
+				if (numbers.Count >= lines)
+				{
+					for(int i = 0; i < lines; i++)
+					{
+						numbers.Pop();
+					}
+				}
+			}
+			
+			command = Console.ReadLine().ToLower();
+		}
+		
+		while(numbers.Count != 0)
+		{
+			sum += numbers.Pop();
+		}
+		
+		Console.WriteLine("Sum: {0}", sum);
+
+	}
+}
