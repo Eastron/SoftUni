@@ -1,0 +1,57 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text.RegularExpressions;
+using System.Text;
+
+namespace Task_01
+{
+    class Program
+    {
+        public static void Main()
+        {
+            int[] c = Console.ReadLine().Split().Select(int.Parse).ToArray();
+            int[] b = Console.ReadLine().Split().Select(int.Parse).ToArray();
+
+            Queue<int> cups = new Queue<int>(c);
+            Stack<int> bottles = new Stack<int>(b);
+            int water = 0;
+
+            while (cups.Count != 0 && bottles.Count != 0)
+            {
+                int cup = cups.Dequeue();
+                int bottle = bottles.Pop();
+
+                cup -= bottle;
+
+                if (cup <= 0)
+                {
+                    water += Math.Abs(cup);
+                }
+                else
+                {
+                    while (cup > 0)
+                    {
+                        bottle = bottles.Pop();
+                        cup -= bottle;
+                    }
+
+                    water += Math.Abs(cup);
+                }
+            }
+
+            if (cups.Count != 0)
+            {
+                Console.WriteLine("Cups: {0}", string.Join(" ", cups));
+            }
+            else
+            {
+                Console.WriteLine("Bottles: {0}", string.Join(" ", bottles));
+            }
+
+
+            Console.WriteLine("Wasted litters of water: {0}", water);
+
+        }
+    }
+}
