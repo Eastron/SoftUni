@@ -1,0 +1,60 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text.RegularExpressions;
+using System.Text;
+
+namespace Task_01
+{
+    class Program
+    {
+        public static void Main()
+        {
+            int foodQuantity = int.Parse(Console.ReadLine());
+            int[] sequenceFood = Console.ReadLine().Split().Select(int.Parse).ToArray();
+            
+            int max = int.MinValue;
+
+            Queue<int> food = new Queue<int>(sequenceFood);
+
+            for (int i = 0; i < sequenceFood.Length; i++)
+            {
+                int num = food.Dequeue();
+                if (num > max)
+                {
+                    max = num;
+                }
+            }
+
+            Console.WriteLine(max);
+
+            for (int i = 0; i < sequenceFood.Length; i++)
+            {
+                food.Enqueue(sequenceFood[i]);
+            }
+
+            int numFood = 0;
+
+            while (food.Count != 0)
+            {
+                numFood = food.Dequeue();
+                foodQuantity -= numFood;
+                if (foodQuantity < 0)
+                {
+                    break;
+                }
+            }
+
+            if (food.Count > 0 || foodQuantity < 0)
+            {
+                Console.Write("Orders left: {0} ", numFood);
+                Console.Write(String.Join(" ", food));
+                Console.WriteLine();
+            }
+            else
+            {
+                Console.WriteLine("Orders complete");
+            }
+        }
+    }
+}
