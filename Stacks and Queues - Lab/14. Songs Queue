@@ -1,0 +1,50 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text.RegularExpressions;
+using System.Text;
+
+namespace Task_01
+{
+    class Program
+    {
+        public static void Main()
+        {
+            string[] sequence = Console.ReadLine().Split(", ").ToArray();
+            Queue<string> songs = new Queue<string>(sequence);
+
+            while (songs.Count != 0)
+            {
+                string[] input = Console.ReadLine().Split();
+
+                if (input[0].Equals("Play"))
+                {
+                    songs.Dequeue();
+                }
+                else if (input[0].Equals("Add"))
+                {
+                    string song = string.Empty;
+                    for (int i = 1; i < input.Length; i++)
+                    {
+                        song += input[i] + " ";
+                    }
+                    if (!songs.Contains(song.Trim()))
+                    {
+                        songs.Enqueue(song.Trim());
+                    }
+                    else
+                    {
+                        Console.WriteLine($"{song.Trim()} is already contained!");
+                    }
+                    
+                }
+                else if (input[0].Equals("Show"))
+                {
+                    Console.WriteLine(String.Join(", ", songs));
+                }
+            }
+
+            Console.WriteLine("No more songs!");
+        }
+    }
+}
