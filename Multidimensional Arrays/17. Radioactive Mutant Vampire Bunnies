@@ -1,0 +1,279 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text.RegularExpressions;
+using System.Text;
+
+namespace Task_01
+{
+    
+    class Program
+    {
+        public static void PrintMatrix(char[,] matrix, int rows, int cols)
+        {
+            for (int row = 0; row < rows; row++)
+            {
+                for (int col = 0; col < cols; col++)
+                {
+                    Console.Write(matrix[row, col]);
+                }
+
+                Console.WriteLine();
+            }
+        }
+
+        public static bool CheckIsDead(char[,] matrix, bool isDead)
+        {
+            foreach (var element in matrix)
+            {
+                if (element.Equals('P'))
+                {
+                    isDead = false;
+                    break;
+                }
+                else
+                {
+                    isDead = true;
+                }
+            }
+
+            return isDead;
+        }
+
+        public static char[,] CheckBunnie(char[,] matrix, int row, int col, int rows, int cols)
+        {
+            if (row >= 0 && row < rows && col >= 0 && col < cols)
+            {
+                if (!matrix[row,col].Equals('B') && !matrix[row,col].Equals('b'))
+                {
+                    matrix[row, col] = 'b';
+                }   
+            }
+
+            return matrix;
+        }
+        public static char[,] MakeLowerB(char[,] matrix, int rows, int cols)
+        {
+            for (int row = 0; row < rows; row++)
+            {
+                for (int col = 0; col < cols; col++)
+                {
+                    if (matrix[row,col].Equals('B'))
+                    {
+                        row--;
+                        CheckBunnie(matrix, row, col, rows, cols);
+                        row++;
+
+                        col++;
+                        CheckBunnie(matrix, row, col, rows, cols);
+                        col--;
+
+                        row++;
+                        CheckBunnie(matrix, row, col, rows, cols);
+                        row--;
+
+                        col--;
+                        CheckBunnie(matrix, row, col, rows, cols);
+                        col++;
+                    }
+                }
+            }
+
+            return matrix;
+        }
+
+        public static char[,] MakeUpperB(char[,] matrix, int rows, int cols)
+        {
+            for (int row = 0; row < rows; row++)
+            {
+                for (int col = 0; col < cols; col++)
+                {
+                    if (matrix[row,col].Equals('b'))
+                    {
+                        matrix[row, col] = 'B';
+                    }
+                }
+            }
+
+            return matrix;
+        }
+        public static void Main()
+        {
+            int[] size = Console.ReadLine().Split(' ', StringSplitOptions.RemoveEmptyEntries).Select(int.Parse).ToArray();
+            
+            int rows = size[0];
+            int cols = size[1];
+            char[,] matrix = new char[rows, cols];
+
+            for (int row = 0; row < rows; row++)
+            {
+                char[] sequence = Console.ReadLine().ToArray();
+
+                for (int col = 0; col < cols; col++)
+                {
+                    matrix[row, col] = sequence[col];
+                }
+            }
+            int currentRow = 0;
+            int currentCol = 0;
+
+            for (int row = 0; row < rows; row++)
+            {
+                for (int col = 0; col < cols; col++)
+                {
+                    if (matrix[row,col].Equals('P'))
+                    {
+                        currentRow = row;
+                        currentCol = col;
+                    }
+                }
+            }
+
+            char[] commands = Console.ReadLine().ToArray();
+            bool isDead = false;
+
+            for (int i = 0; i < commands.Length; i++)
+            {
+                char command = commands[i];
+
+                if (command.Equals('U'))
+                {
+                    currentRow--;
+
+                    if (currentRow >= 0 && currentRow < rows && currentCol >= 0 && currentCol < cols)
+                    {
+                        if (matrix[currentRow, currentCol].Equals('.'))
+                        {
+                            matrix[currentRow, currentCol] = 'P';
+                            matrix[currentRow + 1, currentCol] = '.';
+                        }
+                        else
+                        {
+                            matrix = MakeLowerB(matrix, rows, cols);
+                            matrix = MakeUpperB(matrix, rows, cols);
+                            PrintMatrix(matrix, rows, cols);
+                            Console.WriteLine($"dead: {currentRow} {currentCol}");
+                            break;
+                        }
+                    }
+                    else
+                    {
+                        matrix[currentRow + 1, currentCol] = '.';
+                        matrix = MakeLowerB(matrix, rows, cols);
+                        matrix = MakeUpperB(matrix, rows, cols);
+                        PrintMatrix(matrix, rows, cols);
+                        currentRow++;
+                        Console.WriteLine($"won: {currentRow} {currentCol}");
+                        break;
+                    }
+                }
+                else if (command.Equals('L'))
+                {
+                    currentCol--;
+
+                    if (currentRow >= 0 && currentRow < rows && currentCol >= 0 && currentCol < cols)
+                    {
+                        if (matrix[currentRow, currentCol].Equals('.'))
+                        {
+                            matrix[currentRow, currentCol] = 'P';
+                            matrix[currentRow, currentCol + 1] = '.';
+                        }
+                        else
+                        {
+                            matrix = MakeLowerB(matrix, rows, cols);
+                            matrix = MakeUpperB(matrix, rows, cols);
+                            PrintMatrix(matrix, rows, cols);
+                            Console.WriteLine($"dead: {currentRow} {currentCol}");
+                            break;
+                        }
+                    }
+                    else
+                    {
+                        matrix[currentRow, currentCol + 1] = '.';
+                        matrix = MakeLowerB(matrix, rows, cols);
+                        matrix = MakeUpperB(matrix, rows, cols);
+                        PrintMatrix(matrix, rows, cols);
+                        currentCol++;
+                        Console.WriteLine($"won: {currentRow} {currentCol}");
+                        break;
+                    }
+                }
+                else if (command.Equals('R'))
+                {
+                    currentCol++;
+
+                    if (currentRow >= 0 && currentRow < rows && currentCol >= 0 && currentCol < cols)
+                    {
+                        if (matrix[currentRow, currentCol].Equals('.'))
+                        {
+                            matrix[currentRow, currentCol] = 'P';
+                            matrix[currentRow, currentCol - 1] = '.';
+                        }
+                        else
+                        {
+                            matrix = MakeLowerB(matrix, rows, cols);
+                            matrix = MakeUpperB(matrix, rows, cols);
+                            PrintMatrix(matrix, rows, cols);
+                            Console.WriteLine($"dead: {currentRow} {currentCol}");
+                            break;
+                        }
+                    }
+                    else
+                    {
+                        matrix[currentRow, currentCol - 1] = '.';
+                        matrix = MakeLowerB(matrix, rows, cols);
+                        matrix = MakeUpperB(matrix, rows, cols);
+                        PrintMatrix(matrix, rows, cols);
+                        currentCol--;
+                        Console.WriteLine($"won: {currentRow} {currentCol}");
+                        break;
+                    }
+                }
+                else if (command.Equals('D'))
+                {
+                    currentRow++;
+
+                    if (currentRow >= 0 && currentRow < rows && currentCol >= 0 && currentCol < cols)
+                    {
+                        if (matrix[currentRow, currentCol].Equals('.'))
+                        {
+                            matrix[currentRow, currentCol] = 'P';
+                            matrix[currentRow - 1, currentCol] = '.';
+                        }
+                        else
+                        {
+                            matrix = MakeLowerB(matrix, rows, cols);
+                            matrix = MakeUpperB(matrix, rows, cols);
+                            PrintMatrix(matrix, rows, cols);
+                            Console.WriteLine($"dead: {currentRow} {currentCol}");
+                            break;
+                        }
+                    }
+                    else
+                    {
+                        matrix[currentRow - 1, currentCol] = '.';
+                        matrix = MakeLowerB(matrix, rows, cols);
+                        matrix = MakeUpperB(matrix, rows, cols);
+                        PrintMatrix(matrix, rows, cols);
+                        currentRow--;
+                        Console.WriteLine($"won: {currentRow} {currentCol}");
+                        break;
+                    }
+                }
+
+                matrix = MakeLowerB(matrix, rows, cols);
+                isDead = CheckIsDead(matrix, isDead);
+                if (isDead)
+                {
+                    matrix = MakeUpperB(matrix, rows, cols);
+                    PrintMatrix(matrix, rows, cols);
+                    Console.WriteLine($"dead: {currentRow} {currentCol}");
+                    break;
+                }
+                matrix = MakeUpperB(matrix, rows, cols);
+
+                
+            }
+        }
+    }
+}
