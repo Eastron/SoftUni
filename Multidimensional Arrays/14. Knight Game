@@ -1,0 +1,160 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text.RegularExpressions;
+using System.Text;
+
+namespace Task_01
+{
+    class Program
+    {
+       public static int Recursia(string[,] matrix, int rows, int cols, int count, int removed)
+        {
+            int maxCount = int.MinValue;
+            int maxRow = 0;
+            int maxCol = 0;
+
+            for (int row = 0; row < rows; row++)
+            {
+                for (int col = 0; col < cols; col++)
+                {
+                    count = 0;
+                    if (matrix[row, col].Equals("K"))
+                    {
+                        int r = row - 2;
+                        int c = col + 1;
+
+                        if (r >= 0 && r < rows && c >= 0 && c < cols)
+                        {
+                            if (matrix[r, c].Equals("K"))
+                            {
+                                count++;
+                            }
+                        }
+
+                        r = row - 1;
+                        c = col + 2;
+
+                        if (r >= 0 && r < rows && c >= 0 && c < cols)
+                        {
+                            if (matrix[r, c].Equals("K"))
+                            {
+                                count++;
+                            }
+                        }
+
+                        r = row + 1;
+                        c = col + 2;
+
+                        if (r >= 0 && r < rows && c >= 0 && c < cols)
+                        {
+                            if (matrix[r, c].Equals("K"))
+                            {
+                                count++;
+                            }
+                        }
+
+                        r = row + 2;
+                        c = col + 1;
+
+                        if (r >= 0 && r < rows && c >= 0 && c < cols)
+                        {
+                            if (matrix[r, c].Equals("K"))
+                            {
+                                count++;
+                            }
+                        }
+
+                        r = row + 2;
+                        c = col - 1;
+
+                        if (r >= 0 && r < rows && c >= 0 && c < cols)
+                        {
+                            if (matrix[r, c].Equals("K"))
+                            {
+                                count++;
+                            }
+                        }
+
+                        r = row + 1;
+                        c = col - 2;
+
+                        if (r >= 0 && r < rows && c >= 0 && c < cols)
+                        {
+                            if (matrix[r, c].Equals("K"))
+                            {
+                                count++;
+                            }
+                        }
+
+                        r = row - 1;
+                        c = col - 2;
+
+                        if (r >= 0 && r < rows && c >= 0 && c < cols)
+                        {
+                            if (matrix[r, c].Equals("K"))
+                            {
+                                count++;
+                            }
+                        }
+
+                        r = row - 2;
+                        c = col - 1;
+
+                        if (r >= 0 && r < rows && c >= 0 && c < cols)
+                        {
+                            if (matrix[r, c].Equals("K"))
+                            {
+                                count++;
+                            }
+                        }
+
+                        if (count > maxCount)
+                        {
+                            maxCount = count;
+                            maxRow = row;
+                            maxCol = col;
+                        }
+                    }
+                }
+            }
+
+            if (maxCount != 0)
+            {
+                matrix[maxRow, maxCol] = "0";
+                removed++;
+                count = 0;
+               return Recursia(matrix, rows, cols, count, removed);
+            }
+            else
+            {
+                return removed;
+            }
+            
+            
+        }
+        public static void Main()
+        {
+            int size = int.Parse(Console.ReadLine());
+
+            int rows = size;
+            int cols = size;
+            string[,] matrix = new string[rows, cols];
+            int count = 0;
+            int removed = 0;
+            for (int row = 0; row < rows; row++)
+            {
+                char[] sequence = Console.ReadLine().ToArray();
+
+                for (int col = 0; col < cols; col++)
+                {
+                    matrix[row, col] = sequence[col].ToString();
+                }
+            }
+
+            removed = Recursia(matrix, rows, cols, count, removed);
+
+            Console.WriteLine(removed);
+        }
+    }
+}
