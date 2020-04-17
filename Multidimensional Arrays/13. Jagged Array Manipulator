@@ -1,0 +1,129 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text.RegularExpressions;
+using System.Text;
+
+namespace Task_01
+{
+    class Program
+    {
+        static void PrintMatrix(double[][] matrix, int rows)
+        {
+            for (int row = 0; row < rows; row++)
+            {
+                for (int col = 0; col < matrix[row].Length; col++)
+                {
+                    Console.Write(matrix[row][col] + " ");
+                }
+                Console.WriteLine();
+            }
+        }
+
+        static double[][] MultiplyMatrix(double[][] matrix, int row)
+        {
+
+            for (int col = 0; col < matrix[row].Length; col++)
+            {
+                matrix[row][col] *= 2;
+            }
+
+            return matrix;
+        }
+
+        static double[][] DivideMatrix(double[][] matrix, int row)
+        {
+
+            for (int col = 0; col < matrix[row].Length; col++)
+            {
+                matrix[row][col] /= 2;
+            }
+
+            return matrix;
+        }
+
+        public static void Main()
+        {
+            int rows = int.Parse(Console.ReadLine());
+            double[][] matrix = new double[rows][];
+
+            for (int row = 0; row < rows; row++)
+            {
+                double[] sequence = Console.ReadLine().Split(' ', StringSplitOptions.RemoveEmptyEntries).Select(double.Parse).ToArray();
+                matrix[row] = new double[sequence.Length];
+                for (int col = 0; col < sequence.Length; col++)
+                {
+                    matrix[row][col] = sequence[col];
+                }
+            }
+
+            for (int row = 0; row < rows - 1; row++)
+            {
+                if (row == 0 || row + 1 == rows - 1)
+                {
+                    if (matrix[row].Length == matrix[row + 1].Length)
+                    {
+                        MultiplyMatrix(matrix, row);
+                        MultiplyMatrix(matrix, row + 1);
+                    }
+                    else
+                    {
+                        DivideMatrix(matrix, row);
+                        DivideMatrix(matrix, row + 1);
+                    }
+                }
+                else
+                {
+                    if (matrix[row].Length == matrix[row + 1].Length)
+                    {
+                        MultiplyMatrix(matrix, row);
+                        MultiplyMatrix(matrix, row + 1);
+                    }
+                    else
+                    {
+                        DivideMatrix(matrix, row);
+                        DivideMatrix(matrix, row + 1);
+                    }
+                }
+            }
+
+
+            while (true)
+            {
+                string[] input = Console.ReadLine().Split(' ', StringSplitOptions.RemoveEmptyEntries).ToArray();
+
+                if (input[0].Equals("End"))
+                {
+                    break;
+                }
+
+                int row = int.Parse(input[1]);
+                int col = int.Parse(input[2]);
+                double value = double.Parse(input[3]);
+
+                if (input[0].Equals("Add"))
+                {
+                    if (row >= 0 && row < rows )
+                    {
+                        if (col >= 0 && col < matrix[row].Length)
+                        {
+                            matrix[row][col] += value;
+                        }
+                    }
+                }
+                else if (input[0].Equals("Subtract"))
+                {
+                    if (row >= 0 && row < rows)
+                    {
+                        if (col >= 0 && col < matrix[row].Length)
+                        {
+                            matrix[row][col] -= value;
+                        }
+                    }
+                }
+            }
+
+            PrintMatrix(matrix, rows);
+        }
+    }
+}
