@@ -1,0 +1,116 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text.RegularExpressions;
+using System.Text;
+
+namespace Task_01
+{
+    class Program
+    {
+        static int CheckIsAlive(int cell, int bomb)
+        {
+            if (cell > 0)
+            {
+                cell -= bomb;
+            }
+
+            return cell;
+        }
+
+        static int[,] Ooops(int[,] matrix, int rows, int cols, int row, int col)
+        {
+            if (matrix[row, col] > 0)
+            {
+
+
+                if (row - 1 >= 0 && row - 1 < rows && col - 1 >= 0 && col - 1 < cols)
+                {
+                    matrix[row - 1, col - 1] = CheckIsAlive(matrix[row - 1, col - 1], matrix[row, col]);
+                }
+                if (row - 1 >= 0 && row - 1 < rows)
+                {
+                    matrix[row - 1, col] = CheckIsAlive(matrix[row - 1, col], matrix[row, col]);
+                }
+                if (row - 1 >= 0 && row - 1 < rows && col + 1 >= 0 && col + 1 < cols)
+                {
+                    matrix[row - 1, col + 1] = CheckIsAlive(matrix[row - 1, col + 1], matrix[row, col]);
+                }
+                if (col + 1 >= 0 && col + 1 < cols)
+                {
+                    matrix[row, col + 1] = CheckIsAlive(matrix[row, col + 1], matrix[row, col]);
+                }
+                if (row + 1 >= 0 && row + 1 < rows && col + 1 >= 0 && col + 1 < cols)
+                {
+                    matrix[row + 1, col + 1] = CheckIsAlive(matrix[row + 1, col + 1], matrix[row, col]);
+                }
+                if (row + 1 >= 0 && row + 1 < rows)
+                {
+                    matrix[row + 1, col] = CheckIsAlive(matrix[row + 1, col], matrix[row, col]);
+                }
+                if (row + 1 >= 0 && row + 1 < rows && col - 1 >= 0 && col - 1 < cols)
+                {
+                    matrix[row + 1, col - 1] = CheckIsAlive(matrix[row + 1, col - 1], matrix[row, col]);
+                }
+                if (col - 1 >= 0 && col - 1 < cols)
+                {
+                    matrix[row, col - 1] = CheckIsAlive(matrix[row, col - 1], matrix[row, col]);
+                }
+                matrix[row, col] = 0;
+            }
+            
+            return matrix;
+        }
+        public static void Main()
+        {
+            int size = int.Parse(Console.ReadLine());
+
+            int rows = size;
+            int cols = size;
+            int[,] matrix = new int[rows, cols];
+
+            for (int row = 0; row < rows; row++)
+            {
+                int[] sequence = Console.ReadLine().Split(' ',StringSplitOptions.RemoveEmptyEntries).Select(int.Parse).ToArray();
+
+                for (int col = 0; col < cols; col++)
+                {
+                    matrix[row, col] = sequence[col];
+                }
+            }
+            string[] coordinate = Console.ReadLine().Split(' ', StringSplitOptions.RemoveEmptyEntries).ToArray();
+            for (int i = 0; i < coordinate.Length; i++)
+            {
+                string[] token = coordinate[i].Split(',', StringSplitOptions.RemoveEmptyEntries).ToArray();
+                int row = int.Parse(token[0]);
+                int col = int.Parse(token[1]);
+
+                matrix = Ooops(matrix, rows, cols, row, col);
+            }
+
+            int sum = 0;
+            int countAlive = 0;
+
+            foreach (var cell in matrix)
+            {
+                if (cell > 0)
+                {
+                    sum += cell;
+                    countAlive++;
+                }
+            }
+
+            Console.WriteLine($"Alive cells: {countAlive}");
+            Console.WriteLine($"Sum: {sum}");
+
+            for (int row = 0; row < rows; row++)
+            {
+                for (int col = 0; col < cols; col++)
+                {
+                    Console.Write(matrix[row, col] + " ");
+                }
+                Console.WriteLine();
+            }
+        }
+    }
+}
