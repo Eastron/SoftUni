@@ -1,0 +1,79 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text.RegularExpressions;
+using System.Text;
+
+namespace Task_01
+{
+
+    class Program
+    {
+        public static Dictionary<string, Dictionary<string, int>> CheckDresses(Dictionary<string, Dictionary<string, int>> clothes, string color, string[] dresses)
+        {
+            foreach (var dress in dresses)
+            {
+                if (!clothes[color].ContainsKey(dress))
+                {
+                    clothes[color].Add(dress, 0);
+                }
+                clothes[color][dress]++;
+            }
+            return clothes;
+        }
+        public static void Main()
+        {
+            Dictionary<string, Dictionary<string, int>> clothes = new Dictionary<string, Dictionary<string, int>>();
+
+            int lines = int.Parse(Console.ReadLine());
+
+            for (int i = 0; i < lines; i++)
+            {
+                string[] token1 = Console.ReadLine().Split(" -> ", StringSplitOptions.RemoveEmptyEntries).ToArray();
+                string color1 = token1[0];
+                string[] dresses = token1[1].Split(',', StringSplitOptions.RemoveEmptyEntries).ToArray();
+
+                if (!clothes.ContainsKey(color1))
+                {
+                    clothes.Add(color1, new Dictionary<string, int>());
+                    clothes = CheckDresses(clothes, color1, dresses);
+                }
+                else
+                {
+                    clothes = CheckDresses(clothes, color1, dresses);
+                }
+            }
+
+            string[] token = Console.ReadLine().Split(' ', StringSplitOptions.RemoveEmptyEntries).ToArray();
+            string color = token[0];
+            string clothing = token[1];
+
+            foreach (var cloth in clothes)
+            {
+                if (cloth.Key.Equals(color))
+                {
+                    Console.WriteLine($"{cloth.Key} clothes:");
+                    foreach (var item in cloth.Value)
+                    {
+                        if (item.Key.Equals(clothing))
+                        {
+                            Console.WriteLine($"* {item.Key} - {item.Value} (found!)");
+                        }
+                        else
+                        {
+                            Console.WriteLine($"* {item.Key} - {item.Value}");
+                        }
+                    }
+                }
+                else
+                {
+                    Console.WriteLine($"{cloth.Key} clothes:");
+                    foreach (var item in cloth.Value)
+                    {
+                        Console.WriteLine($"* {item.Key} - {item.Value}");
+                    }
+                }
+            }
+        }
+    }
+}
