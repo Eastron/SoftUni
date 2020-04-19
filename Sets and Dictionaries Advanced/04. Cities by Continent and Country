@@ -1,0 +1,57 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text.RegularExpressions;
+using System.Text;
+
+namespace Task_01
+{
+    
+    class Program
+    {
+        public static void Main()
+        {
+            Dictionary<string, Dictionary<string, List<string>>> continets = new Dictionary<string, Dictionary<string, List<string>>>();
+            
+            int lines = int.Parse(Console.ReadLine());
+
+            for (int i = 0; i < lines; i++)
+            {
+                string[] token = Console.ReadLine().Split(" ", StringSplitOptions.RemoveEmptyEntries).ToArray();
+
+                string continet = token[0];
+                string country = token[1];
+                string city = token[2];
+
+                if (!continets.ContainsKey(continet))
+                {
+                    continets.Add(continet, new Dictionary<string, List<string>>());
+                    continets[continet].Add(country, new List<string>());
+                    continets[continet][country].Add(city);
+                    
+                }
+                else
+                {
+                    if (!continets[continet].ContainsKey(country))
+                    {
+                        continets[continet].Add(country, new List<string>());
+                        continets[continet][country].Add(city);
+                    }
+                    else
+                    {
+                        continets[continet][country].Add(city);
+                    }
+                }
+            }
+
+            foreach (var continent in continets)
+            {
+                Console.WriteLine($"{continent.Key}:");
+                foreach (var country in continent.Value)
+                {
+                    Console.WriteLine($"  {country.Key} -> {string.Join(", ", country.Value)}");
+                }
+            }
+        }
+    }
+}
