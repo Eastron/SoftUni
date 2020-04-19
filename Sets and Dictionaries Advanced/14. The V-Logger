@@ -1,0 +1,75 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text.RegularExpressions;
+using System.Text;
+
+namespace Task_01
+{
+
+    class Program
+    {
+        public static void Main()
+        {
+            Dictionary<string, Dictionary<string, int>> vloggers = new Dictionary<string, Dictionary<string, int>>();
+            
+
+            string input = Console.ReadLine();
+
+            while (input != "Statistics")
+            {
+                string[] token = input.Split(' ', StringSplitOptions.RemoveEmptyEntries).ToArray();
+                string name = token[0];
+
+                if (token[1].Equals("joined"))
+                {
+                    if (!vloggers.ContainsKey(name))
+                    {
+                        vloggers.Add(name, new Dictionary<string, int>());
+                        vloggers[name].Add("following", 0);
+                    }
+                }
+                else if (token[1].Equals("followed"))
+                {
+                    string name1 = token[2];
+
+                    if (vloggers.ContainsKey(name) && vloggers.ContainsKey(name1))
+                    {
+                        if (name != name1)
+                        {
+                            if (!vloggers[name1].ContainsKey(name))
+                            {
+                                vloggers[name1].Add(name, 0);
+                                vloggers[name]["following"]++;
+                            }
+                        }
+                    }
+
+                }
+
+                input = Console.ReadLine();
+            }
+
+            Console.WriteLine($"The V-Logger has a total of {vloggers.Count} vloggers in its logs.");
+            
+            int count = 1;
+            foreach (var vlogger in vloggers.OrderByDescending(x => x.Value.Count).ThenBy(x => x.Value.Values.Sum()))
+            {
+                Console.WriteLine($"{count}. {vlogger.Key} : {vlogger.Value.Count - 1} followers, {vlogger.Value.Values.Sum()} following");
+
+                if (count == 1)
+                {
+                    foreach (var v in vlogger.Value.OrderBy(x => x.Key))
+                    {
+                        if ("following" != v.Key)
+                        {
+                            Console.WriteLine($"*  {v.Key}");
+                        }
+                    }
+                }
+                
+                count++;
+            }
+        }
+    }
+}
