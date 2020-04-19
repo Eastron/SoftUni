@@ -1,0 +1,39 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text.RegularExpressions;
+using System.Text;
+
+namespace Task_01
+{
+
+    class Program
+    {
+        public static void Main()
+        {
+            Dictionary<int, int> nums = new Dictionary<int, int>();
+
+            int lines = int.Parse(Console.ReadLine());
+
+            for (int i = 0; i < lines; i++)
+            {
+                int num = int.Parse(Console.ReadLine());
+
+                if (!nums.ContainsKey(num))
+                {
+                    nums.Add(num, 0);
+                }
+
+                nums[num]++;
+            }
+
+            foreach (var num in nums)
+            {
+                if (num.Value % 2 == 0)
+                {
+                    Console.WriteLine(num.Key);
+                }
+            }
+        }
+    }
+}
