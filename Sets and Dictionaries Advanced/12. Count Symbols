@@ -1,0 +1,35 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text.RegularExpressions;
+using System.Text;
+
+namespace Task_01
+{
+
+    class Program
+    {
+        public static void Main()
+        {
+            Dictionary<char, int> sentences = new Dictionary<char, int>();
+
+            string lines = Console.ReadLine();
+
+            for (int i = 0; i < lines.Length; i++)
+            {
+
+                if (!sentences.ContainsKey(lines[i]))
+                {
+                    sentences.Add(lines[i], 0);
+                }
+
+                sentences[lines[i]]++;
+            }
+
+            foreach (var letter in sentences.OrderBy(x => x.Key))
+            {
+                Console.WriteLine($"{letter.Key}: {letter.Value} time/s");
+            }
+        }
+    }
+}
