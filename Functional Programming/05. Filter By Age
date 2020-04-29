@@ -1,0 +1,65 @@
+using System;
+using System.IO;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text.RegularExpressions;
+using System.Text;
+
+namespace Task_01
+{
+    class Program
+    {
+        public static void Main()
+        {
+            int lines = int.Parse(Console.ReadLine());
+            Dictionary<string, int> people = new Dictionary<string, int>();
+            for (int i = 0; i < lines; i++)
+            {
+                string[] input = Console.ReadLine()
+                    .Split(", ", StringSplitOptions.RemoveEmptyEntries)
+                    .ToArray();
+
+                people.Add(input[0], int.Parse(input[1]));
+            }
+
+            string condition = Console.ReadLine();
+            int age = int.Parse(Console.ReadLine());
+            string format = Console.ReadLine();
+
+            var filter = CreateFilter(condition, age);
+            var write = CreaterWriter(format);
+
+            foreach (var person in people)
+            {
+                if (filter(person.Value))
+                {
+                    write(person);
+                }
+            }
+        }
+
+        public static Action<KeyValuePair<string, int>> CreaterWriter(string format)
+        {
+            switch (format)
+            {
+                case "name":
+                    return x => Console.WriteLine(x.Key);
+                case "age":
+                    return x => Console.WriteLine(x.Value);
+                default:
+                    return x => Console.WriteLine($"{x.Key} - {x.Value}");
+            }
+        }
+
+
+        public static Func<int, bool> CreateFilter(string condition, int age)
+        {
+            if (condition.Equals("older"))
+            {
+                return x => x >= age;
+            }
+
+            return x => x < age;
+        }
+    }
+}
