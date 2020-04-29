@@ -1,0 +1,78 @@
+using System;
+using System.IO;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text.RegularExpressions;
+using System.Text;
+
+namespace Task_01
+{
+    class Program
+    {
+        public static void Main()
+        {
+            var names = Console.ReadLine().Split(' ', StringSplitOptions.RemoveEmptyEntries).ToList();
+
+            Func<string, string, bool> startsWith = (a, b) => a.StartsWith(b);
+            Func<string, string, bool> endsWith = (a, b) => a.EndsWith(b);
+            Func<string, int, bool> checkLenght = (a, b) => a.Length == b;
+            Func<string, string, bool> contains = (a, b) => a.Contains(b);
+            Action<List<string>> printer = x => Console.WriteLine(String.Join(" ", x));
+
+
+            var filtered = new List<string>();
+            var original = new List<string>(names);
+
+
+            string input = Console.ReadLine();
+
+            while (input != "Print")
+            {
+                string[] token = input.Split(';', StringSplitOptions.RemoveEmptyEntries);
+
+                switch (token[1])
+                {
+                    case "Starts with":
+                        filtered = names
+                            .Where(n => startsWith(n, token[2]))
+                            .Distinct()
+                            .ToList();
+                        break;
+                    case "Ends with":
+                        filtered = names
+                            .Where(n => endsWith(n, token[2]))
+                            .Distinct()
+                            .ToList();
+                        break;
+                    case "Length":
+                        filtered = names
+                            .Where(n => checkLenght(n, int.Parse(token[2])))
+                            .Distinct()
+                            .ToList();
+                        break;
+                    case "Contains":
+                        filtered = names
+                            .Where(n => contains(n, token[2]))
+                            .Distinct()
+                            .ToList();
+                        break;
+                }
+
+                switch (token[0])
+                {
+                    case "Add filter":
+                        original.RemoveAll(x => filtered.Contains(x));
+                        break;
+                    case "Remove filter":
+                        original.AddRange(filtered);
+                        original = original.Distinct().ToList();
+                        break;
+                }
+                input = Console.ReadLine();
+            }
+
+            names.RemoveAll(x => !original.Contains(x));
+            Console.WriteLine(string.Join(" ", names));
+        }
+    }
+}
