@@ -1,0 +1,93 @@
+using System;
+using System.IO;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text.RegularExpressions;
+using System.Text;
+
+namespace Task_01
+{
+    class Program
+    {
+        public static void Main()
+        {
+            var names = Console.ReadLine().Split(' ', StringSplitOptions.RemoveEmptyEntries).ToList();
+
+            Func<string, string, bool> startsWith = (a, b) => a.StartsWith(b);
+            Func<string, string, bool> endsWith = (a, b) => a.EndsWith(b);
+            Func<string, int, bool> checkLenght = (a, b) => a.Length == b;
+
+            Func<List<string>, List<string>, List<string>> doublePeople = (a, b) =>
+            {
+                foreach (var doubled in b)
+                {
+                    for (int i = 0; i < a.Count * 2; i++)
+                    {
+                        if (i < a.Count)
+                        {
+                            if (a[i] == doubled)
+                            {
+                                a.Insert(i, doubled);
+                                i++;
+                            }
+                        }
+                    }
+                }
+                return a;
+            };
+
+            var filtered = new List<string>();
+
+            string input = Console.ReadLine();
+
+            while (input !="Party!")
+            {
+                string[] token = input.Split(' ', StringSplitOptions.RemoveEmptyEntries);
+
+                switch (token[1])
+                {
+                    case "StartsWith":
+                        filtered = names
+                            .Where(n => startsWith(n, token[2]))
+                            .Distinct()
+                            .ToList();
+                        break;
+                    case "EndsWith":
+                        filtered = names
+                            .Where(n => endsWith(n, token[2]))
+                            .Distinct()
+                            .ToList();
+                        break;
+                    case "Length":
+                        filtered = names
+                            .Where(n => checkLenght(n, int.Parse(token[2])))
+                            .Distinct()
+                            .ToList();
+                        break;
+                }
+
+                switch (token[0])
+                {
+                    case "Remove":
+                        names = names
+                            .Where(n => !filtered.Contains(n))
+                            .ToList();
+                        break;
+                    case "Double":
+                        names = doublePeople(names, filtered);
+                            break;
+                }
+                input = Console.ReadLine();
+            }
+
+            if (names.Count == 0)
+            {
+                Console.WriteLine("Nobody is going to the party!");
+            }
+            else
+            {
+                Console.WriteLine($"{string.Join(", ", names)} are going to the party!");
+            }
+        }
+    }
+}
