@@ -1,0 +1,30 @@
+using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace DefiningClasses
+{
+    public class Tire
+    {
+        private int year;
+        private decimal pressure;
+
+        public int Year
+        {
+            get { return this.year; }
+            set { this.year = value; }
+        }
+
+        public decimal Pressure
+        {
+            get { return this.pressure; }
+            set { this.pressure = value; }
+        }
+
+        public Tire(int year, decimal pressure)
+        {
+            this.Year = year;
+            this.Pressure = pressure;
+        }
+    }
+}
