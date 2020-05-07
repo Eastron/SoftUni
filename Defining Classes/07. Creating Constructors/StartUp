@@ -1,0 +1,22 @@
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Text;
+using System.Linq;
+using System.Globalization;
+using System.Security.Principal;
+
+namespace DefiningClasses
+{
+   public class StartUp
+    {
+        static void Main(string[] args)
+        {
+            string name = Console.ReadLine();
+            int age = int.Parse(Console.ReadLine());
+
+            var person = new Person(name, age);
+            Console.WriteLine($"{person.Name} {person.Age}");
+        }
+    }
+}
