@@ -1,0 +1,63 @@
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Text;
+using System.Linq;
+using System.Globalization;
+using System.Security.Principal;
+using System.Transactions;
+
+namespace DefiningClasses
+{
+   public class StartUp
+    {
+        static void Main(string[] args)
+        {
+            int n = int.Parse(Console.ReadLine());
+
+            Queue<Car> cars = new Queue<Car>();
+
+            for (int i = 0; i < n; i++)
+            {
+                string[] token = Console.ReadLine().Split(' ', StringSplitOptions.RemoveEmptyEntries);
+                string model = token[0];
+                double fuelAmount = double.Parse(token[1]);
+                double fuelConsumptionPerKilometer = double.Parse(token[2]);
+
+                Car car = new Car(model, fuelAmount, fuelConsumptionPerKilometer);
+                cars.Enqueue(car);
+            }
+
+            string input = Console.ReadLine();
+
+            while (input != "End")
+            {
+                string[] token = input.Split(' ', StringSplitOptions.RemoveEmptyEntries);
+                string model = token[1];
+                double amountOfKilometers = double.Parse(token[2]);
+                int count = 0;
+
+                while (count != cars.Count)
+                {
+                    Car car = cars.Dequeue();
+
+                    if (car.Model == model)
+                    {
+                        car.Drive(amountOfKilometers);
+                    }
+                    cars.Enqueue(car);
+                    count++;
+                }
+
+                input = Console.ReadLine();
+            }
+
+            while (cars.Count != 0)
+            {
+                Car car = cars.Dequeue();
+
+                Console.WriteLine($"{car.Model} {car.FuelAmount:F2} {car.TravelledDistance}");
+            }
+        }
+    }
+}
