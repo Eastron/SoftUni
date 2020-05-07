@@ -1,0 +1,29 @@
+using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace DefiningClasses
+{
+   public class Engine
+    {
+        private int speed;
+        private int horsePower;
+
+        public int Speed
+        {
+            get{ return this.speed; }
+            set { this.speed = value; }
+        }
+
+        public int HorsePower
+        {
+            get { return this.horsePower; }
+            set { this.horsePower = value; }
+        }
+        public Engine(int speed, int horsePower)
+        {
+            this.Speed = speed;
+            this.HorsePower = horsePower;
+        }
+    }
+}
