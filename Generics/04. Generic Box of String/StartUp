@@ -1,0 +1,34 @@
+namespace BoxOfT
+{
+    using System;
+    using System.Collections.Generic;
+    using System.IO;
+    using System.Text;
+    using System.Linq;
+    using System.Globalization;
+    using System.Security.Principal;
+    using System.Transactions;
+    using System.Runtime.CompilerServices;
+    using System.Security.Cryptography.X509Certificates;
+    using System.Text.RegularExpressions;
+    public class StartUp
+    {
+
+       public static void Main(string[] args)
+        {
+            int n = int.Parse(Console.ReadLine());
+            Box<string> box = new Box<string>();
+
+            for (int i = 0; i < n; i++)
+            {
+                string input = Console.ReadLine();
+                box.Add(input);
+            }
+
+            for (int i = 0; i < box.Count; i++)
+            {
+                Console.WriteLine($"{typeof(string).FullName}: {box.Items[i]}");
+            }
+        }
+    }
+}
