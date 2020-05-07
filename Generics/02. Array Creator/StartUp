@@ -1,0 +1,23 @@
+namespace GenericArrayCreator
+{
+    using System;
+    using System.Collections.Generic;
+    using System.IO;
+    using System.Text;
+    using System.Linq;
+    using System.Globalization;
+    using System.Security.Principal;
+    using System.Transactions;
+    using System.Runtime.CompilerServices;
+    using System.Security.Cryptography.X509Certificates;
+    using System.Text.RegularExpressions;
+    public class StartUp
+    {
+
+       public static void Main(string[] args)
+        {
+            string[] strings = ArrayCreator.Create(5, "Pesho");
+            int[] integers = ArrayCreator.Create(10, 33);
+        }
+    }
+}
