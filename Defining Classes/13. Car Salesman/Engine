@@ -1,0 +1,44 @@
+using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace DefiningClasses
+{
+   public class Engine
+    {
+        private string model;
+        private string horsePower;
+        private string displacement;
+        private string efficiency;
+
+        public String Model
+        {
+            get{ return this.model; }
+            set { this.model = value; }
+        }
+
+        public string HorsePower
+        {
+            get { return this.horsePower; }
+            set { this.horsePower = value; }
+        }
+        public string Displacement
+        {
+            get { return this.displacement; }
+            set { this.displacement = value; }
+        }
+        public string Efficiency
+        {
+            get { return this.efficiency; }
+            set { this.efficiency = value; }
+        }
+
+        public Engine(string model, string horsePower, string displacement, string efficiency)
+        {
+            this.Model = model;
+            this.HorsePower = horsePower;
+            this.Displacement = displacement;
+            this.Efficiency = efficiency;
+        }
+    }
+}
