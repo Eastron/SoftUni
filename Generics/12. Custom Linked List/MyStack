@@ -1,0 +1,76 @@
+using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace BoxOfT
+{
+    class MyStack
+    {
+        private const int capacity = 4;
+        private int[] array;
+        private int count;
+
+        public MyStack()
+        {
+            this.count = 0;
+            this.array = new int[capacity];
+        }
+        
+        public int Count
+        {
+            get
+            {
+                return this.count;
+            }
+            private set
+            {
+                this.count = value;
+            }
+        }
+
+        public void Push(int element)
+        {
+            if (this.array.Length == this.count)
+            {
+                var copy = new int[this.array.Length * 2];
+                for (int i = 0; i < this.array.Length; i++)
+                {
+                    copy[i] = this.array[i];
+                }
+
+                this.array = copy;
+            }
+            this.array[this.Count] = element;
+            count++;
+        }
+        public int Pop()
+        {
+            if (this.array.Length == 0)
+            {
+                throw new InvalidOperationException("MyStack is empty");
+            }
+
+            var lastIndex = this.count - 1;
+            int last = this.array[lastIndex];
+            this.count--;
+            return last;
+        }
+        public int Peek()
+        {
+            if (this.array.Length == 0)
+            {
+                throw new InvalidOperationException("MyStack is empty");
+            }
+
+            return this.array[this.count - 1];
+        }
+
+        public void ForEach(Action<object> action)
+        {
+            for (int i = 0; i < this.count; i++)
+            {
+                action(this.array[i]);
+            }
+        }
+    }
+}
