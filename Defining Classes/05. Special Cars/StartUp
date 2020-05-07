@@ -1,0 +1,92 @@
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Text;
+using System.Linq;
+using System.Globalization;
+
+namespace CarManufacturer
+{
+   public class StartUp
+    {
+        static void Main(string[] args)
+        {
+            string input = Console.ReadLine();
+            List<Tire[]> tires = new List<Tire[]>();
+
+            while (input != "No more tires")
+            {
+                string[] token = input.Split(' ', StringSplitOptions.RemoveEmptyEntries);
+                int year1 = int.Parse(token[0]);
+                double pressure1 = double.Parse(token[1], CultureInfo.InvariantCulture);
+                int year2 = int.Parse(token[2]);
+                double pressure2 = double.Parse(token[3], CultureInfo.InvariantCulture);
+                int year3 = int.Parse(token[4]);
+                double pressure3 = double.Parse(token[5], CultureInfo.InvariantCulture);
+                int year4 = int.Parse(token[6]);
+                double pressure4 = double.Parse(token[7], CultureInfo.InvariantCulture);
+
+                Tire[] tire = new Tire[4]
+                    {
+                        new Tire(year1, pressure1),
+                        new Tire(year2, pressure2),
+                        new Tire(year3, pressure3),
+                        new Tire(year4, pressure4),
+                    };
+
+                tires.Add(tire);
+                
+                input = Console.ReadLine();
+            }
+
+            List<Engine> engines = new List<Engine>();
+            input = Console.ReadLine();
+
+            while (input != "Engines done")
+            {
+                string[] token = input.Split(' ', StringSplitOptions.RemoveEmptyEntries);
+                int horsePower = int.Parse(token[0]);
+                double cubicCapacity = double.Parse(token[1], CultureInfo.InvariantCulture);
+                Engine engine = new Engine(horsePower, cubicCapacity);
+                engines.Add(engine);
+
+                input = Console.ReadLine();
+            }
+
+            List<Car> cars = new List<Car>();
+            input = Console.ReadLine();
+
+            while (input != "Show special")
+            {
+                string[] token = input.Split(' ', StringSplitOptions.RemoveEmptyEntries);
+                string make = token[0];
+                string model = token[1];
+                int year = int.Parse(token[2]);
+                double fuelQuantity = double.Parse(token[3], CultureInfo.InvariantCulture);
+                double fuelConsumption = double.Parse(token[4], CultureInfo.InvariantCulture);
+                int engineIndex = int.Parse(token[5]);
+                int tiresIndex = int.Parse(token[6]);
+
+                Car car = new Car(make, model, year, fuelQuantity, fuelConsumption, engines[engineIndex], tires[tiresIndex]);
+                cars.Add(car);
+                input = Console.ReadLine();
+            }
+
+            foreach (var car in cars)
+            {
+                if (car.Drive(20))
+                {
+                    if (car.GetPressure(car.Tires) >= 9)
+                    {
+                        if (car.GetPressure(car.Tires) <= 10)
+                        {
+                            Console.WriteLine(car.WhoAmI(), CultureInfo.InvariantCulture);
+                        }
+                        
+                    }
+                    
+                }
+            }
+        }
+    }
+}
