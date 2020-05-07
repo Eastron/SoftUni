@@ -1,0 +1,37 @@
+
+
+namespace BoxOfT
+{
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+    public class Box<T>
+    {
+        private List<T> items = new List<T>();
+        private int count = 0;
+
+        public List<T> Items
+        {
+            get { return this.items; }
+            set { this.items = value; }
+        }
+        public int Count => this.items.Count;
+        
+        public Box()
+        {
+            this.Items = new List<T>();
+        }
+
+        public void Add(T item)
+        {
+            this.Items.Add(item);
+        }
+        public T Remove()
+        {
+            var rem = this.Items.Last();
+            this.items.RemoveAt(this.items.Count - 1);
+            return rem;
+        }
+    }
+}
