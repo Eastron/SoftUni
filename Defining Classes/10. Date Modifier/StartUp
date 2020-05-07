@@ -1,0 +1,26 @@
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Text;
+using System.Linq;
+using System.Globalization;
+using System.Security.Principal;
+
+namespace DefiningClasses
+{
+   public class StartUp
+    {
+        static void Main(string[] args)
+        {
+            string date1 = Console.ReadLine();
+            string date2 = Console.ReadLine();
+
+            DateTime firstDate = Convert.ToDateTime(date1);
+            DateTime secondDate = Convert.ToDateTime(date2);
+
+            DateModifier dateModifier = new DateModifier(firstDate, secondDate);
+
+            dateModifier.GetDays();
+        }
+    }
+}
