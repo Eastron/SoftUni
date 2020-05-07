@@ -1,0 +1,29 @@
+namespace BoxOfT
+{
+    using System;
+    using System.Collections.Generic;
+    using System.IO;
+    using System.Text;
+    using System.Linq;
+    using System.Globalization;
+    using System.Security.Principal;
+    using System.Transactions;
+    using System.Runtime.CompilerServices;
+    using System.Security.Cryptography.X509Certificates;
+    using System.Text.RegularExpressions;
+    public class StartUp
+    {
+
+       public static void Main(string[] args)
+        {
+            Box<int> box = new Box<int>();
+            box.Add(1);
+            box.Add(2);
+            box.Add(3);
+            Console.WriteLine(box.Remove());
+            box.Add(4);
+            box.Add(5);
+            Console.WriteLine(box.Remove());
+        }
+    }
+}
