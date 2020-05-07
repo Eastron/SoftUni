@@ -1,0 +1,35 @@
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Text;
+using System.Linq;
+using System.Globalization;
+using System.Security.Principal;
+
+namespace DefiningClasses
+{
+   public class StartUp
+    {
+        static void Main(string[] args)
+        {
+            int n = int.Parse(Console.ReadLine());
+
+            Family people = new Family();
+
+            for (int i = 0; i < n; i++)
+            {
+                string[] token = Console.ReadLine().Split(' ', StringSplitOptions.RemoveEmptyEntries);
+                string name = token[0];
+                int age = int.Parse(token[1]);
+
+                Person member = new Person(name, age);
+
+                people.AddMember(member);
+            }
+
+            var oldestMember = people.GetOldestMember();
+
+            Console.WriteLine($"{oldestMember.Name} {oldestMember.Age}");
+        }
+    }
+}
