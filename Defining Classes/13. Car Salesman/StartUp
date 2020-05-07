@@ -1,0 +1,112 @@
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Text;
+using System.Linq;
+using System.Globalization;
+using System.Security.Principal;
+using System.Transactions;
+using System.Runtime.CompilerServices;
+using System.Security.Cryptography.X509Certificates;
+using System.Text.RegularExpressions;
+
+namespace DefiningClasses
+{
+    public class StartUp
+    {
+
+        static void Main(string[] args)
+        {
+            int n = int.Parse(Console.ReadLine());
+            List<Engine> engines = new List<Engine>();
+            
+           
+            for (int i = 0; i < n; i++)
+            {
+                string[] token = Console.ReadLine().Split(' ', StringSplitOptions.RemoveEmptyEntries);
+                
+                string model = token[0];
+                string horsePower = token[1];
+                string displacement = string.Empty;
+                string efficiency = string.Empty;
+                if (token.Length == 3)
+                {
+                    try
+                    {
+                        int a = int.Parse(token[2]);
+                        displacement = a.ToString();
+                        efficiency = "n/a";
+                    }
+                    catch (Exception)
+                    {
+                        displacement = "n/a";
+                        efficiency = token[2];
+                    }
+                }
+                if (token.Length == 4)
+                {
+                    displacement = token[2];
+                    efficiency = token[3];
+                }
+                if (token.Length == 2)
+                {
+                    displacement = "n/a";
+                    efficiency = "n/a";
+                }
+                Engine engine = new Engine(model, horsePower, displacement, efficiency);
+                engines.Add(engine);
+            }
+
+            List<Car> cars = new List<Car>();
+            n = int.Parse(Console.ReadLine());
+
+            for (int i = 0; i < n; i++)
+            {
+                string[] token = Console.ReadLine().Split(' ', StringSplitOptions.RemoveEmptyEntries);
+
+                string model = token[0];
+                string engine = token[1];
+                string weight = string.Empty;
+                string color = string.Empty;
+                if (token.Length == 3)
+                {
+                    try
+                    {
+                        int a = int.Parse(token[2]);
+                        weight = a.ToString();
+                        color = "n/a";
+                    }
+                    catch (Exception)
+                    {
+                        weight = "n/a";
+                        color = token[2];
+                    }
+                }
+                if (token.Length == 4)
+                {
+                    weight = token[2];
+                    color = token[3];
+                }
+                if (token.Length == 2)
+                {
+                    weight = "n/a";
+                    color = "n/a";
+                }
+                Engine engin = engines.Find(x => x.Model == engine);
+                Car car = new Car(model, engin, weight, color);
+                cars.Add(car);
+            }
+
+            foreach (var car in cars)
+            {
+                Console.WriteLine($"{car.Model}:");
+                Console.WriteLine($"  {car.Engine.Model}:");
+                Console.WriteLine($"    Power: {car.Engine.HorsePower}");
+                Console.WriteLine($"    Displacement: {car.Engine.Displacement}");
+                Console.WriteLine($"    Efficiency: {car.Engine.Efficiency}");
+                Console.WriteLine($"  Weight: {car.Weight}");
+                Console.WriteLine($"  Color: {car.Color}");
+            }
+        }
+    }
+}
