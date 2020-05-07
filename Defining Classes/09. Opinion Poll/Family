@@ -1,0 +1,41 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Security.Cryptography.X509Certificates;
+using System.Text;
+
+namespace DefiningClasses
+{
+    public class Family
+    {
+        private List<Person> people = new List<Person>();
+
+        public List<Person> People
+        { 
+            get { return people; }
+            set { this.people = value; } 
+        }
+
+        public void AddMember(Person member)
+        {
+            this.people.Add(member);
+        }
+
+        public Person GetOldestMember()
+        {
+            int maxAge = int.MinValue;
+            Person person1 = new Person();
+
+            foreach (var person in people)
+            {
+                if (person.Age > maxAge)
+                {
+                    maxAge = person.Age;
+                    person1 = person;
+                }
+            }
+
+            return person1;
+        }
+    }
+}
