@@ -1,0 +1,30 @@
+using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace DefiningClasses
+{
+    public class Cargo
+    {
+        private int wieght;
+        private string type;
+
+        public int Weight
+        {
+            get { return this.wieght; }
+            set { this.wieght = value; }
+        }
+
+        public string Type
+        {
+            get { return this.type; }
+            set { this.type = value; }
+        }
+
+        public Cargo(int weight, string type)
+        {
+            Weight = weight;
+            Type = type;
+        }
+    }
+}
