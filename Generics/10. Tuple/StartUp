@@ -1,0 +1,29 @@
+namespace BoxOfT
+{
+    using System;
+
+    public class StartUp
+    {
+
+        public static void Main(string[] args)
+        {
+
+            string[] firstLine = Console.ReadLine().Split();
+
+            Tuple<string, string> tuple1 = new Tuple<string, string>(firstLine[0] + " " + firstLine[1], firstLine[2]);
+
+            string[] secondLine = Console.ReadLine().Split();
+
+            Tuple<string, int> tuple2 = new Tuple<string, int>(secondLine[0], int.Parse(secondLine[1]));
+
+            string[] thirdLine = Console.ReadLine().Split();
+
+            Tuple<int, decimal> tuple3 = new Tuple<int, decimal>(int.Parse(thirdLine[0]), decimal.Parse(thirdLine[1]));
+
+            Console.WriteLine($"{tuple1.Item1} -> {tuple1.Item2}");
+            Console.WriteLine($"{tuple2.Item1} -> {tuple2.Item2}");
+            Console.WriteLine($"{tuple3.Item1} -> {tuple3.Item2}");
+
+        }
+    }
+}
