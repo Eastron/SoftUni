@@ -1,0 +1,154 @@
+namespace BoxOfT
+{
+    using System;
+    using System.Collections.Generic;
+    using System.Text;
+    public class MyList<T>
+    {
+        private int capacity = 2;
+        private T[] array;
+
+        public MyList()
+        {
+            this.array = new T[capacity];
+        }
+
+        public int Count { get; private set; }
+
+        public T this[int index]
+        {
+            get 
+            {
+                if (index >= this.Count)
+                {
+                    throw new ArgumentOutOfRangeException();
+                }
+                return array[index];
+            }
+            set
+            {
+                if (index >= this.Count)
+                {
+                    throw new ArgumentOutOfRangeException();
+                }
+                array[index] = value;
+            }
+        }
+
+        private void Resize()
+        {
+            T[] copy = new T[this.array.Length * 2];
+
+            for (int i = 0; i < this.array.Length; i++)
+            {
+                copy[i] = this.array[i];
+            }
+
+            this.array = copy;
+        }
+        private void Shift(int index)
+        {
+            for (int i = index; i < this.Count - 1; i++)
+            {
+                this.array[i] = this.array[i + 1];
+            }
+        }
+        private void ShiftToRight(int index)
+        {
+            for (int i = this.Count; i > 0; i--)
+            {
+                this.array[i] = this.array[i - 1];
+            }
+        }
+        private void Shrink()
+        {
+            T[] copy = new T[this.array.Length / 2];
+            for (int i = 0; i < this.Count; i++)
+            {
+                copy[i] = this.array[i];
+            }
+            this.array = copy;
+        }
+
+        public void Insert(int index, T element)
+        {
+            if (index >= this.Count)
+            {
+                throw new ArgumentOutOfRangeException();
+            }
+
+            if (this.Count == this.array.Length)
+            {
+                this.Resize();
+            }
+
+            this.ShiftToRight(index);
+            this.array[index] = element;
+            this.Count++;
+        }
+        public void Swap(int firstIndex, int secondIndex)
+        {
+            if (firstIndex >= this.Count || secondIndex >= this.Count)
+            {
+                throw new ArgumentOutOfRangeException();
+            }
+
+            T temp = this.array[firstIndex];
+            this.array[firstIndex] = this.array[secondIndex];
+            this.array[secondIndex] = temp;
+
+        }
+        public void Reverse()
+        {
+            T[] copy = new T[this.Count];
+            int count = 0;
+            for (int i = this.Count - 1; i >= 0; i--)
+            {
+                copy[count] = this.array[i];
+                count++;
+            }
+
+            this.array = copy;
+        }
+        public bool Contains(int element)
+        {
+            for (int i = 0; i < this.Count; i++)
+            {
+                if (array[i].Equals(element))
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+        public void RemoveAt(int index)
+        {
+            if (index >= this.Count)
+            {
+                throw new ArgumentOutOfRangeException();
+            }
+
+            var element = this.array[index];
+            this.array[index] = default(T);
+            this.Shift(index);
+
+            this.Count--;
+
+            if (this.Count <= this.array.Length / 4)
+            {
+                this.Shrink();
+            }
+        }
+        public void Add(T element)
+        {
+            if (this.Count == this.array.Length)
+            {
+                this.Resize();
+            }
+
+            this.array[this.Count] = element;
+            this.Count++;
+        }
+    }
+}
