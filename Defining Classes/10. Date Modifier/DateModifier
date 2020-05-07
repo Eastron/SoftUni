@@ -1,0 +1,35 @@
+using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace DefiningClasses
+{
+    public class DateModifier
+    {
+        private DateTime firstDate;
+        private DateTime secondDate;
+
+        public DateTime FirstDate
+        {
+            get { return firstDate; }
+            set { this.firstDate = value; }
+        }
+
+        public DateTime SecondDate
+        {
+            get { return secondDate; }
+            set { this.secondDate = value; }
+        }
+
+        public DateModifier(DateTime firstDate, DateTime secondDate)
+        {
+            this.FirstDate = firstDate;
+            this.SecondDate = secondDate;
+        }
+
+        public void GetDays()
+        {
+            Console.WriteLine(Math.Abs((firstDate - secondDate).TotalDays));
+        }
+    }
+}
