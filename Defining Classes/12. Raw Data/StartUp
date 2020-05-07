@@ -1,0 +1,76 @@
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Text;
+using System.Linq;
+using System.Globalization;
+using System.Security.Principal;
+using System.Transactions;
+using System.Runtime.CompilerServices;
+using System.Security.Cryptography.X509Certificates;
+
+namespace DefiningClasses
+{
+    public class StartUp
+    {
+        static void Main(string[] args)
+        {
+            int n = int.Parse(Console.ReadLine());
+
+            List<Car> cars = new List<Car>();
+
+            for (int i = 0; i < n; i++)
+            {
+                string[] token = Console.ReadLine().Split(' ', StringSplitOptions.RemoveEmptyEntries);
+
+                string model = token[0];
+                int speed = int.Parse(token[1]);
+                int horsePower = int.Parse(token[2]);
+                int weight = int.Parse(token[3]);
+                string type = token[4];
+                decimal pressure1 = decimal.Parse(token[5]);
+                int age1 = int.Parse(token[6]);
+                decimal pressure2 = decimal.Parse(token[7]);
+                int age2 = int.Parse(token[8]);
+                decimal pressure3 = decimal.Parse(token[9]);
+                int age3 = int.Parse(token[10]);
+                decimal pressure4 = decimal.Parse(token[11]);
+                int age4 = int.Parse(token[12]);
+
+
+                Tire[] tires = new Tire[4]
+                    {
+                        new Tire(age1, pressure1),
+                        new Tire(age2, pressure2),
+                        new Tire(age3, pressure3),
+                        new Tire(age4, pressure4)
+                    };
+                Engine engine = new Engine(speed, horsePower);
+                Cargo cargo = new Cargo(weight, type);
+                Car car = new Car(model, engine, cargo, tires);
+
+                cars.Add(car);
+
+            }
+
+            string types = Console.ReadLine();
+
+            if (types.Equals("fragile"))
+            {
+                cars
+                    .Where(x => x.Cargo.Type == types)
+                    .Where(x => x.Tires.Any(t => t.Pressure < 1))
+                    .ToList()
+                    .ForEach(x => Console.WriteLine(x.Model));
+            }
+            else
+            {
+                cars
+                    .Where(x => x.Cargo.Type == types)
+                    .Where(x => x.Engine.HorsePower > 250)
+                    .ToList()
+                    .ForEach(x => Console.WriteLine(x.Model));
+            }
+        }
+    }
+}
